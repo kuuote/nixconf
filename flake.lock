@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "neovim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1725884087,
+        "narHash": "sha256-DPw33pApJk+TmAKIIifWvD9CkLA4io3EtlkOcLtEem0=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "648d6426c863c75643d714d45f4b67e19ac6944a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1725634671,
@@ -18,6 +34,7 @@
     },
     "root": {
       "inputs": {
+        "neovim-src": "neovim-src",
         "nixpkgs": "nixpkgs",
         "vim-src": "vim-src"
       }
@@ -25,11 +42,11 @@
     "vim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1725723472,
-        "narHash": "sha256-r8zp0TCiQnXt6LqAC5CoXMQdjo7SyL7Sf4sREzbQcIA=",
+        "lastModified": 1725906435,
+        "narHash": "sha256-1o64L6xW1bT40BsYQck5PHH0hyP5zDquBTzGABHpoPE=",
         "owner": "vim",
         "repo": "vim",
-        "rev": "b584117b05790cc95628af79e874fb58bbcc2cb7",
+        "rev": "d30ffdca495d116da359aaea806ad0da7b4b6c75",
         "type": "github"
       },
       "original": {
