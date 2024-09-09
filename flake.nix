@@ -7,10 +7,19 @@
       url = "github:vim/vim/";
       flake = false;
     };
+    neovim-src = {
+      url = "github:neovim/neovim/";
+      flake = false;
+    };
   };
 
   outputs =
-    { self, nixpkgs, vim-src }:
+    {
+      self,
+      nixpkgs,
+      vim-src,
+      neovim-src,
+    }:
     let
       system = "x86_64-linux";
     in
@@ -19,7 +28,7 @@
         latitude = nixpkgs.lib.nixosSystem {
           system = system;
           specialArgs = {
-            inherit vim-src;
+            inherit vim-src neovim-src;
           };
           modules = [
             ./latitude

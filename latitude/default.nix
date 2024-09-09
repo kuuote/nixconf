@@ -7,6 +7,7 @@
   lib,
   pkgs,
   vim-src,
+  neovim-src,
   ...
 }:
 
@@ -104,6 +105,22 @@ in
         buildInputs = oldAttrs.buildInputs ++ [ prev.lua ];
       });
     })
+    (final: prev: rec {
+      utf8proc-latest = prev.utf8proc.overrideAttrs {
+        version = "latest";
+        src = pkgs.fetchFromGitHub {
+          owner = "JuliaStrings";
+          repo = "utf8proc";
+          rev = "3de4596fbe28956855df2ecb3c11c0bbc3535838";
+          sha256 = "sha256-DNnrKLwks3hP83K56Yjh9P3cVbivzssblKIx4M/RKqw=";
+        };
+      };
+      neovim-latest = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
+        version = "latest";
+        src = neovim-src;
+        buildInputs = oldAttrs.buildInputs ++ [ utf8proc-latest ];
+      });
+    })
   ];
 
   # List packages installed in system profile. To search, run:
@@ -120,6 +137,7 @@ in
     gnumake
     lua
     ncurses
+    neovim-latest
     nixfmt-rfc-style
     noto-fonts-cjk
     python3
