@@ -1,3 +1,0 @@
-#!/usr/bin/env -S bash -u
-
-nixfmt **/*.nix
