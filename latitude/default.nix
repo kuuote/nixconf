@@ -113,6 +113,7 @@ in
     btrfs-progs
     deno
     dunst
+    fd
     fzf
     gcc
     git
