@@ -141,6 +141,7 @@ in
     nixfmt-rfc-style
     noto-fonts-cjk
     python3
+    ripgrep
     tmux
     trash-cli
     unar
