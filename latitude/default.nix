@@ -19,6 +19,7 @@ let
   nix = import ../nixos/nix.nix;
   openssh = import ../nixos/services/openssh.nix;
 
+  jfdotfont = pkgs.callPackage ../pkgs/jf-dotfont { };
 in
 {
   imports = [
@@ -163,6 +164,7 @@ in
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-emoji
+      jfdotfont
     ];
     fontDir.enable = true;
     fontconfig = {
