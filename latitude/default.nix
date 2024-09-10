@@ -145,6 +145,7 @@ in
     tmux
     trash-cli
     unar
+    vifm
     vim2 # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wezterm
     wget
@@ -152,6 +153,7 @@ in
     grim
     mako
     slurp
+    sway-contrib.grimshot
     wl-clipboard
     wofi
   ];
