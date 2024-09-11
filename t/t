@@ -1,2 +1,2 @@
 #!/usr/bin/env -S bash -u
-sudo nixos-rebuild test --flake .#latitude
+sudo nixos-rebuild test -L --flake .#latitude
