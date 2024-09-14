@@ -31,14 +31,6 @@ in
     ./hardware-configuration.nix
   ];
 
-  fileSystems."/data" = {
-    device = "/dev/disk/by-partlabel/data";
-    fsType = "btrfs";
-    options = [
-      "subvol=/@"
-    ];
-  };
-
   networking.hostName = "nixos"; # Define your hostname.
 
   # Set your time zone.
