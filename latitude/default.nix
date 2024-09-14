@@ -74,6 +74,7 @@ in
   users.users.alice = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    hashedPassword = "$y$j9T$G7oFPasBuVL1NcN3wPu0A/$uNAIdrXb4Kw2RO1s4/BSKpNBTBlywVUHU8wQXfIduz9";
     packages = with pkgs; [
       firefox
       fish
