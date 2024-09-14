@@ -1,0 +1,8 @@
+#!/usr/bin/env -S bash -u
+
+nixos-generate-config --show-hardware-config --root /mnt > latitude/hardware-configuration.nix
+rm -rf /tmp/nix
+cp -a . /tmp/nix
+rm -rf /tmp/nix/.git
+cd /tmp/nix
+nixos-install --root /mnt --flake .#latitude
