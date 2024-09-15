@@ -121,6 +121,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     acpi
+    acpilight
     btrfs-progs
     deno
     dunst
@@ -143,6 +144,7 @@ in
     vim2 # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wezterm
     wget
+    wineWow64Packages.full
     # sway
     grim
     mako
