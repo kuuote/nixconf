@@ -20,6 +20,7 @@ let
   openssh = import ../nixos/services/openssh.nix;
 
   jfdotfont = pkgs.callPackage ../pkgs/jfdotfont { };
+  xremap = pkgs.callPackage ../pkgs/xremap { };
 in
 {
   imports = [
@@ -82,6 +83,7 @@ in
       mpv
       smplayer
       tree
+      xremap
     ];
     shell = pkgs.fish;
   };
