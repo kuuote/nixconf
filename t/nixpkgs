@@ -1,4 +1,4 @@
 #!/bin/sh
 
-cd $(nix flake metadata nixpkgs --json | nix run nixpkgs#jq -- -r .path)
+cd $(nix flake metadata --inputs-from . nixpkgs --json | nix run --inputs-from . nixpkgs#jq -- -r .path)
 exec $SHELL
