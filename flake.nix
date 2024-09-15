@@ -2,15 +2,11 @@
   description = "俺の城";
 
   inputs = {
+    neovim-src.flake = false;
+    neovim-src.url = "github:neovim/neovim";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    vim-src = {
-      url = "github:vim/vim/";
-      flake = false;
-    };
-    neovim-src = {
-      url = "github:neovim/neovim/";
-      flake = false;
-    };
+    vim-src.flake = false;
+    vim-src.url = "github:vim/vim";
   };
 
   outputs =
@@ -38,7 +34,7 @@
       };
       # for debug
       packages.x86_64-linux.default =
-        nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/jf-dotfont
+        nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/xremap.nix
           { };
     };
 }
