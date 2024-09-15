@@ -11,11 +11,9 @@
 
   outputs =
     {
-      self,
       nixpkgs,
-      vim-src,
-      neovim-src,
-    }:
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
     in
@@ -25,7 +23,7 @@
         latitude = nixpkgs.lib.nixosSystem {
           system = system;
           specialArgs = {
-            inherit vim-src neovim-src;
+            inherit inputs;
           };
           modules = [
             ./latitude

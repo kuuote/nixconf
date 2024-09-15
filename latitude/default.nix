@@ -6,8 +6,7 @@
   config,
   lib,
   pkgs,
-  vim-src,
-  neovim-src,
+  inputs,
   ...
 }:
 
@@ -92,7 +91,7 @@ in
     (final: prev: {
       vim2 = prev.vim.overrideAttrs (oldAttrs: {
         version = "latest";
-        src = vim-src;
+        src = inputs.vim-src;
         configureFlags = oldAttrs.configureFlags ++ [
           "--enable-luainterp"
           "--with-lua-prefix=${prev.lua}"
@@ -113,7 +112,7 @@ in
       };
       neovim-latest = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
         version = "latest";
-        src = neovim-src;
+        src = inputs.neovim-src;
         buildInputs = oldAttrs.buildInputs ++ [ utf8proc-latest ];
       });
     })
