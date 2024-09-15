@@ -19,7 +19,7 @@ let
   nix = import ../nixos/nix.nix;
   openssh = import ../nixos/services/openssh.nix;
 
-  jfdotfont = pkgs.callPackage ../pkgs/jf-dotfont { };
+  jfdotfont = pkgs.callPackage ../pkgs/jfdotfont { };
 in
 {
   imports = [
