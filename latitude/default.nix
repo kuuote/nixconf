@@ -114,6 +114,7 @@ in
         version = "latest";
         src = inputs.neovim-src;
         buildInputs = oldAttrs.buildInputs ++ [ utf8proc-latest ];
+        buildPhase = "true"; # installPhaseでもビルド走るのでbuildPhaseを潰す
       });
     })
   ];
