@@ -1,0 +1,3 @@
+#!/usr/bin/env -S bash -u
+
+NIX_DISK_IMAGE=/tmp/$(uuidgen).qcow2 result/bin/run-nixos-vm

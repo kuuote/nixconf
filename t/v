@@ -1,0 +1,2 @@
+#!/usr/bin/env -S bash -u
+nixos-rebuild build-vm -L --flake .#vm
