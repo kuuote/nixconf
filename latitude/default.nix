@@ -86,6 +86,7 @@ in
     ];
     shell = pkgs.fish;
   };
+  services.getty.autologinUser = "alice";
 
   nixpkgs.overlays = [
     (final: prev: {
