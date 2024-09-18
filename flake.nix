@@ -2,6 +2,8 @@
   description = "俺の城";
 
   inputs = {
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
     neovim-src.flake = false;
     neovim-src.url = "github:neovim/neovim";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -11,6 +13,7 @@
 
   outputs =
     {
+      home-manager,
       nixpkgs,
       ...
     }@inputs:
@@ -27,6 +30,17 @@
           };
           modules = [
             ./latitude
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.alice = {
+                home.username = "alice";
+                home.homeDirectory = "/home/alice";
+                home.stateVersion = "24.05";
+                programs.emacs.enable = true;
+              };
+            }
           ];
         };
       };
