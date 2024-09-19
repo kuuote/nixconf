@@ -19,6 +19,7 @@ let
   openssh = import ../nixos/services/openssh.nix;
 
   jfdotfont = pkgs.callPackage ../pkgs/jfdotfont { };
+  mycmds = pkgs.callPackage ../pkgs/mycmds { };
   xremap = pkgs.callPackage ../pkgs/xremap { };
 in
 {
@@ -80,6 +81,7 @@ in
       fish
       libreoffice-fresh
       mpv
+      mycmds
       smplayer
       tree
       xremap
