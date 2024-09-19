@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git restore flake.lock
+nix flake update --commit-lock-file
