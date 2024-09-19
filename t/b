@@ -1,2 +1,2 @@
 #!/usr/bin/env -S bash -u
-nixos-rebuild build -L --flake .#latitude
+sudo nixos-rebuild boot -L --flake .#latitude
