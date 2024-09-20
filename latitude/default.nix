@@ -152,7 +152,6 @@ in
     wineWow64Packages.full
     # sway
     grim
-    mako
     slurp
     sway-contrib.grimshot
     wl-clipboard
