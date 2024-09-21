@@ -28,6 +28,7 @@ in
     networking_wireless
     nix
     openssh
+    (import ../nixos/feat/vim.nix { inherit inputs pkgs; })
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -90,38 +91,6 @@ in
   };
   services.getty.autologinUser = "alice";
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      vim2 = prev.vim.overrideAttrs (oldAttrs: {
-        version = "latest";
-        src = inputs.vim-src;
-        configureFlags = oldAttrs.configureFlags ++ [
-          "--enable-luainterp"
-          "--with-lua-prefix=${prev.lua}"
-          "--enable-fail-if-missing"
-        ];
-        buildInputs = oldAttrs.buildInputs ++ [ prev.lua ];
-      });
-    })
-    (final: prev: rec {
-      utf8proc-latest = prev.utf8proc.overrideAttrs {
-        version = "latest";
-        src = pkgs.fetchFromGitHub {
-          owner = "JuliaStrings";
-          repo = "utf8proc";
-          rev = "3de4596fbe28956855df2ecb3c11c0bbc3535838";
-          sha256 = "sha256-DNnrKLwks3hP83K56Yjh9P3cVbivzssblKIx4M/RKqw=";
-        };
-      };
-      neovim-latest = prev.neovim-unwrapped.overrideAttrs (oldAttrs: {
-        version = "latest";
-        src = inputs.neovim-src;
-        buildInputs = oldAttrs.buildInputs ++ [ utf8proc-latest ];
-        buildPhase = "true"; # installPhaseでもビルド走るのでbuildPhaseを潰す
-      });
-    })
-  ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -137,7 +106,6 @@ in
     gnumake
     lua
     ncurses
-    neovim-latest
     nixfmt-rfc-style
     noto-fonts-cjk
     python3
@@ -146,7 +114,6 @@ in
     trash-cli
     unar
     vifm
-    vim2 # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wezterm
     wget
     wineWow64Packages.full
