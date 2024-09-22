@@ -20,15 +20,15 @@ let
 
   jfdotfont = pkgs.callPackage ../pkgs/jfdotfont { };
   mycmds = pkgs.callPackage ../pkgs/mycmds { };
-  xremap = pkgs.callPackage ../pkgs/xremap { };
 in
 {
   imports = [
+    (import ../nixos/feat/vim.nix { inherit inputs pkgs; })
+    (import ../nixos/feat/xremap.nix { inherit pkgs; })
     boot
     networking_wireless
     nix
     openssh
-    (import ../nixos/feat/vim.nix { inherit inputs pkgs; })
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -75,7 +75,11 @@ in
   programs.fish.enable = true;
   users.users.alice = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "input" # for xremap
+      "uinput" # for xremap
+      "wheel" # Enable ‘sudo’ for the user.
+    ];
     hashedPassword = "$y$j9T$G7oFPasBuVL1NcN3wPu0A/$uNAIdrXb4Kw2RO1s4/BSKpNBTBlywVUHU8wQXfIduz9";
     packages = with pkgs; [
       firefox
@@ -85,7 +89,6 @@ in
       mycmds
       smplayer
       tree
-      xremap
     ];
     shell = pkgs.fish;
   };
