@@ -103,6 +103,7 @@ in
     deno
     dunst
     fd
+    ffmpeg
     fzf
     gcc
     git
