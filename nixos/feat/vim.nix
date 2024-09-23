@@ -38,6 +38,8 @@ in
         # installPhaseでもビルド走るのでbuildPhaseを潰す
         buildPhase = "true";
       }))
+      # テストは大事
+      pkgs.vimPlugins.vim-themis
     ];
     variables = {
       # Vimは真理
