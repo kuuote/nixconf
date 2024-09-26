@@ -19,9 +19,10 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      formatter.${system} = pkgs.nixfmt-rfc-style;
       nixosConfigurations = {
         latitude = nixpkgs.lib.nixosSystem {
           system = system;
@@ -36,6 +37,6 @@
         };
       };
       # for debug
-      packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./pkgs/mycmds { };
+      packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
     };
 }
