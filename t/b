@@ -1,2 +1,3 @@
 #!/usr/bin/env -S bash -u
-sudo nixos-rebuild boot -L --flake .#latitude
+sudo nixos-rebuild boot -L --flake .#latitude || exit 1
+rsync -ac /data/nix/ /data/nix_backup/
