@@ -7,5 +7,6 @@
       pskRaw = "ext:psk_buffalo";
     };
   };
+  networking.wireless.userControlled.enable = true;
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 }
