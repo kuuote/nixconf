@@ -55,7 +55,8 @@
               ln -s $bin $out/bin/
             done
           done
-          echo $inputs > $out/bin/inputs.txt
+          # 依存関係をGC対象から外すおまじない
+          export > $out/export.txt
         '';
       };
     };

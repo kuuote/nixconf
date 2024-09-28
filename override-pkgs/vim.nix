@@ -11,4 +11,8 @@ pkgs.vim.overrideAttrs (oldAttrs: {
     "--with-lua-prefix=${pkgs.lua}"
     "--enable-fail-if-missing"
   ];
+  postInstall = ''
+    ${oldAttrs.postInstall}
+    export > $out/export.txt
+  '';
 })

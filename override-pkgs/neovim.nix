@@ -20,4 +20,11 @@ pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
   buildInputs = oldAttrs.buildInputs ++ [ utf8proc-latest ];
   # installPhaseでもビルド走るのでbuildPhaseを潰す
   buildPhase = "true";
+  postInstall = ''
+    ${oldAttrs.postInstall}
+    export > $out/export.txt
+  '';
+  # 全依存をexportで吐き出してるから出力チェック潰さないと死ぬ
+  # ref: https://discourse.nixos.org/t/getting-is-not-allowed-to-refer-to-the-following-paths-since-upgrading-to-unstable/21743
+  outputChecks = null;
 })

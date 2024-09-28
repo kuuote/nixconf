@@ -20,5 +20,6 @@ stdenvNoCC.mkDerivation rec {
   installPhase = ''
     7z e -y $src
     install -m444 -Dt $out/share/fonts/jfdotfont *.ttf
+    export > $out/export.txt
   '';
 }
