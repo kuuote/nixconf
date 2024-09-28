@@ -22,6 +22,9 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
+      devShells.${system}.default = import ./shell.nix {
+        inherit inputs pkgs;
+      };
       formatter.${system} = pkgs.nixfmt-rfc-style;
       nixosConfigurations = {
         latitude = nixpkgs.lib.nixosSystem {
@@ -37,6 +40,23 @@
         };
       };
       # for debug
-      packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
+      # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
+      packages.${system}.default = pkgs.stdenvNoCC.mkDerivation {
+        name = "test";
+        srcs = import ./shellpkgs.nix {
+          inherit inputs pkgs;
+        };
+        inputs = builtins.attrValues inputs;
+        phases = [ "linkPhase" ];
+        linkPhase = ''
+          for src in $srcs; do
+            mkdir -p $out/bin
+            for bin in $src/bin/*; do
+              ln -s $bin $out/bin/
+            done
+          done
+          echo $inputs > $out/bin/inputs.txt
+        '';
+      };
     };
 }
