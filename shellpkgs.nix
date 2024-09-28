@@ -17,5 +17,6 @@ with pkgs;
 [
   ffmpeg
   neovim
+  nixfmt-rfc-style
   vim
 ]
