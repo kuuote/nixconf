@@ -22,7 +22,6 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      defaultTemplate = inputs.self.templates.develop;
       devShells.${system}.default = import ./shell.nix {
         inherit inputs pkgs;
       };
@@ -64,8 +63,10 @@
           export > $out/export.txt
         '';
       };
-      templates = {
+      templates = rec {
+        default = develop;
         develop = {
+          description = "devShellテンプレ";
           path = ./flake-template/develop;
         };
       };
