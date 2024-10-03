@@ -39,6 +39,16 @@
             {
               # 何かあった時のために現在のビルドソースへのリンクを作っておく
               environment.etc.nixconf.source = ./.;
+              # inputsへのrefもあると便利そう
+              environment.etc.inputs.source = pkgs.stdenvNoCC.mkDerivation {
+                name = "links";
+                phases = [ "linkPhase" ];
+                linkPhase = ''
+                  mkdir $out
+                  ln -s ${inputs.nixpkgs} $out/nixpkgs
+                  ln -s ${inputs.home-manager} $out/home-manager
+                '';
+              };
             }
           ];
         };

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-rm -rf /tmp/nixpkgs
-rsync -a $(nix flake metadata --inputs-from . nixpkgs --json | nix run --inputs-from . nixpkgs#jq -- -r .path)/ /tmp/nixpkgs/
