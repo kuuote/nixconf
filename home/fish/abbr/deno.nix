@@ -1,0 +1,3 @@
+{
+  dr = "deno run -A";
+}
