@@ -19,5 +19,6 @@ with pkgs;
   neovim
   nixfmt-rfc-style
   vim
+  vimPlugins.vim-themis
   (inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default)
 ]
