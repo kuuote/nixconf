@@ -20,6 +20,15 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      inputs-pkg = pkgs.stdenvNoCC.mkDerivation {
+        name = "inputs-pkg";
+        phases = [ "linkPhase" ];
+        linkPhase = ''
+          mkdir $out
+          ln -s ${inputs.nixpkgs} $out/nixpkgs
+          ln -s ${inputs.home-manager} $out/home-manager
+        '';
+      };
     in
     {
       devShells.${system}.default = import ./shell.nix {
@@ -48,15 +57,7 @@
               # 何かあった時のために現在のビルドソースへのリンクを作っておく
               environment.etc.nixconf.source = ./.;
               # inputsへのrefもあると便利そう
-              environment.etc.inputs.source = pkgs.stdenvNoCC.mkDerivation {
-                name = "links";
-                phases = [ "linkPhase" ];
-                linkPhase = ''
-                  mkdir $out
-                  ln -s ${inputs.nixpkgs} $out/nixpkgs
-                  ln -s ${inputs.home-manager} $out/home-manager
-                '';
-              };
+              environment.etc.inputs.source = inputs-pkg;
             }
           ];
         };
@@ -79,9 +80,8 @@
           done
           # 依存関係をGC対象から外すおまじない
           export > $out/export.txt
-
-          ln -s ${inputs.nixpkgs} $out/nixpkgs
-          ln -s ${inputs.home-manager} $out/home-manager
+          # こちらでもinputsの参照をできるようにしておく
+          ln -s ${inputs-pkg} $out/inputs
         '';
       };
       templates = rec {
