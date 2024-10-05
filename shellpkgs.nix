@@ -19,4 +19,5 @@ with pkgs;
   neovim
   nixfmt-rfc-style
   vim
+  (inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default)
 ]

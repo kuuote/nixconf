@@ -26,6 +26,14 @@
         inherit inputs pkgs;
       };
       formatter.${system} = pkgs.nixfmt-rfc-style;
+      homeConfigurations = {
+        arch = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            (import ./home "arch")
+          ];
+        };
+      };
       nixosConfigurations = {
         latitude = nixpkgs.lib.nixosSystem {
           system = system;
