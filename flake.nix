@@ -71,6 +71,9 @@
           done
           # 依存関係をGC対象から外すおまじない
           export > $out/export.txt
+
+          ln -s ${inputs.nixpkgs} $out/nixpkgs
+          ln -s ${inputs.home-manager} $out/home-manager
         '';
       };
       templates = rec {
