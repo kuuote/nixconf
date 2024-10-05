@@ -41,9 +41,9 @@
             inherit inputs;
           };
           modules = [
-            ./latitude
             home-manager.nixosModules.home-manager
-            ./home
+            ./latitude
+            ./latitude/home.nix
             {
               # 何かあった時のために現在のビルドソースへのリンクを作っておく
               environment.etc.nixconf.source = ./.;
