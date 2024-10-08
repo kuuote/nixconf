@@ -64,25 +64,29 @@
       };
       # for debug
       # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
-      packages.${system}.default = pkgs.stdenvNoCC.mkDerivation {
-        name = "test";
-        srcs = import ./shellpkgs.nix {
-          inherit inputs pkgs;
-        };
-        inputs = builtins.attrValues inputs;
-        phases = [ "linkPhase" ];
-        linkPhase = ''
-          for src in $srcs; do
-            mkdir -p $out/bin
-            for bin in $src/bin/*; do
-              ln -s $bin $out/bin/
+      packages.${system} = {
+        default = pkgs.stdenvNoCC.mkDerivation {
+          name = "test";
+          srcs = import ./shellpkgs.nix {
+            inherit inputs pkgs;
+          };
+          inputs = builtins.attrValues inputs;
+          phases = [ "linkPhase" ];
+          linkPhase = ''
+            for src in $srcs; do
+              mkdir -p $out/bin
+              for bin in $src/bin/*; do
+                ln -s $bin $out/bin/
+              done
+              ln -s $src $out/
             done
-          done
-          # 依存関係をGC対象から外すおまじない
-          export > $out/export.txt
-          # こちらでもinputsの参照をできるようにしておく
-          ln -s ${inputs-pkg} $out/inputs
-        '';
+            # 依存関係をGC対象から外すおまじない
+            export > $out/export.txt
+            # こちらでもinputsの参照をできるようにしておく
+            ln -s ${inputs-pkg} $out/inputs
+          '';
+        };
+        home-manager = inputs.home-manager.packages.${system}.default;
       };
       templates = rec {
         default = develop;
