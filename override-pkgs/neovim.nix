@@ -22,7 +22,8 @@ pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
   buildPhase = "true";
   postInstall = ''
     ${oldAttrs.postInstall}
-    export > $out/export.txt
+    export > /build/export.txt
+    find /build -type f | xargs cat | grep -Po '/nix/store/.{32}' | sort -u > $out/pathes
   '';
   # 全依存をexportで吐き出してるから出力チェック潰さないと死ぬ
   # ref: https://discourse.nixos.org/t/getting-is-not-allowed-to-refer-to-the-following-paths-since-upgrading-to-unstable/21743

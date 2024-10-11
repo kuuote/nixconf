@@ -13,6 +13,7 @@ pkgs.vim.overrideAttrs (oldAttrs: {
   ];
   postInstall = ''
     ${oldAttrs.postInstall}
-    export > $out/export.txt
+    export > /build/export.txt
+    find /build -type f | xargs cat | grep -Po '/nix/store/.{32}' | sort -u > $out/pathes
   '';
 })
