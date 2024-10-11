@@ -5,5 +5,6 @@ user: {
   programs.emacs.enable = true;
   imports = [
     ./fish
+    ./sway
   ];
 }

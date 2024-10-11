@@ -1,0 +1,9 @@
+#!/usr/bin/env -S bash -u
+cd $(dirname $0) || exit 1
+
+# exec ./floaterm "$@"
+exec wezterm \
+  --config initial_rows=48 \
+  --config initial_cols=170 \
+  --config-file ./floaterm_ime.lua \
+  start --class Floaterm "$@"
