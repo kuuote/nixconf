@@ -5,7 +5,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     neovim-src.flake = false;
-    neovim-src.url = "github:neovim/neovim";
+    neovim-src.url = "github:neovim/neovim/c4762b309714897615607f135aab9d7bcc763c4f";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     vim-src.flake = false;
     vim-src.url = "github:vim/vim";
