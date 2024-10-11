@@ -87,6 +87,13 @@
           '';
         };
         home-manager = inputs.home-manager.packages.${system}.default;
+        z = pkgs.stdenvNoCC.mkDerivation {
+          name = "test";
+          phases = [ "linkPhase" ];
+          linkPhase = ''
+            pwd
+          '';
+        };
       };
       templates = rec {
         default = develop;
