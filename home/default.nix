@@ -6,5 +6,6 @@ user: {
   imports = [
     ./fish
     ./sway
+    ./wezterm
   ];
 }
