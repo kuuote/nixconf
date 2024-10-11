@@ -1,4 +1,5 @@
 {
+  home-manager,
   inputs,
   pkgs,
 }:
@@ -16,9 +17,9 @@ in
 with pkgs;
 [
   ffmpeg
+  home-manager
   neovim
   nixfmt-rfc-style
   vim
   vimPlugins.vim-themis
-  (inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default)
 ]

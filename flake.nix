@@ -64,37 +64,50 @@
       };
       # for debug
       # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
-      packages.${system} = {
-        default = pkgs.stdenvNoCC.mkDerivation {
-          name = "test";
-          srcs = import ./shellpkgs.nix {
-            inherit inputs pkgs;
-          };
-          inputs = builtins.attrValues inputs;
-          phases = [ "linkPhase" ];
-          linkPhase = ''
-            for src in $srcs; do
-              mkdir -p $out/bin
-              for bin in $src/bin/*; do
-                ln -s $bin $out/bin/
+      packages.${system} =
+        let
+          home-manager =
+            let
+              path = "${inputs.home-manager}";
+              pkg = "${path}/home-manager";
+            in
+            pkgs.callPackage pkg { inherit path; };
+        in
+        {
+          default = pkgs.stdenvNoCC.mkDerivation {
+            name = "test";
+            srcs = import ./shellpkgs.nix {
+              inherit
+                home-manager
+                inputs
+                pkgs
+                ;
+            };
+            inputs = builtins.attrValues inputs;
+            phases = [ "linkPhase" ];
+            linkPhase = ''
+              for src in $srcs; do
+                mkdir -p $out/bin
+                for bin in $src/bin/*; do
+                  ln -s $bin $out/bin/
+                done
+                ln -s $src $out/
               done
-              ln -s $src $out/
-            done
-            # 依存関係をGC対象から外すおまじない
-            export > $out/export.txt
-            # こちらでもinputsの参照をできるようにしておく
-            ln -s ${inputs-pkg} $out/inputs
-          '';
+              # 依存関係をGC対象から外すおまじない
+              export > $out/export.txt
+              # こちらでもinputsの参照をできるようにしておく
+              ln -s ${inputs-pkg} $out/inputs
+            '';
+          };
+          home-manager = home-manager;
+          z = pkgs.stdenvNoCC.mkDerivation {
+            name = "test";
+            phases = [ "linkPhase" ];
+            linkPhase = ''
+              pwd
+            '';
+          };
         };
-        home-manager = inputs.home-manager.packages.${system}.default;
-        z = pkgs.stdenvNoCC.mkDerivation {
-          name = "test";
-          phases = [ "linkPhase" ];
-          linkPhase = ''
-            pwd
-          '';
-        };
-      };
       templates = rec {
         default = develop;
         develop = {
