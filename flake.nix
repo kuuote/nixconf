@@ -6,6 +6,8 @@
     home-manager.url = "github:nix-community/home-manager";
     neovim-src.flake = false;
     neovim-src.url = "github:neovim/neovim/c4762b309714897615607f135aab9d7bcc763c4f";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     vim-src.flake = false;
     vim-src.url = "github:vim/vim";
@@ -51,6 +53,7 @@
           };
           modules = [
             home-manager.nixosModules.home-manager
+            inputs.nix-index-database.nixosModules.nix-index
             ./latitude
             ./latitude/home.nix
             {
