@@ -66,8 +66,10 @@ local settings = {
 		{ key = "B", mods = "ALT", action = wezterm.action({ EmitEvent = "toggle-bg-opacity" }) },
 		{ key = "J", mods = "ALT", action = wezterm.action({ EmitEvent = "toggle-jiskan" }) },
 		-- simulate modifyOtherKeys
+    -- keycodes can get by `$ showkey -a` if `enable_csi_u_encoding = true`
 		-- {key="Enter", mods="CTRL", action=wezterm.action.SendString('\x1b[13;5u')},
 		-- {key="Enter", mods="SHIFT", action=wezterm.action.SendString('\x1b[13;2u')},
+		-- {key=".", mods="CTRL", action=wezterm.action.SendString('\x1b[46;5u')},
 	},
 	use_ime = false, -- skkeleton使ってるので(ry
 	window_background_opacity = 0.7,
