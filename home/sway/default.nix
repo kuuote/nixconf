@@ -26,6 +26,7 @@
         ];
         defaultWorkspace = "workspace number 1";
         focus = {
+          newWindow = "urgent"; # smplayerぶっ叩くのに困るのでswayのデフォルトに合わせておく
           followMouse = false;
         };
         keybindings =
