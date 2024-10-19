@@ -73,23 +73,39 @@
         "type": "github"
       }
     },
+    "org-babel": {
+      "locked": {
+        "lastModified": 1726753532,
+        "narHash": "sha256-EVLP55yzqAvlNeJuBohBm4SkHIKrFBb4ahyYBzCi57w=",
+        "owner": "emacs-twist",
+        "repo": "org-babel",
+        "rev": "fb2a3dc4dccb2ab05059c6910c5f83c49f73eba8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emacs-twist",
+        "repo": "org-babel",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "neovim-src": "neovim-src",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "org-babel": "org-babel",
         "vim-src": "vim-src"
       }
     },
     "vim-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1729274284,
-        "narHash": "sha256-P9NS5T1tyC6pC9y7yuEes8TqA5GC/vVmnfCn6HAdTS0=",
+        "lastModified": 1729346097,
+        "narHash": "sha256-YZ7QSrkzXRzwTlW9xYWEoCl5AkWbqDH0sRUmFlsqO+o=",
         "owner": "vim",
         "repo": "vim",
-        "rev": "cc15bbcbc471a206e995e147a09a0720b9f35a38",
+        "rev": "c73fc86bf8fe318aab41900dd92e380143211cda",
         "type": "github"
       },
       "original": {

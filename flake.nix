@@ -9,6 +9,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    org-babel.url = "github:emacs-twist/org-babel";
     vim-src.flake = false;
     vim-src.url = "github:vim/vim";
   };
