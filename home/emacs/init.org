@@ -1,0 +1,6 @@
+#+STARTUP: fold
+* test
+** indent/tab
+#+begin_src emacs-lisp :tangle yes
+  (indent-tabs-mode nil)
+#+END_SRC
