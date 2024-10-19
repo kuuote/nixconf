@@ -33,28 +33,38 @@
           ln -s ${inputs.nixpkgs} $out/nixpkgs
         '';
       };
+      specialArgs = {
+        inherit inputs;
+      };
     in
     {
       devShells.${system}.default = import ./shell.nix {
         inherit inputs pkgs;
       };
       formatter.${system} = pkgs.nixfmt-rfc-style;
-      homeConfigurations = {
-        arch = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            (import ./home "arch")
-          ];
+      homeConfigurations =
+        let
+          config =
+            user:
+            home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = specialArgs;
+              modules = [
+                (import ./home user)
+              ];
+            };
+        in
+        {
+          alice = config "alice"; # home-manager build用
+          arch = config "arch";
         };
-      };
       nixosConfigurations = {
         latitude = nixpkgs.lib.nixosSystem {
           system = system;
-          specialArgs = {
-            inherit inputs;
-          };
+          inherit specialArgs;
           modules = [
             home-manager.nixosModules.home-manager
+            { home-manager.extraSpecialArgs = specialArgs; }
             inputs.nix-index-database.nixosModules.nix-index
             ./latitude
             ./latitude/home.nix
