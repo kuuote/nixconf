@@ -100,6 +100,7 @@ in
     acpi
     acpilight
     btrfs-progs
+    cryptsetup
     deno
     dunst
     fd
