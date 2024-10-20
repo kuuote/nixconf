@@ -4,3 +4,12 @@
 #+begin_src emacs-lisp :tangle yes
   (indent-tabs-mode nil)
 #+END_SRC
+* packages
+** ddskk
+nix: epkgs.ddskk
+#+begin_src emacs-lisp :tangle yes
+  (autoload 'skk-mode "ddskk-autoloads")
+  (keymap-global-set "C-x C-j" #'skk-mode)
+#+END_SRC
+** magit
+nix: epkgs.magit

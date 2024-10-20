@@ -44,6 +44,9 @@ in
   home = {
     file = {
       ".emacs.d/init.el".text = tangle init;
+      ".skk.el".text = ''
+        (setq skk-large-jisyo "${pkgs.skkDictionaries.l}/share/skk/SKK-JISYO.L")
+      '';
     };
   };
 }
