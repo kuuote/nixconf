@@ -1,15 +1,38 @@
 #+STARTUP: fold
-* test
+* basic
+#+begin_src emacs-lisp :tangle yes
+#+end_src
+** 日本語でやっていく
+https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
+#+begin_src emacs-lisp :tangle yes
+  (set-language-environment "Japanese")
+  (let ((font "Noto Sans Mono CJK JP"))
+    (set-frame-font font)
+    (add-to-list 'default-frame-alist (cons 'font font)))
+#+end_src
+** 起動画面の無効化
+#+begin_src emacs-lisp :tangle yes
+  (setq inhibit-startup-screen t)
+#+end_src
 ** indent/tab
 #+begin_src emacs-lisp :tangle yes
   (indent-tabs-mode nil)
-#+END_SRC
+#+end_src
+* commands
+** indent-buffer
+#+begin_src emacs-lisp :tangle yes
+  (defun my/indent-buffer ()
+    (interactive)
+    (save-excursion
+      (indent-region (point-min) (point-max))
+      (untabify (point-min) (point-max))))
+#+end_src
 * packages
 ** ddskk
 nix: epkgs.ddskk
 #+begin_src emacs-lisp :tangle yes
   (autoload 'skk-mode "ddskk-autoloads")
   (keymap-global-set "C-x C-j" #'skk-mode)
-#+END_SRC
+#+end_src
 ** magit
 nix: epkgs.magit
