@@ -2,6 +2,10 @@
 * basic
 #+begin_src emacs-lisp :tangle yes
 #+end_src
+** theme - modus-vivendi
+#+begin_src emacs-lisp :tangle yes
+  (load-theme 'modus-vivendi t)
+#+end_src
 ** 日本語でやっていく
 https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+begin_src emacs-lisp :tangle yes
@@ -34,6 +38,12 @@ nix: epkgs.ddskk
 #+begin_src emacs-lisp :tangle yes
   (autoload 'skk-mode "ddskk-autoloads")
   (keymap-global-set "C-x C-j" #'skk-mode)
+#+end_src
+** nyan-mode
+nix: epkgs.nyan-mode
+#+begin_src emacs-lisp :tangle yes
+  (nyan-mode)
+  (nyan-start-animation)
 #+end_src
 ** magit
 nix: epkgs.magit

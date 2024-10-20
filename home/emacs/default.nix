@@ -9,7 +9,7 @@ let
   # init.orgから行頭に書かれた `nix: epkgs.ddskk` のような定義を抽出する
   decls =
     let
-      a = builtins.split "\nnix: ([a-zA-Z.]+)" init;
+      a = builtins.split "\nnix: ([a-zA-Z.\-]+)" init;
       b = builtins.filter builtins.isList a;
       c = builtins.map (list: builtins.elemAt list 0) b;
     in
