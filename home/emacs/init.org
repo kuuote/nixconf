@@ -6,6 +6,10 @@
 #+begin_src emacs-lisp :tangle yes
   (load-theme 'modus-vivendi t)
 #+end_src
+** リアルタイムで補完が出てほしい人生
+#+begin_src emacs-lisp :tangle yes
+  (fido-vertical-mode)
+#+end_src
 ** 日本語でやっていく
 https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+begin_src emacs-lisp :tangle yes
