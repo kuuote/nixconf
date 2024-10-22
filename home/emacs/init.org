@@ -24,7 +24,7 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+end_src
 ** indent/tab
 #+begin_src emacs-lisp :tangle yes
-  (indent-tabs-mode nil)
+  (setq-default indent-tabs-mode nil)
 #+end_src
 * commands
 ** indent-buffer
