@@ -112,7 +112,7 @@ in
     lua
     ncurses
     nixfmt-rfc-style
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     python3
     ripgrep
     tmux

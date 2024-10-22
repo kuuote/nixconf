@@ -27,7 +27,7 @@ in
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsWithPackages (
+    package = pkgs.emacs.pkgs.withPackages (
       epkgs:
       let
         set = {
