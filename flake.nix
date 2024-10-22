@@ -31,6 +31,7 @@
           ln -s ${inputs.home-manager} $out/home-manager
           ln -s ${inputs.nix-index-database} $out/nix-index-database
           ln -s ${inputs.nixpkgs} $out/nixpkgs
+          ln -s ${inputs.org-babel} $out/org-babel
         '';
       };
       specialArgs = {
