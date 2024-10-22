@@ -4,7 +4,9 @@
 #+end_src
 ** theme - modus-vivendi
 #+begin_src emacs-lisp :tangle yes
-  (load-theme 'modus-vivendi t)
+  (if (display-graphic-p)
+      (load-theme 'modus-vivendi t)
+    (load-theme 'modus-operandi t))
 #+end_src
 ** リアルタイムで補完が出てほしい人生
 #+begin_src emacs-lisp :tangle yes
