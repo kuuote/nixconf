@@ -2,4 +2,5 @@
 
 # nix fmtがgitignore見てくれないのでとりあえず
 # ref: https://stackoverflow.com/questions/39064520/list-all-files-that-are-not-ignored-by-gitignore
-git ls-files -z --cached --others --exclude-standard | xargs -0 nix fmt
+# git ls-files -z --cached --others --exclude-standard | xargs -0 -I{} nix fmt {}
+find . -type f -name '*.nix' -print0 | sort -z | xargs -0 -I{} nixfmt {}
