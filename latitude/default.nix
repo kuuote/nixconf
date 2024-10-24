@@ -126,6 +126,7 @@ in
     grim
     slurp
     sway-contrib.grimshot
+    wf-recorder
     wl-clipboard
     wofi
   ];
