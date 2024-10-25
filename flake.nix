@@ -60,6 +60,14 @@
           arch = config "arch";
         };
       nixosConfigurations = {
+        a = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            {
+              services.getty.autologinUser = "root";
+            }
+          ];
+        };
         latitude = nixpkgs.lib.nixosSystem {
           system = system;
           inherit specialArgs;
