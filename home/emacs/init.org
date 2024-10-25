@@ -38,6 +38,8 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
       (untabify (point-min) (point-max))))
 #+end_src
 * packages
+** consult
+nix: epkgs.consult
 ** ddskk
 nix: epkgs.ddskk
 辞書の設定は.skk.elに記述している
@@ -45,11 +47,17 @@ nix: epkgs.ddskk
   (autoload 'skk-mode "ddskk-autoloads")
   (keymap-global-set "C-x C-j" #'skk-mode)
 #+end_src
+** magit
+nix: epkgs.magit
+** nix-mode
+nix: epkgs.nix-mode
+#+begin_src emacs-lisp :tangle yes
+  (autoload 'nix-mode "nix-mode")
+  (add-to-list 'auto-mode-alist '("\\.nix$" . nix-mode))
+#+end_src
 ** nyan-mode
 nix: epkgs.nyan-mode
 #+begin_src emacs-lisp :tangle yes
   (nyan-mode)
   (nyan-start-animation)
 #+end_src
-** magit
-nix: epkgs.magit
