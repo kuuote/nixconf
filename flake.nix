@@ -115,7 +115,8 @@
                 for bin in $src/bin/*; do
                   ln -s $bin $out/bin/
                 done
-                ln -s $src $out/
+                # srcへのリンクを作っておく。hashはいらないので除去
+                ln -s $src $out/$(echo $src | sed -E 's|.*/nix/store/.{32}-||g')
               done
               # 依存関係をGC対象から外すおまじない
               export > $out/export.txt
