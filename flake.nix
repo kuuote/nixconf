@@ -92,9 +92,9 @@
             modules = [
               home-manager.nixosModules.home-manager
               { home-manager.extraSpecialArgs = special; }
+              ./home/nixos.nix
               inputs.nix-index-database.nixosModules.nix-index
               ./latitude
-              ./latitude/home.nix
               {
                 # 何かあった時のために現在のビルドソースへのリンクを作っておく
                 environment.etc.nixconf.source = ./.;
