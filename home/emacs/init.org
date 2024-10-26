@@ -49,6 +49,14 @@ nix: epkgs.ddskk
 #+end_src
 ** magit
 nix: epkgs.magit
+#+begin_src emacs-lisp :tangle yes
+  (defun my/magit-full ()
+    (interactive)
+    (window-configuration-to-register :magit-full)
+    (magit)
+    (delete-other-windows))
+  (keymap-global-set "C-c m" #'my/magit-full)
+#+end_src
 ** nix-mode
 nix: epkgs.nix-mode
 #+begin_src emacs-lisp :tangle yes
