@@ -151,6 +151,7 @@ in
           "Noto Color Emoji"
         ];
         monospace = [
+          "Noto Sans Mono CJK JP"
           "Noto Color Emoji"
         ];
         emoji = [ "Noto Color Emoji" ];
