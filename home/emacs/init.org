@@ -2,6 +2,14 @@
 * basic
 #+begin_src emacs-lisp :tangle yes
 #+end_src
+** indent/tab
+#+begin_src emacs-lisp :tangle yes
+  (setq-default indent-tabs-mode nil)
+#+end_src
+** repeat-mode
+#+begin_src emacs-lisp :tangle yes
+  (repeat-mode)
+#+end_src
 ** theme - modus-vivendi
 #+begin_src emacs-lisp :tangle yes
   (if (display-graphic-p)
@@ -23,10 +31,6 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 ** 起動画面の無効化
 #+begin_src emacs-lisp :tangle yes
   (setq inhibit-startup-screen t)
-#+end_src
-** indent/tab
-#+begin_src emacs-lisp :tangle yes
-  (setq-default indent-tabs-mode nil)
 #+end_src
 * commands
 ** indent-buffer
