@@ -34,6 +34,7 @@ in
   ] args;
   programs.fish.shellInit = builtins.concatStringsSep "\n" ([
     (import ./init/mru.nix { inherit pkgs; })
+    (import ./init/external-chdir.nix)
     "fish_add_path ~/cmd"
   ]);
 }
