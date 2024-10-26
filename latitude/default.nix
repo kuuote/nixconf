@@ -26,6 +26,7 @@ in
   imports = [
     (import ../nixos/feat/vim.nix { inherit inputs pkgs; })
     (import ../nixos/feat/xremap.nix { inherit pkgs; })
+    ../nixos/feat/acpilight.nix
     boot
     networking_wireless
     nix
@@ -99,7 +100,6 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     acpi
-    acpilight
     btrfs-progs
     cryptsetup
     deno
