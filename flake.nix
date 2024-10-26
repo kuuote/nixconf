@@ -23,6 +23,12 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      home-manager-pkg =
+        let
+          path = "${inputs.home-manager}";
+          pkg = "${path}/home-manager";
+        in
+        pkgs.callPackage pkg { inherit path; };
       inputs-pkg = pkgs.stdenvNoCC.mkDerivation {
         name = "inputs-pkg";
         phases = [ "linkPhase" ];
@@ -40,7 +46,11 @@
     in
     {
       devShells.${system}.default = import ./shell.nix {
-        inherit inputs pkgs;
+        inherit
+          home-manager-pkg
+          inputs
+          pkgs
+          ;
       };
       formatter.${system} = pkgs.nixfmt-rfc-style;
       homeConfigurations =
@@ -88,51 +98,35 @@
       };
       # for debug
       # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
-      packages.${system} =
-        let
-          home-manager =
-            let
-              path = "${inputs.home-manager}";
-              pkg = "${path}/home-manager";
-            in
-            pkgs.callPackage pkg { inherit path; };
-        in
-        {
-          default = pkgs.stdenvNoCC.mkDerivation {
-            name = "test";
-            srcs = import ./shellpkgs.nix {
-              inherit
-                home-manager
-                inputs
-                pkgs
-                ;
-            };
-            inputs = builtins.attrValues inputs;
-            phases = [ "linkPhase" ];
-            linkPhase = ''
-              for src in $srcs; do
-                mkdir -p $out/bin
-                for bin in $src/bin/*; do
-                  ln -s $bin $out/bin/
-                done
-                # srcへのリンクを作っておく。hashはいらないので除去
-                ln -s $src $out/$(echo $src | sed -E 's|.*/nix/store/.{32}-||g')
+      packages.${system} = {
+        default = pkgs.stdenvNoCC.mkDerivation {
+          name = "test";
+          srcs = import ./shellpkgs.nix {
+            inherit
+              home-manager-pkg
+              inputs
+              pkgs
+              ;
+          };
+          inputs = builtins.attrValues inputs;
+          phases = [ "linkPhase" ];
+          linkPhase = ''
+            for src in $srcs; do
+              mkdir -p $out/bin
+              for bin in $src/bin/*; do
+                ln -s $bin $out/bin/
               done
-              # 依存関係をGC対象から外すおまじない
-              export > $out/export.txt
-              # こちらでもinputsの参照をできるようにしておく
-              ln -s ${inputs-pkg} $out/inputs
-            '';
-          };
-          home-manager = home-manager;
-          z = pkgs.stdenvNoCC.mkDerivation {
-            name = "test";
-            phases = [ "linkPhase" ];
-            linkPhase = ''
-              pwd
-            '';
-          };
+              # srcへのリンクを作っておく。hashはいらないので除去
+              ln -s $src $out/$(echo $src | sed -E 's|.*/nix/store/.{32}-||g')
+            done
+            # 依存関係をGC対象から外すおまじない
+            export > $out/export.txt
+            # こちらでもinputsの参照をできるようにしておく
+            ln -s ${inputs-pkg} $out/inputs
+          '';
         };
+        home-manager = home-manager;
+      };
       templates = rec {
         default = develop;
         develop = {

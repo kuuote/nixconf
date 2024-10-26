@@ -1,5 +1,5 @@
 {
-  home-manager,
+  home-manager-pkg,
   inputs,
   pkgs,
 }:
@@ -18,7 +18,7 @@ with pkgs;
 [
   deno
   ffmpeg
-  home-manager
+  home-manager-pkg
   neovim
   nixfmt-rfc-style
   vim
