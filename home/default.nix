@@ -9,6 +9,7 @@
   imports = [
     ./emacs
     ./fish
+    ./git
     ./sway
     ./wezterm
   ];
