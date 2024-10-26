@@ -4,9 +4,10 @@
 
 {
   config,
+  inputs,
   lib,
   pkgs,
-  inputs,
+  user,
   ...
 }:
 
@@ -73,7 +74,7 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.fish.enable = true;
-  users.users.alice = {
+  users.users.${user} = {
     isNormalUser = true;
     extraGroups = [
       "input" # for xremap
@@ -92,7 +93,7 @@ in
     ];
     shell = pkgs.fish;
   };
-  services.getty.autologinUser = "alice";
+  services.getty.autologinUser = user;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

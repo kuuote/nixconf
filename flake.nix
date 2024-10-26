@@ -59,9 +59,11 @@
             user:
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
-              extraSpecialArgs = specialArgs;
+              extraSpecialArgs = specialArgs // {
+                inherit user;
+              };
               modules = [
-                (import ./home user)
+                ./home
               ];
             };
         in
@@ -78,23 +80,29 @@
             }
           ];
         };
-        latitude = nixpkgs.lib.nixosSystem {
-          system = system;
-          inherit specialArgs;
-          modules = [
-            home-manager.nixosModules.home-manager
-            { home-manager.extraSpecialArgs = specialArgs; }
-            inputs.nix-index-database.nixosModules.nix-index
-            ./latitude
-            ./latitude/home.nix
-            {
-              # 何かあった時のために現在のビルドソースへのリンクを作っておく
-              environment.etc.nixconf.source = ./.;
-              # inputsへのrefもあると便利そう
-              environment.etc.inputs.source = inputs-pkg;
-            }
-          ];
-        };
+        latitude =
+          let
+            special = specialArgs // {
+              user = "alice";
+            };
+          in
+          nixpkgs.lib.nixosSystem {
+            system = system;
+            specialArgs = special;
+            modules = [
+              home-manager.nixosModules.home-manager
+              { home-manager.extraSpecialArgs = special; }
+              inputs.nix-index-database.nixosModules.nix-index
+              ./latitude
+              ./latitude/home.nix
+              {
+                # 何かあった時のために現在のビルドソースへのリンクを作っておく
+                environment.etc.nixconf.source = ./.;
+                # inputsへのrefもあると便利そう
+                environment.etc.inputs.source = inputs-pkg;
+              }
+            ];
+          };
       };
       # for debug
       # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
