@@ -47,6 +47,10 @@ nix: epkgs.ddskk
   (autoload 'skk-mode "ddskk-autoloads")
   (keymap-global-set "C-x C-j" #'skk-mode)
 #+end_src
+*** sticky key無いと生きていけない
+#+begin_src emacs-lisp :tangle yes
+  (setq skk-sticky-key ";")
+#+end_src
 ** magit
 nix: epkgs.magit
 #+begin_src emacs-lisp :tangle yes
