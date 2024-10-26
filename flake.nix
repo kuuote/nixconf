@@ -125,7 +125,7 @@
             ln -s ${inputs-pkg} $out/inputs
           '';
         };
-        home-manager = home-manager;
+        home-manager = home-manager-pkg;
       };
       templates = rec {
         default = develop;
