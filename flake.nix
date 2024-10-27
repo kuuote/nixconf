@@ -97,7 +97,7 @@
               ./latitude
               {
                 # 何かあった時のために現在のビルドソースへのリンクを作っておく
-                environment.etc.nixconf.source = ./.;
+                environment.etc.c.source = ./.;
                 # inputsへのrefもあると便利そう
                 environment.etc.inputs.source = inputs-pkg;
               }
@@ -142,5 +142,6 @@
           path = ./flake-template/develop;
         };
       };
+      z = import ./lib/p_test.nix { inherit pkgs; };
     };
 }
