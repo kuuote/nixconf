@@ -17,7 +17,7 @@ let
   boot = import ../nixos/boot.nix;
   networking_wireless = import ../nixos/networking/wireless.nix;
   nix = import ../nixos/nix.nix;
-  openssh = import ../nixos/services/openssh.nix;
+  openssh = import ../nixos/services/openssh;
 
   jfdotfont = pkgs.callPackage ../pkgs/jfdotfont { };
   mycmds = pkgs.callPackage ../pkgs/mycmds { };

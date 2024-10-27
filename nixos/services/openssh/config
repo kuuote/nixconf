@@ -1,0 +1,6 @@
+UserKnownHostsFile=/dev/null
+StrictHostKeyChecking=no
+
+Host local
+	HostName 10.0.2.2
+	User alice
