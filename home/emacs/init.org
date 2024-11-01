@@ -26,6 +26,13 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
     (set-frame-font font)
     (add-to-list 'default-frame-alist (cons 'font font)))
 #+end_src
+** 画面を広くする
+テキストエディタが広いことは大事だと思います!
+#+begin_src emacs-lisp :tangle yes
+  (menu-bar-mode -1)
+  (scroll-bar-mode 0)
+  (tool-bar-mode 0)
+#+end_src
 ** 起動画面の無効化
 #+begin_src emacs-lisp :tangle yes
   (setq inhibit-startup-screen t)
