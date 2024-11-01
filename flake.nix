@@ -56,7 +56,10 @@
       homeConfigurations =
         let
           config =
-            user:
+            {
+              extraModules ? [ ],
+              user,
+            }:
             home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
               extraSpecialArgs = specialArgs // {
@@ -64,12 +67,25 @@
               };
               modules = [
                 ./home
-              ];
+              ] ++ extraModules;
             };
         in
         {
-          alice = config "alice"; # home-manager build用
-          arch = config "arch";
+          alice = config { user = "alice"; };
+          arch = config {
+            extraModules = [
+              {
+                home.packages = import ./shellpkgs.nix {
+                  inherit
+                    home-manager-pkg
+                    inputs
+                    pkgs
+                    ;
+                };
+              }
+            ];
+            user = "arch";
+          };
         };
       nixosConfigurations = {
         a = nixpkgs.lib.nixosSystem {
