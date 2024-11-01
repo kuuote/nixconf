@@ -77,13 +77,15 @@ nix: epkgs.ddskk
 nix: epkgs.edit-indirect
 ** magit
 nix: epkgs.magit
+*** 全画面でmagitするやつ
+[[http://k2nr.me/blog/2014/12/22/emacs-magit.html]]より
 #+begin_src emacs-lisp :tangle yes
   (defun my/magit-full ()
     (interactive)
     (window-configuration-to-register :magit-full)
     (magit)
     (delete-other-windows))
-  (keymap-global-set "C-c m" #'my/magit-full)
+  (keymap-global-set "C-c g" #'my/magit-full)
 #+end_src
 ** nix-mode
 nix: epkgs.nix-mode
