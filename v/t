@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sudo result/system/bin/switch-to-configuration test

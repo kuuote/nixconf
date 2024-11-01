@@ -1,0 +1,16 @@
+#!/bin/sh -eu
+
+mkdir -p ~/.ssh
+cp $(dirname $(dirname $0))/nixos/services/openssh/id_local ~/.ssh/id_ed25519
+cp $(dirname $(dirname $0))/nixos/services/openssh/config ~/.ssh/config
+chmod -R 700 ~/.ssh
+sudo rsync -a --chown root:root ~/.ssh/ /root/.ssh/
+if [[ ! -d ~/c ]]; then
+    cp -a /etc/c/ ~/
+    chmod -R +w ~/c
+fi
+cd ~/c
+result=$(ssh local readlink -f /data/nix/result)
+nix copy --no-check-sigs --from ssh://local $result
+rm -rf result
+ln -s $result result
