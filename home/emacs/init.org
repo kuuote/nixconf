@@ -87,6 +87,16 @@ nix: epkgs.magit
     (delete-other-windows))
   (keymap-global-set "C-c g" #'my/magit-full)
 #+end_src
+*** 明示的にrefreshした際にsectionの開閉を元に戻す
+#+begin_src emacs-lisp :tangle yes
+  (defun my/magit-refresh ()
+    (interactive)
+    (setq magit-section-visibility-cache nil)
+    (magit-refresh))
+  (add-hook 'magit-status-mode-hook
+            (lambda ()
+              (define-key magit-status-mode-map (kbd "g") #'my/magit-refresh)))
+#+end_src
 ** nix-mode
 nix: epkgs.nix-mode
 #+begin_src emacs-lisp :tangle yes
