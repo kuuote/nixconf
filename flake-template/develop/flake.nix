@@ -12,14 +12,20 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      packages.${system}.default = pkgs.mkShell {
-        packages = with pkgs; [
-          fish
-          hello
-        ];
-        shellHook = ''
-          exec fish
-        '';
+      devShells.${system} = rec {
+        default = shell;
+        shell = pkgs.mkShell {
+          packages = with pkgs; [
+            fish
+            hello
+          ];
+          shellHook = ''
+            exec fish
+          '';
+        };
+      };
+      packages.${system} = {
+        default = pkgs.writeScript "test" "echo 42";
       };
     };
 }
