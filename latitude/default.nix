@@ -26,11 +26,11 @@ in
   imports = [
     (import ../nixos/feat/vim.nix { inherit inputs pkgs; })
     (import ../nixos/feat/xremap.nix { inherit pkgs; })
+    (import ../nixos/services/openssh { usePassword = true; })
     ../nixos/feat/acpilight.nix
     boot
     networking_wireless
     nix
-    openssh
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];

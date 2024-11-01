@@ -1,4 +1,8 @@
 {
+  # パスワード系は危険なので切っておく
+  usePassword ? false,
+}:
+{
   lib,
   pkgs,
   ...
@@ -12,9 +16,9 @@
         AuthorizedKeysFile = ${./id_local.pub}
     '';
     settings = {
-      ChallengeResponseAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PasswordAuthentication = false;
+      ChallengeResponseAuthentication = usePassword;
+      KbdInteractiveAuthentication = usePassword;
+      PasswordAuthentication = usePassword;
       PermitRootLogin = "no";
       StrictModes = false; # VM設定の邪魔だしどっちみち邪魔なので解除
     };
