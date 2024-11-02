@@ -94,6 +94,13 @@ nix: epkgs.ddskk
                      skk-rom-kana-base-rule-list
                      skk-rom-kana-rule-list))))
 #+end_src
+** ddskk-posframe
+nix: epkgs.ddskk-posframe
+[[https://emacs-jp.github.io/packages/ddskk-posframe][ddskkツールチップposframeフロントエンド]]
+#+begin_src emacs-lisp :tangle yes
+  (autoload 'ddskk-posframe-mode "ddskk-posframe")
+  (add-hook 'skk-mode-hook #'ddskk-posframe-mode)
+#+end_src
 ** edit-indirect
 nix: epkgs.edit-indirect
 ** magit
