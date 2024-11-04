@@ -4,12 +4,12 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "xremap";
-  version = "v0.10.0";
+  version = "v0.10.2";
   src = fetchFromGitHub {
     owner = "xremap";
     repo = "xremap";
     rev = version;
-    hash = "sha256-TZvi5EOZ5Ekg8aGXCAzCcphJ7U5YsPtTWKTUQKZXEsg=";
+    hash = "sha256-UMcyT3CradQsshYTnqUrkrusF+7aUcxHQQm7DGhHEVg=";
   };
-  cargoHash = "sha256-2a66jPpb/fdI4EBMUgYW3NTlQGKlsOAUYvZendHK9+o=";
+  cargoHash = "sha256-IIqClLxOUJN4jax3Y9h8wfr+zI4kHGyFcFBiWvLPQOY=";
 }
