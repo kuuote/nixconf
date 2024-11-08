@@ -113,6 +113,7 @@ in
     ncurses
     nixfmt-rfc-style
     noto-fonts-cjk-sans
+    nvfetcher
     python3
     ripgrep
     tmux

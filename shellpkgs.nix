@@ -21,6 +21,7 @@ with pkgs;
   home-manager-pkg
   neovim
   nixfmt-rfc-style
+  nvfetcher
   vim
   vimPlugins.vim-themis
 ]
