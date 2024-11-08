@@ -86,7 +86,6 @@ in
     packages = with pkgs; [
       firefox
       fish
-      libreoffice-fresh
       mpv
       mycmds
       smplayer
