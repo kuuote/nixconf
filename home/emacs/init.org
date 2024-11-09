@@ -26,7 +26,8 @@ nix: epkgs.sync-recentf
 #+end_src
 #+begin_src emacs-lisp :tangle yes
   (require 'recentf)
-  (setq recentf-save-file "/data/mr/recentf")
+  (when (file-writable-p "/data/mr/recentf")
+    (setq recentf-save-file "/data/mr/recentf"))
   (setq recentf-max-saved-items 2000)
   (setq recentf-auto-cleanup 10)
   (run-with-idle-timer 30 t 'recentf-save-list)
