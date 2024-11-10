@@ -36,5 +36,6 @@ in
     (import ./init/mru.nix { inherit pkgs; })
     (import ./init/external-chdir.nix)
     "fish_add_path ~/cmd"
+    "fish_add_path ~/.nix-profile/bin"
   ]);
 }
