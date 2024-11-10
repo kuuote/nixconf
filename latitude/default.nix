@@ -85,7 +85,6 @@ in
     hashedPassword = "$y$j9T$G7oFPasBuVL1NcN3wPu0A/$uNAIdrXb4Kw2RO1s4/BSKpNBTBlywVUHU8wQXfIduz9";
     packages = with pkgs; [
       firefox
-      fish
       mpv
       mycmds
       smplayer
@@ -109,11 +108,7 @@ in
     gcc
     git
     gnumake
-    lua
-    ncurses
     nixfmt-rfc-style
-    noto-fonts-cjk-sans
-    nvfetcher
     python3
     ripgrep
     tmux
@@ -129,7 +124,6 @@ in
     sway-contrib.grimshot
     wf-recorder
     wl-clipboard
-    wofi
   ];
 
   fonts = {
