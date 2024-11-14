@@ -5,5 +5,5 @@
 {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.${user} = import ../home args;
+  home-manager.users.${user} = ../home;
 }
