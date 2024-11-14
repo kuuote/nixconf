@@ -30,6 +30,7 @@
         in
         pkgs.callPackage pkg { inherit path; };
       inputs-pkg = pkgs.stdenvNoCC.mkDerivation {
+        allowSubstitutes = false;
         name = "inputs-pkg";
         phases = [ "linkPhase" ];
         linkPhase = ''
@@ -124,6 +125,7 @@
       # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
       packages.${system} = {
         default = pkgs.stdenvNoCC.mkDerivation {
+          allowSubstitutes = false;
           name = "test";
           srcs = import ./shellpkgs.nix {
             inherit

@@ -3,6 +3,7 @@
   rustPlatform,
 }:
 rustPlatform.buildRustPackage rec {
+  allowSubstitutes = false;
   pname = "xremap";
   version = "v0.10.2";
   src = fetchFromGitHub {
