@@ -1,0 +1,7 @@
+#!/bin/sh
+
+rm -rf /tmp/nix
+git clone . /tmp/nix
+cd /tmp/nix
+t/hs
+
