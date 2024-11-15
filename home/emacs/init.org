@@ -93,6 +93,15 @@ nix: epkgs.ddskk
               ;; 「l」を「っ」にするので「や*っ」のようなパターンを正しく扱うために変換ポイントのパターンに足す
               (setq skk-set-henkan-point-key
                     (append '(?L) skk-set-henkan-point-key))
+              ;; 「ん」のshorthandは使わないのでqでカタカナになってほしいし鉤括弧もちゃんと打ててほしい
+              (setq skk-rom-kana-rule-list
+                    (skk-del-alist "q" skk-rom-kana-rule-list))
+              (setq skk-rom-kana-rule-list
+                    (skk-del-alist "[" skk-rom-kana-rule-list))
+              (setq skk-rom-kana-rule-list
+                    (append skk-rom-kana-rule-list
+                            '(("q" nil skk-toggle-characters)
+                              ("[" nil "「"))))
               (setq skk-rule-tree
                     (skk-compile-rule-list
                      skk-rom-kana-base-rule-list
