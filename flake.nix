@@ -94,7 +94,19 @@
           modules = [
             {
               services.getty.autologinUser = "root";
+              environment.systemPackages = [
+                pkgs.foot
+                pkgs.git
+                pkgs.sway
+              ];
             }
+          ];
+        };
+        iso = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            ./nixos/iso
           ];
         };
         latitude =

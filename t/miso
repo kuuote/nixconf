@@ -1,0 +1,4 @@
+#!/usr/bin/env -S bash -eu
+
+cd /data/nix
+nix build -v -L -o /tmp/iso ".#nixosConfigurations.iso.config.system.build.isoImage"
