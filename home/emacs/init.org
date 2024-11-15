@@ -84,12 +84,15 @@ nix: epkgs.ddskk
               ;; AZIK使用時に";"をsticky-keyにして「っ」を「l」に退避する設定
               (setq skk-rom-kana-rule-list
                     (skk-del-alist ";" skk-rom-kana-rule-list))
-              (setq skk-rom-kana-rule-list
-                    (skk-del-alist "l" skk-rom-kana-rule-list))
+              (setq skk-rom-kana-base-rule-list
+                    (skk-del-alist "l" skk-rom-kana-base-rule-list))
               (setq skk-rom-kana-rule-list
                     (append skk-rom-kana-rule-list
                             '((";" nil skk-sticky-set-henkan-point)
-                              ("l" nil "っ"))))
+                              ("l" nil ("ッ" . "っ")))))
+              ;; 「l」を「っ」にするので「や*っ」のようなパターンを正しく扱うために変換ポイントのパターンに足す
+              (setq skk-set-henkan-point-key
+                    (append '(?L) skk-set-henkan-point-key))
               (setq skk-rule-tree
                     (skk-compile-rule-list
                      skk-rom-kana-base-rule-list
