@@ -37,6 +37,11 @@
     fsType = "ext4";
   };
 
+  fileSystems."/nix/var/nix/gcroots" = {
+    device = "none";
+    fsType = "tmpfs";
+  };
+
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/6a6b8bb3-e1f5-40c2-8378-bd10844d880d";
     fsType = "btrfs";
