@@ -37,12 +37,14 @@
           "*" = {
             bg =
               let
-                bgFile = builtins.fetchurl {
-                  url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/da01f68d21ddfdc9f1c6e520c2170871c81f1cf5/wallpapers/nix-wallpaper-nineish.png";
-                  sha256 = "sha256:1mwvnmflp0z1biyyhfz7mjn7i1nna94n7jyns3na2shbfkaq7i0h";
-                };
+                # bgFile = builtins.fetchurl {
+                #   url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/da01f68d21ddfdc9f1c6e520c2170871c81f1cf5/wallpapers/nix-wallpaper-nineish.png";
+                #   sha256 = "sha256:1mwvnmflp0z1biyyhfz7mjn7i1nna94n7jyns3na2shbfkaq7i0h";
+                # };
+                name = "nineish";
+                bgPath = "${pkgs.nixos-artwork.wallpapers.${name}}/share/backgrounds/nixos/nix-wallpaper-${name}.png";
               in
-              "${bgFile} fill";
+              "${bgPath} fill";
           };
         };
         terminal = "${pkgs.wezterm}/bin/wezterm";
