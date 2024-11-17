@@ -14,3 +14,7 @@ result=$(ssh local readlink -f /data/nix/result)
 nix copy --no-check-sigs --from ssh://local $result
 rm -rf result
 ln -s $result result
+result=$(ssh local readlink -f /data/nix/result-vm)
+nix copy --no-check-sigs --from ssh://local $result
+rm -rf result-vm
+ln -s $result result-vm
