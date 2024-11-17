@@ -44,7 +44,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2817-7020";
+    device = "/dev/disk/by-uuid/DEAD-BEEF";
     fsType = "vfat";
     options = [
       "fmask=0022"
