@@ -36,11 +36,13 @@
         output = {
           "*" = {
             bg =
-              builtins.fetchurl {
-                url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/97444e18b7fe97705e8caedd29ae05e62cb5d4b7/wallpapers/nixos-wallpaper-catppuccin-mocha.png";
-                sha256 = "sha256:0ny7393qqbqf54rczyrmy5jyswwi12zrdy7bih2hcq501miqaqky";
-              }
-              + " fill";
+              let
+                bgFile = builtins.fetchurl {
+                  url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/da01f68d21ddfdc9f1c6e520c2170871c81f1cf5/wallpapers/nix-wallpaper-nineish.png";
+                  sha256 = "sha256:1mwvnmflp0z1biyyhfz7mjn7i1nna94n7jyns3na2shbfkaq7i0h";
+                };
+              in
+              "${bgFile} fill";
           };
         };
         terminal = "${pkgs.wezterm}/bin/wezterm";
