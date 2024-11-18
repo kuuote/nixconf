@@ -28,6 +28,7 @@ in
     (import ../nixos/feat/xremap.nix { inherit pkgs; })
     (import ../nixos/services/openssh { usePassword = true; })
     ../nixos/feat/acpilight.nix
+    ../nixos/feat/vm.nix
     boot
     networking_wireless
     nix
@@ -82,7 +83,7 @@ in
       "uinput" # for xremap
       "wheel" # Enable ‘sudo’ for the user.
     ];
-    hashedPassword = "$y$j9T$G7oFPasBuVL1NcN3wPu0A/$uNAIdrXb4Kw2RO1s4/BSKpNBTBlywVUHU8wQXfIduz9";
+    hashedPasswordFile = "/nix/secret/${user}.passwd";
     packages = with pkgs; [
       firefox
       mpv
