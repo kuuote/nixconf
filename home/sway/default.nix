@@ -42,7 +42,9 @@
                 #   sha256 = "sha256:1mwvnmflp0z1biyyhfz7mjn7i1nna94n7jyns3na2shbfkaq7i0h";
                 # };
                 name = "nineish";
-                bgPath = "${pkgs.nixos-artwork.wallpapers.${name}}/share/backgrounds/nixos/nix-wallpaper-${name}.png";
+                bgPath = "${
+                  pkgs.nixos-artwork.wallpapers.${name}
+                }/share/backgrounds/nixos/nix-wallpaper-${name}.png";
               in
               "${bgPath} fill";
           };
