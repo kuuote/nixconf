@@ -1,0 +1,10 @@
+[window]
+opacity = 0.7
+
+[window.dimensions]
+columns = 180
+lines = 47
+
+[font]
+normal = { family = "JF Dot jiskan16s-2000" }
+size = 12

@@ -1,7 +1,11 @@
-#!/usr/bin/env -S bash -u
+#!/bin/sh -u
 cd $(dirname $0) || exit 1
 
 # exec ./floaterm "$@"
+exec alacritty \
+     --class Floaterm \
+     --config-file alacritty.toml \
+     -e "$@"
 exec wezterm \
   --config initial_rows=48 \
   --config initial_cols=170 \
