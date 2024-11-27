@@ -14,10 +14,6 @@
 #+begin_src emacs-lisp :tangle yes
   (load-theme 'modus-vivendi t)
 #+end_src
-** リアルタイムで補完が出てほしい人生
-#+begin_src emacs-lisp :tangle yes
-  (fido-vertical-mode)
-#+end_src
 ** 履歴大事
 nix: epkgs.sync-recentf
 [[http://emacs.rubikitch.com/sync-recentf/][sync-recentf.el : recentf(最近開いたファイル)を複数のEmacs間で同期させる]]
@@ -149,4 +145,14 @@ nix: epkgs.nyan-mode
 #+begin_src emacs-lisp :tangle yes
   (nyan-mode)
   (nyan-start-animation)
+#+end_src
+** orderless
+nix: epkgs.orderless
+#+begin_src emacs-lisp :tangle yes
+  (setq completion-styles '(orderless))
+#+end_src
+** vertico
+nix: epkgs.vertico
+#+begin_src emacs-lisp :tangle yes
+  (vertico-mode)
 #+end_src
