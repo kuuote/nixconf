@@ -64,7 +64,6 @@ nix: epkgs.consult
 nix: epkgs.ddskk
 辞書の設定は.skk.elに記述している
 #+begin_src emacs-lisp :tangle yes
-  (autoload 'skk-mode "ddskk-autoloads")
   (keymap-global-set "C-x C-j" #'skk-mode)
 #+end_src
 *** sticky key無いと生きていけない
@@ -103,7 +102,7 @@ nix: epkgs.ddskk
                      skk-rom-kana-base-rule-list
                      skk-rom-kana-rule-list))))
 #+end_src
-** ddskk-posframe
+*** ddskk-posframe
 nix: epkgs.ddskk-posframe
 [[https://emacs-jp.github.io/packages/ddskk-posframe][ddskkツールチップposframeフロントエンド]]
 #+begin_src emacs-lisp :tangle yes
