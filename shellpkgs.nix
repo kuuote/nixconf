@@ -6,7 +6,7 @@
 let
   # Vimは先っちょをビルドしたい
   vim = import ./override-pkgs/vim.nix {
-    pkgs = pkgs.pkgsStatic;
+    pkgs = pkgs;
     src = inputs.vim-src;
   };
   neovim = import ./override-pkgs/neovim.nix {
