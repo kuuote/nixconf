@@ -121,6 +121,12 @@ nix: epkgs.ddskk-posframe
 #+end_src
 ** edit-indirect
 nix: epkgs.edit-indirect
+** embark
+nix: epkgs.embark
+nix: epkgs.embark-consult
+#+begin_src emacs-lisp :tangle yes
+  (keymap-global-set "C-." #'embark-act)
+#+end_src
 ** magit
 nix: epkgs.magit
 *** 全画面でmagitするやつ
