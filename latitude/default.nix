@@ -110,6 +110,7 @@ in
     gcc
     git
     gnumake
+    nix-output-monitor
     nixfmt-rfc-style
     python3
     ripgrep

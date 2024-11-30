@@ -1,18 +1,17 @@
-#!/usr/bin/env -S bash -u
+#!/bin/sh -u
 rm -rf /tmp/nix
 git clone . /tmp/nix
+if ! command -v nom > /dev/null; then
+  alias nom=nix
+fi
 (
   set -e
   cd /tmp/nix
-  nix build -L -o /data/nix/result-git
-  # cd -
-  # rm -rf result-git
-  # cp -a /tmp/nix/result result-git
+  nom build -L -o /data/nix/result-git
 )
 (
   set -e
   cd /tmp/nix
-  # t/hb
   # nix run '.#home-manager' -- -L --arg -b nixspill --flake . build
-  nix build -L -o /data/nix/result-git-hm ".#homeConfigurations.\"${1:-$(id -nu)}\".activationPackage"
+  nom build -L -o /data/nix/result-git-hm ".#homeConfigurations.\"${1:-$(id -nu)}\".activationPackage"
 )

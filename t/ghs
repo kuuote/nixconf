@@ -1,12 +1,7 @@
 #!/bin/sh
 
-if [[ -x ./result-git-hm/bin/home-manager-generation ]]; then
-  export HOME_MANAGER_BACKUP_EXT=".nixspill"
-  ./result-git-hm/bin/home-manager-generation
-  exit
+if [[ ! -x ./result-git-hm/bin/home-manager-generation ]]; then
+  t/g
 fi
-rm -rf /tmp/nix
-git clone . /tmp/nix
-cd /tmp/nix
-t/hs
-
+export HOME_MANAGER_BACKUP_EXT=".nixspill"
+./result-git-hm/bin/home-manager-generation
