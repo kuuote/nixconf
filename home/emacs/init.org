@@ -14,6 +14,13 @@
 #+begin_src emacs-lisp :tangle yes
   (load-theme 'modus-vivendi t)
 #+end_src
+** バックアップ系の無効化
+#+begin_src emacs-lisp :tangle yes
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+  (setq auto-save-list-file-prefix nil)
+  (setq create-lockfiles nil)
+#+end_src
 ** 履歴大事
 nix: epkgs.sync-recentf
 [[http://emacs.rubikitch.com/sync-recentf/][sync-recentf.el : recentf(最近開いたファイル)を複数のEmacs間で同期させる]]
