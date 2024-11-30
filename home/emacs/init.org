@@ -67,6 +67,9 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 * packages
 ** consult
 nix: epkgs.consult
+#+begin_src emacs-lisp :tangle yes
+  (keymap-global-set "C-c r" #'consult-recent-file)
+#+end_src
 ** ddskk
 nix: epkgs.ddskk
 辞書の設定は.skk.elに記述している
