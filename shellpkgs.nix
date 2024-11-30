@@ -20,6 +20,7 @@ with pkgs;
   ffmpeg
   home-manager-pkg
   neovim
+  nix-output-monitor
   nixfmt-rfc-style
   nvfetcher
   vim
