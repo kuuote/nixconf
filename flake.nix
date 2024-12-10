@@ -2,6 +2,7 @@
   description = "俺の城";
 
   inputs = {
+    # keep-sorted start
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     neovim-src.flake = false;
@@ -10,14 +11,18 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     org-babel.url = "github:emacs-twist/org-babel";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
     vim-src.flake = false;
     vim-src.url = "github:vim/vim";
+    # keep-sorted end
   };
 
   outputs =
     {
       home-manager,
       nixpkgs,
+      treefmt-nix,
       ...
     }@inputs:
     let
@@ -35,10 +40,13 @@
         phases = [ "linkPhase" ];
         linkPhase = ''
           mkdir $out
+          # keep-sorted start
           ln -s ${inputs.home-manager} $out/home-manager
           ln -s ${inputs.nix-index-database} $out/nix-index-database
           ln -s ${inputs.nixpkgs} $out/nixpkgs
           ln -s ${inputs.org-babel} $out/org-babel
+          ln -s ${inputs.treefmt-nix} $out/treefmt-nix
+          # keep-sorted end
         '';
       };
       specialArgs = {
@@ -53,7 +61,19 @@
           pkgs
           ;
       };
-      formatter.${system} = pkgs.nixfmt-rfc-style;
+      formatter.${system} =
+        let
+          mod = treefmt-nix.lib.evalModule pkgs {
+            projectRootFile = "flake.nix";
+            programs = {
+              # keep-sorted start
+              keep-sorted.enable = true;
+              nixfmt.enable = true;
+              # keep-sorted end
+            };
+          };
+        in
+        mod.config.build.wrapper;
       homeConfigurations =
         let
           config =
