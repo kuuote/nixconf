@@ -104,6 +104,7 @@
                     ;
                 };
               }
+              ./home/nix.nix
             ];
             user = "arch";
           };
