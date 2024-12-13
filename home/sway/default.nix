@@ -26,13 +26,12 @@
         ];
         defaultWorkspace = "workspace number 1";
         focus = {
-          newWindow = "urgent"; # smplayerぶっ叩くのに困るのでswayのデフォルトに合わせておく
           followMouse = false;
+          mouseWarping = "container";
+          newWindow = "urgent"; # smplayerぶっ叩くのに困るのでswayのデフォルトに合わせておく
         };
-        keybindings =
-          lib.mkOptionDefault
-            {
-            };
+        keybindings = lib.mkOptionDefault {
+        };
         output = {
           "*" = {
             bg =
