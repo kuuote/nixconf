@@ -31,6 +31,17 @@
     (setq mr-mrw-list (cons filename (delete filename mr-mrw-list))))
   (mr-mrw-savefile))
 
+(defun consult-mrw ()
+  (interactive)
+  (require 'consult)
+  (find-file
+   (consult--read
+    (mr-mrw-list)
+    :category 'file
+    :require-match t
+    :state (consult--file-preview)
+    :sort nil)))
+
 ;;;###autoload
 (define-minor-mode mr-mode
   "record recent files"
