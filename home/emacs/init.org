@@ -76,33 +76,28 @@ nix: epkgs.ddskk
 #+begin_src emacs-lisp :tangle yes
   (setq skk-use-azik t)
   (setq skk-azik-keyboard-type 'us101)
-  (add-hook 'skk-azik-load-hook
-            (lambda ()
+  (add-hook
+   'skk-azik-load-hook
+   (lambda ()
+     ;; 「l」を「っ」にするので「や*っ」のようなパターンを正しく扱うために変換ポイントのパターンに足す
+     (setq skk-set-henkan-point-key
+           (append '(?L) skk-set-henkan-point-key))
+     (let ((my-rules
+            '(
               ;; AZIK使用時に";"をsticky-keyにして「っ」を「l」に退避する設定
-              (setq skk-rom-kana-rule-list
-                    (skk-del-alist ";" skk-rom-kana-rule-list))
-              (setq skk-rom-kana-base-rule-list
-                    (skk-del-alist "l" skk-rom-kana-base-rule-list))
-              (setq skk-rom-kana-rule-list
-                    (append skk-rom-kana-rule-list
-                            '((";" nil skk-sticky-set-henkan-point)
-                              ("l" nil ("ッ" . "っ")))))
-              ;; 「l」を「っ」にするので「や*っ」のようなパターンを正しく扱うために変換ポイントのパターンに足す
-              (setq skk-set-henkan-point-key
-                    (append '(?L) skk-set-henkan-point-key))
+              (";" nil skk-sticky-set-henkan-point)
+              ("l" nil ("ッ" . "っ"))
               ;; 「ん」のshorthandは使わないのでqでカタカナになってほしいし鉤括弧もちゃんと打ててほしい
-              (setq skk-rom-kana-rule-list
-                    (skk-del-alist "q" skk-rom-kana-rule-list))
-              (setq skk-rom-kana-rule-list
-                    (skk-del-alist "[" skk-rom-kana-rule-list))
-              (setq skk-rom-kana-rule-list
-                    (append skk-rom-kana-rule-list
-                            '(("q" nil skk-toggle-characters)
-                              ("[" nil "「"))))
-              (setq skk-rule-tree
-                    (skk-compile-rule-list
-                     skk-rom-kana-base-rule-list
-                     skk-rom-kana-rule-list))))
+              ("q" nil skk-toggle-characters)
+              ("[" nil "「")
+              ;; 「'」で一時解除
+              ("'" nil skk-latin-mode)
+              )))
+       (setq skk-rule-tree
+             (skk-compile-rule-list
+              skk-rom-kana-base-rule-list
+              skk-rom-kana-rule-list
+              my-rules)))))
 #+end_src
 *** ddskk-posframe
 nix: epkgs.ddskk-posframe
