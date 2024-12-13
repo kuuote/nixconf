@@ -49,6 +49,13 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
       (indent-region (point-min) (point-max))
       (untabify (point-min) (point-max))))
 #+end_src
+** kill-all-buffers
+全バッファを終了する
+#+begin_src emacs-lisp :tangle yes
+  (defun my/kill-all-buffers ()
+    (interactive)
+    (mapcar #'kill-buffer (buffer-list)))
+#+end_src
 * packages
 ** consult
 nix: epkgs.consult
