@@ -31,11 +31,8 @@ in
       epkgs:
       let
         set = {
-          inherit
-            epkgs
-            pkgs
-            inputs
-            ;
+          inherit epkgs;
+          orepkgs = import ./package { inherit pkgs; };
         };
       in
       builtins.map (ref set) decls

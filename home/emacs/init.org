@@ -21,21 +21,6 @@
   (setq auto-save-list-file-prefix nil)
   (setq create-lockfiles nil)
 #+end_src
-** 履歴大事
-nix: epkgs.sync-recentf
-[[http://emacs.rubikitch.com/sync-recentf/][sync-recentf.el : recentf(最近開いたファイル)を複数のEmacs間で同期させる]]
-#+begin_src emacs-lisp :tangle yes
-  (require 'sync-recentf)
-#+end_src
-#+begin_src emacs-lisp :tangle yes
-  (require 'recentf)
-  (when (file-writable-p "/data/mr/recentf")
-    (setq recentf-save-file "/data/mr/recentf"))
-  (setq recentf-max-saved-items 2000)
-  (setq recentf-auto-cleanup 10)
-  (run-with-idle-timer 30 t 'recentf-save-list)
-  (recentf-mode 1)
-#+end_src
 ** 日本語でやっていく
 https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+begin_src emacs-lisp :tangle yes
@@ -148,6 +133,12 @@ nix: epkgs.magit
   (add-hook 'magit-status-mode-hook
             (lambda ()
               (define-key magit-status-mode-map (kbd "g") #'my/magit-refresh)))
+#+end_src
+** mr
+nix: orepkgs.mr
+Most Recently Writtenっぽいの
+#+begin_src emacs-lisp :tangle yes
+  (mr-mode)
 #+end_src
 ** nix-mode
 nix: epkgs.nix-mode
