@@ -5,6 +5,10 @@
 }:
 {
   nix = {
+    nixPath = [
+      "nixpkgs=flake"
+      "nixpkgs"
+    ];
     package = pkgs.nix;
     registry = {
       nixpkgs = {
