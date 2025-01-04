@@ -3,5 +3,5 @@
 if [[ ! -x ./result-git-hm/bin/home-manager-generation ]]; then
   t/g
 fi
-export HOME_MANAGER_BACKUP_EXT=".nixspill"
+export HOME_MANAGER_BACKUP_EXT="nixspill"
 ./result-git-hm/bin/home-manager-generation
