@@ -18,14 +18,14 @@ in
 {
   imports = [
     # keep-sorted start
-    (import ../nixos/feat/vim.nix { inherit inputs pkgs; })
-    (import ../nixos/feat/xremap.nix { inherit pkgs; })
     (import ../nixos/services/openssh { usePassword = true; })
     ../nixos/feat/acpilight.nix
+    ../nixos/feat/vim.nix
     ../nixos/feat/vm.nix
     ../nixos/nix.nix
     ../nixos/sway.nix
     ../nixos/systemd-boot.nix
+    ../nixos/user/xremap.nix
     ./networking.nix
     # keep-sorted end
     # Include the results of the hardware scan.
@@ -47,8 +47,6 @@ in
   users.users.${user} = {
     isNormalUser = true;
     extraGroups = [
-      "input" # for xremap
-      "uinput" # for xremap
       "wheel" # Enable ‘sudo’ for the user.
     ];
     hashedPasswordFile = "/nix/secret/${user}.passwd";

@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  ...
 }:
 let
   # Vimは先っちょをビルドしたい
