@@ -1,0 +1,19 @@
+#!/usr/bin/env -S bash -u
+
+if ! mountpoint -q /mnt; then
+  mount -m -t tmpfs none /mnt
+fi
+if ! mountpoint -q /mnt/nix; then
+  # mount -m --bind /n /mnt/nix
+  mount -m /dev/disk/by-partlabel/nixos /mnt/nix
+fi
+if ! mountpoint -q /mnt/nix/var/nix/gcroots; then
+  mount -m -t tmpfs none /mnt/nix/var/nix/gcroots
+fi
+if ! mountpoint -q /mnt/data; then
+  mount -m /dev/disk/by-partlabel/data -o subvol=/@ /mnt/data
+fi
+if ! mountpoint -q /mnt/boot; then
+  mkfs.vfat -i deadbeef /dev/disk/by-partlabel/esp
+  mount -m /dev/disk/by-partlabel/esp /mnt/boot
+fi

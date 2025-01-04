@@ -1,0 +1,8 @@
+#!/bin/sh -u
+
+systemctl start wpa_supplicant
+wpa_cli add_network
+wpa_cli set_network 0 ssid '"Buffalo-A-230E"'
+wpa_cli set_network 0 psk "\"$(cat $(dirname $0)/psk)\""
+wpa_cli set_network 0 key_mgmt WPA-PSK
+wpa_cli enable_network 0
