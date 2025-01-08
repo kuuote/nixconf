@@ -45,6 +45,10 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+begin_src emacs-lisp :tangle yes
   (setq inhibit-startup-screen t)
 #+end_src
+** 括弧の補完
+#+begin_src emacs-lisp :tangle yes
+  (electric-pair-mode)
+#+end_src
 * daemon only
 ** 色々と遅いのでpreloadしておく
 #+begin_src emacs-lisp :tangle yes
