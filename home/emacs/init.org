@@ -41,11 +41,13 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
   (setq inhibit-startup-screen t)
 #+end_src
 * daemon only
-** org-modeの読み込みが遅いので呼んでおく
+** 色々と遅いのでpreloadしておく
 #+begin_src emacs-lisp :tangle yes
   (when (daemonp)
     (with-temp-buffer
-      (org-mode)))
+      (org-mode)
+      (ignore-errors (magit))
+      ))
 #+end_src
 * commands
 ** indent-buffer
