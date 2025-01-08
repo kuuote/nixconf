@@ -85,6 +85,10 @@ nix: epkgs.ddskk
 辞書の設定は.skk.elに記述している
 #+begin_src emacs-lisp :tangle yes
   (keymap-global-set "C-x C-j" #'skk-mode)
+  ;; キーリマッパーで変換と無変換を矢印キーにしている
+  ;; Macみたいなスタイルで切り替えられるのがベネ
+  (keymap-global-set "<left>" (lambda () (interactive) (skk-mode -1)))
+  (keymap-global-set "<right>" (lambda () (interactive) (skk-mode 1)))
 #+end_src
 *** sticky key無いと生きていけない
 #+begin_src emacs-lisp :tangle yes
