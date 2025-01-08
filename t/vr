@@ -1,4 +1,0 @@
-#!/usr/bin/env -S bash -u
-
-rm -rf /tmp/*.qcow2
-NIX_DISK_IMAGE=/tmp/$(uuidgen).qcow2 result-vm/bin/run-*-vm -m 4096 "$@"

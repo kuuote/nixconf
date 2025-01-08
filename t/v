@@ -1,5 +1,0 @@
-#!/usr/bin/env -S bash -u
-
-# nixos-rebuild build-vm -L --flake .#latitude
-nix build -L -v -j 0 -o result-vm ".#nixosConfigurations.\"latitude\".config.system.build.vm"
-nom build -L -v -o result-vm ".#nixosConfigurations.\"latitude\".config.system.build.vm"

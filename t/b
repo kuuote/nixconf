@@ -1,4 +1,0 @@
-#!/usr/bin/env -S bash -u
-# nixos-rebuild build -v -L --flake .#latitude
-nix build -L -v -j 0 .#nixosConfigurations.latitude.config.system.build.toplevel
-nom build -L -v .#nixosConfigurations.latitude.config.system.build.toplevel

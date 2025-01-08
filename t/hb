@@ -1,4 +1,0 @@
-#!/bin/sh
-
-nix build -L -v -j 0 -o /data/nix/result-hm ".#homeConfigurations.\"${1:-$(id -nu)}\".activationPackage"
-nom build -L -v -o /data/nix/result-hm ".#homeConfigurations.\"${1:-$(id -nu)}\".activationPackage"

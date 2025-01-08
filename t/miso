@@ -1,5 +1,0 @@
-#!/usr/bin/env -S bash -eu
-# make iso、略して味噌
-
-cd /data/nix
-nix build -v -L -o /tmp/iso ".#nixosConfigurations.iso.config.system.build.isoImage"

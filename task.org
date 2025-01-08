@@ -1,0 +1,71 @@
+#!/bin/sh -eu
+# -*- mode: org -*-
+#+STARTUP: fold
+rm -rf /tmp/task
+mkdir -p /tmp/task/t
+cp task.org /tmp/task/task.org
+cd /tmp/task
+emacs --batch --eval "(progn (require 'ob-tangle) (org-babel-tangle-file \"task.org\"))"
+cd -
+rsync -rlpcP --delete-before /tmp/task/t/ t/
+exit 0
+
+* home-manager
+** build
+#+begin_src sh :tangle t/hb :shebang "#!/bin/sh -u"
+  pwd=$(pwd)
+  cd ${1:-.}
+  nix build -L -v -j 0 -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
+  nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
+#+end_src
+** switch
+home-manager switchは使わずに自前でビルドして中身を直接叩く
+#+begin_src sh :tangle t/hs :shebang "#!/bin/sh -u"
+  t/hb
+  export HOME_MANAGER_BACKUP_EXT=".nixspill"
+  result-hm/activate
+#+end_src
+** git op
+*** build
+#+begin_src sh :tangle t/ghb :shebang "#!/bin/sh -u"
+  rm -rf /tmp/nix
+  git clone . /tmp/nix
+  t/hb /tmp/nix git-
+#+end_src
+*** switch
+#+begin_src sh :tangle t/ghs :shebang "#!/bin/sh -u"
+  if [[ ! -x result-git-hm/activate ]]; then
+      t/ghb
+  fi
+  export HOME_MANAGER_BACKUP_EXT=".nixspill"
+  result-git-hm/activate
+#+end_src
+* nix flake update with git commit
+先端に「あぷでたん」というコミットが積まれてたら消した上でflake.lockを復元する
+#+begin_src sh :tangle t/u :shebang "#!/bin/sh -u"
+  if git log --oneline | head -n1 | grep -q 'あぷでたん'; then
+      git reset HEAD^
+  fi
+  git restore flake.lock
+#+end_src
+nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作ってそうじゃないなら再び「あぷでたん」を積む
+#+begin_src sh :tangle t/u
+  remote_head=$(git ls-remote --heads https://github.com/NixOS/nixpkgs nixos-unstable | awk '{print $1}')
+  local_head=$(jq -r '.nodes.nixpkgs.locked.rev' flake.lock)
+  echo $remote_head
+  echo $local_head
+  if [[ "$remote_head" = "$local_head" ]]; then
+      nix flake update
+      git add flake.lock
+      git commit -m あぷでたん
+  else
+      nix flake update --commit-lock-file
+  fi
+#+end_src
+* NixOS build
+本来は ~nixos-rebuild build -v -L --flake .#latitude~
+#+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
+  nix build -L -v -j 0 .#nixosConfigurations.latitude.config.system.build.toplevel
+  nom build -L -v .#nixosConfigurations.latitude.config.system.build.toplevel
+#+end_src
+* コミットしないやつ置き場

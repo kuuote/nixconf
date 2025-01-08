@@ -1,6 +1,0 @@
-#!/bin/sh -eu
-
-#nix run .#home-manager -- -L -b nixspill --flake . switch
-t/hb
-export HOME_MANAGER_BACKUP_EXT=".nixspill"
-result-hm/activate
