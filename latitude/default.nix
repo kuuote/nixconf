@@ -64,9 +64,11 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # keep-sorted start
     acpi
     alacritty
     btrfs-progs
+    chromium
     cryptsetup
     deno
     dunst
@@ -76,6 +78,7 @@ in
     gcc
     git
     gnumake
+    jq
     nix-output-monitor
     nixfmt-rfc-style
     python3
@@ -87,6 +90,7 @@ in
     wezterm
     wget
     wineWow64Packages.full
+    # keep-sorted end
     # sway
     grim
     slurp
