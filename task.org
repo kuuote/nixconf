@@ -5,7 +5,7 @@ rm -rf /tmp/task
 mkdir -p /tmp/task/t
 cp task.org /tmp/task/task.org
 cd /tmp/task
-emacs --batch --eval "(progn (require 'ob-tangle) (org-babel-tangle-file \"task.org\"))"
+emacs --batch task.org -f org-babel-tangle
 cd -
 rsync -rlpcP --delete-before /tmp/task/t/ t/
 exit 0
