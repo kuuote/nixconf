@@ -2,6 +2,11 @@
 * basic
 #+begin_src emacs-lisp :tangle yes
 #+end_src
+** サクッと実験するために/tmp/init.elがあれば読み込むようにする
+#+begin_src emacs-lisp :tangle yes
+  (when (file-readable-p "/tmp/init.el")
+    (load-file "/tmp/init.el"))
+#+end_src
 ** indent/tab
 #+begin_src emacs-lisp :tangle yes
   (setq-default indent-tabs-mode nil)
