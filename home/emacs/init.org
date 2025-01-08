@@ -40,6 +40,13 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+begin_src emacs-lisp :tangle yes
   (setq inhibit-startup-screen t)
 #+end_src
+* daemon only
+** org-modeの読み込みが遅いので呼んでおく
+#+begin_src emacs-lisp :tangle yes
+  (when (daemonp)
+    (with-temp-buffer
+      (org-mode)))
+#+end_src
 * commands
 ** indent-buffer
 #+begin_src emacs-lisp :tangle yes
