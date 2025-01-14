@@ -26,6 +26,7 @@
     (write-region nil nil mr-mrw-filename nil 'nomsg)))
 
 (defun mr-mrw-record ()
+  (interactive)
   (mr-mrw-list)
   (let ((filename (file-truename buffer-file-name)))
     (setq mr-mrw-list (cons filename (delete filename mr-mrw-list))))
