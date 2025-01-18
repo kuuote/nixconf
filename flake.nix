@@ -34,21 +34,7 @@
           pkg = "${path}/home-manager";
         in
         pkgs.callPackage pkg { inherit path; };
-      inputs-pkg = pkgs.stdenvNoCC.mkDerivation {
-        allowSubstitutes = false;
-        name = "inputs-pkg";
-        phases = [ "linkPhase" ];
-        linkPhase = ''
-          mkdir $out
-          # keep-sorted start
-          ln -s ${inputs.home-manager} $out/home-manager
-          ln -s ${inputs.nix-index-database} $out/nix-index-database
-          ln -s ${inputs.nixpkgs} $out/nixpkgs
-          ln -s ${inputs.org-babel} $out/org-babel
-          ln -s ${inputs.treefmt-nix} $out/treefmt-nix
-          # keep-sorted end
-        '';
-      };
+      inputs-pkg = pkgs.linkFarm "inputs" (builtins.mapAttrs (name: drv: drv.outPath) inputs);
       specialArgs = {
         inherit inputs;
       };
