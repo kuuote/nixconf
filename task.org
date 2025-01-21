@@ -44,7 +44,17 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
   export HOME_MANAGER_BACKUP_EXT=".nixspill"
   result-git-hm/activate
 #+end_src
-* nix flake update with git commit
+* nix flake update
+** コミットだけ積むやつ
+#+begin_src sh :tangle t/uc :shebang "#!/bin/sh -u"
+  if git log --oneline | head -n1 | grep -q 'あぷでたん'; then
+      git restore flake.lock
+      git reset HEAD^
+  fi
+  git add flake.lock
+  git commit -m あぷでたん
+#+end_src
+** with git commit
 先端に「あぷでたん」というコミットが積まれてたら消した上でflake.lockを復元する
 #+begin_src sh :tangle t/u :shebang "#!/bin/sh -u"
   if git log --oneline | head -n1 | grep -q 'あぷでたん'; then
@@ -66,10 +76,19 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
       nix flake update --commit-lock-file
   fi
 #+end_src
-* NixOS build
+* NixOS
+** build
 本来は ~nixos-rebuild build -v -L --flake .#latitude~
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
   nix build -L -v -j 0 .#nixosConfigurations.latitude.config.system.build.toplevel
   nom build -L -v .#nixosConfigurations.latitude.config.system.build.toplevel
+#+end_src
+** switch
+#+begin_src sh :tangle t/s :shebang "#!/bin/sh -u"
+  sudo nixos-rebuild switch -L --flake .#latitude
+#+end_src
+* /nixの容量チェック
+#+begin_src sh :tangle t/c :shebang "#/bin/sh -u"
+  df --output=ipcent,pcent /nix
 #+end_src
 * コミットしないやつ置き場
