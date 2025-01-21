@@ -89,6 +89,24 @@ nix: epkgs.ddskk
   ;; Macみたいなスタイルで切り替えられるのがベネ
   (keymap-global-set "<left>" (lambda () (interactive) (skk-mode -1)))
   (keymap-global-set "<right>" (lambda () (interactive) (skk-mode 1)))
+  ;;; Isearch setting.
+  ;; skk-setup.elが無いのでhttps://github.com/skk-dev/ddskk/blob/master/skk-setup.el.inからコピペ
+  (defun skk-isearch-setup-maybe ()
+    (require 'skk-vars)
+    (when (or (eq skk-isearch-mode-enable 'always)
+              (and (boundp 'skk-mode)
+                   skk-mode
+                   skk-isearch-mode-enable))
+      (skk-isearch-mode-setup)))
+
+  (defun skk-isearch-cleanup-maybe ()
+    (require 'skk-vars)
+    (when (and (featurep 'skk-isearch)
+               skk-isearch-mode-enable)
+      (skk-isearch-mode-cleanup)))
+
+  (add-hook 'isearch-mode-hook #'skk-isearch-setup-maybe)
+  (add-hook 'isearch-mode-end-hook #'skk-isearch-cleanup-maybe)
 #+end_src
 *** sticky key無いと生きていけない
 #+begin_src emacs-lisp :tangle yes
