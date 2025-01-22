@@ -8,6 +8,6 @@
   end
 
   function m
-    cd (cat ~/.stack | ${pkgs.fzf}/bin/fzf --exact +s)
+    cd (cat ~/.stack | ${pkgs.fzf}/bin/fzf --scheme history)
   end
 ''
