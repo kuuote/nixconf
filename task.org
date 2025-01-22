@@ -19,8 +19,12 @@
 #+begin_src sh :tangle t/hb :shebang "#!/bin/sh -u"
   pwd=$(pwd)
   cd ${1:-.}
-  nix build -L -v -j 0 -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
-  nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
+  if command -v nom > /dev/null; then
+      nix build -L -v -j 0 -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
+      nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
+  else
+      nix build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
+  fi
 #+end_src
 ** switch
 home-manager switchは使わずに自前でビルドして中身を直接叩く
