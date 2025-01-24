@@ -65,12 +65,12 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # keep-sorted start
+    (callPackage ../override-pkgs/deno.nix { })
     acpi
     alacritty
     btrfs-progs
     chromium
     cryptsetup
-    deno
     dunst
     fd
     ffmpeg
