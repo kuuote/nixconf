@@ -3,7 +3,6 @@
   src,
 }:
 pkgs.vim.overrideAttrs (oldAttrs: {
-  allowSubstitutes = false;
   version = "latest";
   src = src;
   buildInputs = oldAttrs.buildInputs ++ [ pkgs.lua ];

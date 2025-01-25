@@ -3,7 +3,6 @@
   src,
 }:
 pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
-  allowSubstitutes = false;
   version = "latest";
   src = src;
   buildInputs = oldAttrs.buildInputs ++ [ pkgs.utf8proc ];
