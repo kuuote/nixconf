@@ -18,6 +18,7 @@ in
 {
   imports = [
     # keep-sorted start
+    (import ../nixos/feat/systemd-timeout.nix 10)
     (import ../nixos/services/openssh { usePassword = true; })
     ../nixos/feat/acpilight.nix
     ../nixos/feat/vim.nix
