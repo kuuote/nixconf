@@ -9,9 +9,8 @@ let
     pkgs = pkgs;
     src = inputs.vim-src;
   };
-  neovim = import ../../override-pkgs/neovim.nix {
-    pkgs = pkgs;
-    src = inputs.neovim-src;
+  neovim = pkgs.callPackage ../../pkgs/neovim {
+    inherit (inputs) neovim-src;
   };
 in
 {
