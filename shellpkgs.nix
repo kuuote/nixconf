@@ -15,7 +15,7 @@ let
 in
 with pkgs;
 [
-  (callPackage ./override-pkgs/deno.nix { })
+  deno
   ffmpeg
   home-manager-pkg
   neovim
