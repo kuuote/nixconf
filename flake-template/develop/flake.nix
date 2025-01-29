@@ -1,10 +1,6 @@
 {
   description = "べんり";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-  };
-
   outputs =
     { self, nixpkgs }:
     let
@@ -28,4 +24,8 @@
         default = pkgs.writeScript "test" "echo 42";
       };
     };
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+  };
 }
