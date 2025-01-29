@@ -25,12 +25,15 @@ in
     }
   ];
   programs.fish.shellAbbrs = importAttrs [
+    # keep-sorted start
     ./abbr/deno.nix
     ./abbr/fish.nix
+    ./abbr/git.nix
     ./abbr/nix.nix
     ./abbr/tmux.nix
     ./abbr/trash-cli.nix
     ./abbr/vim.nix
+    # keep-sorted end
   ] args;
   programs.fish.shellInit = builtins.concatStringsSep "\n" ([
     (import ./init/mru.nix { inherit pkgs; })
