@@ -148,8 +148,6 @@ nix: epkgs.ddskk-posframe
   (autoload 'ddskk-posframe-mode "ddskk-posframe")
   (add-hook 'skk-mode-hook #'ddskk-posframe-mode)
 #+end_src
-** edit-indirect
-nix: epkgs.edit-indirect
 ** embark
 nix: epkgs.embark
 nix: epkgs.embark-consult
