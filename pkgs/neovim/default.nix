@@ -1,4 +1,5 @@
 {
+  callPackage,
   cmake,
   gettext,
   lib,
@@ -7,26 +8,7 @@
   stdenv,
 }:
 let
-  deps = lib.pipe "${neovim-src}/cmake.deps/deps.txt" [
-    builtins.readFile
-    (builtins.split "[\n]")
-    (builtins.filter builtins.isString)
-    (builtins.map (builtins.match "([0-9A-Z_]+)_(URL|SHA256) (.+)"))
-    (builtins.filter builtins.isList)
-    (builtins.map (m: {
-      "${lib.toLower (builtins.elemAt m 0)}" = {
-        "${lib.toLower (builtins.elemAt m 1)}" = builtins.elemAt m 2;
-      };
-    }))
-    (builtins.foldl' lib.recursiveUpdate { })
-    (lib.mapAttrs' (
-      name: value: {
-        name = "${name}/${builtins.baseNameOf value.url}";
-        value = builtins.fetchurl value;
-      }
-    ))
-    (linkFarm "deps")
-  ];
+  deps = callPackage ./deps.nix { inherit neovim-src; };
 in
 stdenv.mkDerivation {
   name = "neovim";
@@ -35,10 +17,9 @@ stdenv.mkDerivation {
     cmake
     gettext
   ];
-  patchPhase = ''
-    mkdir -p .deps/build
-    cp -a ${deps} .deps/build/downloads
-    make -j$NIX_BUILD_CORES deps
+  postPatch = ''
+    cp -a ${deps} .deps
+    chmod -R +w .deps
   '';
   # installPhaseでもビルド走るのでbuildPhaseを潰す
   buildPhase = "true";
