@@ -2,27 +2,26 @@
   description = "べんり";
 
   outputs =
-    { self, nixpkgs }:
+    {
+      nixpkgs,
+      ...
+    }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      forAllSystems =
+        fn:
+        nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (system: fn nixpkgs.legacyPackages.${system});
     in
     {
-      devShells.${system} = rec {
+      devShells = forAllSystems (pkgs: rec {
         default = shell;
         shell = pkgs.mkShell {
-          packages = with pkgs; [
-            fish
-            hello
-          ];
-          shellHook = ''
-            exec fish
-          '';
+          packages = [ pkgs.fish ];
+          shellHook = "exec fish";
         };
-      };
-      packages.${system} = {
+      });
+      packages = forAllSystems (pkgs: {
         default = pkgs.writeScript "test" "echo 42";
-      };
+      });
     };
 
   inputs = {
