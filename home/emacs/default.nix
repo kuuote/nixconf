@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   ...
 }:
@@ -7,22 +8,19 @@ let
   tangle = inputs.org-babel.lib.tangleOrgBabel { languages = [ "emacs-lisp" ]; };
   init = builtins.readFile ./init.org;
   # init.orgから行頭に書かれた `nix: epkgs.ddskk` のような定義を抽出する
-  decls =
-    let
-      a = builtins.split "\nnix: ([a-zA-Z.\-]+)" init;
-      b = builtins.filter builtins.isList a;
-      c = builtins.map (list: builtins.elemAt list 0) b;
-    in
-    c;
+  decls = lib.pipe init [
+    (builtins.split "\nnix: ([a-zA-z.\-]+)")
+    (builtins.filter builtins.isList)
+    (map (lib.flip builtins.elemAt 0))
+  ];
   # AttrSetと `epkgs.ddskk` のような式を渡すと再帰的に参照する
   ref =
-    set: expr:
-    let
-      a = builtins.split "\\." expr;
-      b = builtins.filter builtins.isString a;
-      c = builtins.foldl' (set: attr: set."${attr}") set b;
-    in
-    c;
+    set:
+    lib.flip lib.pipe [
+      (builtins.split "\\.")
+      (builtins.filter builtins.isString)
+      (builtins.foldl' (set: attr: set."${attr}") set)
+    ];
 in
 {
   programs.emacs = {
