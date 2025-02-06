@@ -6,5 +6,6 @@
   nfu = "nix flake update";
   nob = "nom build -v -L";
   noob = "nom-build";
+  nr = "nix run -L";
   # keep-sorted end
 }
