@@ -7,19 +7,19 @@
       ...
     }:
     let
-      forAllSystems =
+      eachPkgs =
         fn:
         nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed (system: fn nixpkgs.legacyPackages.${system});
     in
     {
-      devShells = forAllSystems (pkgs: rec {
+      devShells = eachPkgs (pkgs: rec {
         default = shell;
         shell = pkgs.mkShell {
           packages = [ pkgs.fish ];
           shellHook = "exec fish";
         };
       });
-      packages = forAllSystems (pkgs: {
+      packages = eachPkgs (pkgs: {
         default = pkgs.writeScript "test" "echo 42";
       });
     };
