@@ -30,7 +30,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       home-manager-pkg =
         let
-          path = "${inputs.home-manager}";
+          path = "${inputs.home-manager.outPath}";
           pkg = "${path}/home-manager";
         in
         pkgs.callPackage pkg { inherit path; };
