@@ -56,6 +56,7 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
       git reset HEAD^
   fi
   git add flake.lock
+  git add src/github.lock
   git commit -m あぷでたん
 #+end_src
 ** with git commit
@@ -74,8 +75,7 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
   echo $local_head
   if [[ "$remote_head" = "$local_head" ]]; then
       nix flake update
-      git add flake.lock
-      git commit -m あぷでたん
+      t/uc
   else
       nix flake update --commit-lock-file
   fi
@@ -84,12 +84,20 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
 ** build
 本来は ~nixos-rebuild build -v -L --flake .#latitude~
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
-  nix build -L -v -j 0 .#nixosConfigurations.latitude.config.system.build.toplevel
-  nom build -L -v .#nixosConfigurations.latitude.config.system.build.toplevel
+  target=${1:-.}
+  nix build -L -v -j 0 $target#nixosConfigurations.latitude.config.system.build.toplevel
+  nom build -L -v $target#nixosConfigurations.latitude.config.system.build.toplevel
 #+end_src
 ** switch
 #+begin_src sh :tangle t/s :shebang "#!/bin/sh -u"
   sudo nixos-rebuild switch -L --flake .#latitude
+#+end_src
+** git
+*** build
+#+begin_src sh :tangle t/gb :shebang "#!/bin/sh -u"
+  rm -rf /tmp/nix
+  git clone . /tmp/nix
+  t/b /tmp/nix
 #+end_src
 * /nixの容量チェック
 #+begin_src sh :tangle t/c :shebang "#/bin/sh -u"
