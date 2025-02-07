@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -u
+
+python checkgit.py checkgit.toml > /tmp/checkgit.json

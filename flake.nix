@@ -53,6 +53,7 @@
             projectRootFile = "flake.nix";
             programs = {
               # keep-sorted start
+              black.enable = true;
               keep-sorted.enable = true;
               nixfmt.enable = true;
               # keep-sorted end
