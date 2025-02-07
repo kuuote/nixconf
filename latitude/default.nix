@@ -12,6 +12,8 @@
 }:
 
 let
+  pkgset = { inherit pkgs; };
+  deno2nix = (import (import ../src { }).deno2nix pkgset).deno2nix;
   jfdotfont = pkgs.callPackage ../pkgs/jfdotfont { };
   mycmds = pkgs.callPackage ../pkgs/mycmds { };
 in
@@ -72,6 +74,7 @@ in
     chromium
     cryptsetup
     deno
+    deno2nix
     dunst
     fd
     ffmpeg

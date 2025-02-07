@@ -1,1 +1,9 @@
-{}
+{
+	"deno2nix": {
+		"hash": "sha256-rAu0suikyHVHbuJfkaZDjQueJV0wQJaQ5Jo5UbpVd0w=",
+		"name": "deno2nix",
+		"owner": "kuuote",
+		"repo": "deno2nix",
+		"rev": "2076446997ee3551d49c1c7c6a08a7a2b9c8d65f"
+	}
+}
