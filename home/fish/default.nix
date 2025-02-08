@@ -29,6 +29,7 @@ in
     ./abbr/deno.nix
     ./abbr/fish.nix
     ./abbr/git.nix
+    ./abbr/misc.nix
     ./abbr/nix.nix
     ./abbr/tmux.nix
     ./abbr/trash-cli.nix
