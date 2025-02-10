@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -18,7 +17,8 @@
         };
         to = {
           type = "path";
-          path = "${inputs.nixpkgs.outPath}";
+          # pkgs.pathそのまま使うと謎のコピーが走るのでbuiltins.toStringかける
+          path = "${builtins.toString pkgs.path}";
         };
       };
     };
