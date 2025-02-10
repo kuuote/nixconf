@@ -2,6 +2,8 @@
 * basic
 #+begin_src emacs-lisp :tangle yes
 #+end_src
+leaf.elで設定したい
+nix: epkgs.leaf
 ** サクッと実験するために/tmp/init.elがあれば読み込むようにする
 #+begin_src emacs-lisp :tangle yes
   (when (file-readable-p "/tmp/init.el")
@@ -21,10 +23,11 @@
 #+end_src
 ** バックアップ系の無効化
 #+begin_src emacs-lisp :tangle yes
-  (setq make-backup-files nil)
-  (setq auto-save-default nil)
-  (setq auto-save-list-file-prefix nil)
-  (setq create-lockfiles nil)
+  (leaf backup
+    :setq ((make-backup-files . nil)
+           (auto-save-default . nil)
+           (auto-save-list-file-prefix . nil)
+           (create-lockfiles . nil)))
 #+end_src
 ** 日本語でやっていく
 https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
@@ -86,7 +89,9 @@ nix: epkgs.consult
 nix: epkgs.ddskk
 辞書の設定は.skk.elに記述している
 #+begin_src emacs-lisp :tangle yes
-  (keymap-global-set "C-x C-j" #'skk-mode)
+  (leaf ddskk
+    :bind (("C-x C-j" . skk-mode)))
+
   ;; キーリマッパーで変換と無変換を矢印キーにしている
   ;; Macみたいなスタイルで切り替えられるのがベネ
   (keymap-global-set "<left>" (lambda () (interactive) (skk-mode -1)))
