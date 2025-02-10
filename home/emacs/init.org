@@ -69,6 +69,8 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
     (save-excursion
       (indent-region (point-min) (point-max))
       (untabify (point-min) (point-max))))
+  (leaf my/indent-buffer
+    :bind (("C-c i" . my/indent-buffer)))
 #+end_src
 ** kill-all-buffers
 全バッファを終了する
