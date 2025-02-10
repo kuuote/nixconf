@@ -20,7 +20,6 @@
   pwd=$(pwd)
   cd ${1:-.}
   if command -v nom > /dev/null; then
-      nix build -L -v -j 0 -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
       nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
   else
       nix build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
@@ -85,7 +84,6 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
 本来は ~nixos-rebuild build -v -L --flake .#latitude~
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
   target=${1:-.}
-  nix build -L -v -j 0 $target#nixosConfigurations.latitude.config.system.build.toplevel
   nom build -L -v $target#nixosConfigurations.latitude.config.system.build.toplevel
 #+end_src
 ** switch
