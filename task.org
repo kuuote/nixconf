@@ -68,6 +68,7 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
 #+end_src
 nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作ってそうじゃないなら再び「あぷでたん」を積む
 #+begin_src sh :tangle t/u
+  src/update
   remote_head=$(git ls-remote --heads https://github.com/NixOS/nixpkgs nixos-unstable | awk '{print $1}')
   local_head=$(jq -r '.nodes.nixpkgs.locked.rev' flake.lock)
   echo $remote_head
@@ -77,6 +78,8 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
       t/uc
   else
       nix flake update --commit-lock-file
+      git add src/github.lock
+      git commit --amend --no-edit
   fi
 #+end_src
 * NixOS

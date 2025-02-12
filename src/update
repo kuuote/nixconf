@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -u
 
+cd $(dirname ${BASH_SOURCE:-}) || exit 1
 ./check
 python prefetchgithub.py /tmp/checkgit.json github.lock
