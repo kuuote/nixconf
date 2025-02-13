@@ -8,6 +8,7 @@
   home.stateVersion = "24.05";
   imports = [
     # keep-sorted start
+    ./direnv.nix
     ./emacs
     ./fish
     ./git
