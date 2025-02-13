@@ -1,11 +1,17 @@
 {
-  cmake,
   lib,
-  linkFarm,
   neovim-src,
-  runCommandCC,
+  pkgs,
 }:
 let
+  moldRC =
+    name: env:
+    pkgs.runCommandWith {
+      stdenv = pkgs.useMoldLinker pkgs.clangStdenv;
+      runLocal = false;
+      inherit name;
+      derivationArgs = env;
+    };
   deps = lib.pipe "${neovim-src}/cmake.deps/deps.txt" [
     builtins.readFile
     (builtins.split "[\n]")
@@ -24,7 +30,7 @@ let
         value = builtins.fetchurl value;
       }
     ))
-    (linkFarm "deps")
+    (pkgs.linkFarm "deps")
   ];
   buildpath = builtins.path {
     path = neovim-src;
@@ -39,9 +45,9 @@ let
     recursive = true;
   };
 in
-runCommandCC "neovim-deps"
+moldRC "neovim-deps"
   {
-    buildInputs = [ cmake ];
+    buildInputs = [ pkgs.cmake ];
   }
   ''
     cp -a ${buildpath}/* .

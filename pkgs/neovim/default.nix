@@ -1,19 +1,15 @@
 {
-  callPackage,
-  cmake,
-  gettext,
-  lib,
-  linkFarm,
   neovim-src,
-  stdenv,
+  pkgs,
 }:
 let
-  deps = callPackage ./deps.nix { inherit neovim-src; };
+  deps = pkgs.callPackage ./deps.nix { inherit neovim-src; };
+  moldStdenv = pkgs.useMoldLinker pkgs.clangStdenv;
 in
-stdenv.mkDerivation {
+moldStdenv.mkDerivation {
   name = "neovim";
   src = neovim-src;
-  buildInputs = [
+  buildInputs = with pkgs; [
     cmake
     gettext
   ];
