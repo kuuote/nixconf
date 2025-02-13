@@ -79,6 +79,18 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
     (interactive)
     (mapcar #'kill-buffer (buffer-list)))
 #+end_src
+* macro packages
+** reformatter
+nix: epkgs.reformatter
+#+begin_src emacs-lisp :tangle yes
+  (defmacro reformatter-hook (hook name &rest reformatter-args)
+    `(add-hook
+      ',hook
+      (lambda ()
+        (reformatter-define
+         ,name
+         ,@reformatter-args))))
+#+end_src
 * packages
 ** consult
 nix: epkgs.consult
@@ -194,6 +206,9 @@ nix: epkgs.nix-mode
 #+begin_src emacs-lisp :tangle yes
   (autoload 'nix-mode "nix-mode")
   (add-to-list 'auto-mode-alist '("\\.nix$" . nix-mode))
+  (reformatter-hook
+   nix-mode-hook nix-format
+   :program "nixfmt")
 #+end_src
 ** nyan-mode
 nix: epkgs.nyan-mode
