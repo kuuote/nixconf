@@ -22,7 +22,9 @@ rec {
     attrs:
     foldAttrs (
       acc: item:
-      if isAttrs item && isAttrs acc then
+      if isAttrs item && item ? "outPath" then
+        item
+      else if isAttrs item && isAttrs acc then
         mergeAttrs [
           acc
           item
