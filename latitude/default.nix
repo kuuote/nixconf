@@ -58,7 +58,6 @@ in
       mpv
       mycmds
       smplayer
-      tree
     ];
     shell = pkgs.fish;
   };
@@ -72,27 +71,23 @@ in
     alacritty
     btrfs-progs
     chromium
-    cryptsetup
     deno
     deno2nix
     dunst
     fd
     ffmpeg
     fzf
-    gcc
     git
-    gnumake
     jq
     nix-output-monitor
     nixfmt-rfc-style
     python3
     ripgrep
+    stylua
     tmux
     trash-cli
-    unar
     vifm
     wezterm
-    wget
     wineWow64Packages.full
     # keep-sorted end
     # sway
