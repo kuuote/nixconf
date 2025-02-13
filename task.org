@@ -100,6 +100,13 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
   git clone . /tmp/nix
   t/b /tmp/nix
 #+end_src
+** test
+#+begin_src sh :tangle t/t :shebang "#!/bin/sh -eu"
+  sudo true
+  t/b
+  sudo result/bin/switch-to-configuration test
+#+end_src
+
 * /nixの容量チェック
 #+begin_src sh :tangle t/c :shebang "#/bin/sh -u"
   df --output=ipcent,pcent /nix
