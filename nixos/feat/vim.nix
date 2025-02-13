@@ -4,14 +4,14 @@
   ...
 }:
 let
-  # Vimは先っちょをビルドしたい
-  vim = import ../../override-pkgs/vim.nix {
-    pkgs = pkgs;
-    src = inputs.vim-src;
-  };
-  neovim = pkgs.callPackage ../../pkgs/neovim {
-    inherit (inputs) neovim-src;
-  };
+  inherit
+    (import ../../pkgs/vim.nix {
+      inherit pkgs;
+      inherit (inputs) vim-src neovim-src;
+    })
+    vim
+    neovim
+    ;
 in
 {
   environment = {
