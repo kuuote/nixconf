@@ -11,31 +11,24 @@ let
     ;
 in
 rec {
-  # nixpkgs's foldAttrs mimic
-  # from https://github.com/NixOS/nixpkgs/blob/5fbeaf6d89ff1ff08a59a0f0b34d6eb33fb75307/lib/attrsets.nix#L817
-  foldAttrs =
-    op: nul: list_of_attrs:
-    foldl' (
-      a: n: foldl' (o: name: o // { ${name} = op (a.${name} or nul) n.${name}; }) a (attrNames n)
-    ) { } list_of_attrs;
   mergeAttrs =
     attrs:
-    foldAttrs (
-      acc: item:
-      if isAttrs item && item ? "outPath" then
-        item
-      else if isAttrs item && isAttrs acc then
-        mergeAttrs [
-          acc
-          item
-        ]
-      else if isList item && isList acc then
-        acc ++ item
-      else if isNull item then
-        acc
+    let
+      inherit (builtins) all;
+      # ignore drv
+      isAttrs' = e: builtins.isAttrs e && !(e ? "outPath");
+    in
+    builtins.zipAttrsWith (
+      _: values:
+      if all isAttrs' values then
+        mergeAttrs values
+      else if all builtins.isList values then
+        builtins.concatLists values
+      else if all builtins.isString values then
+        builtins.concatStringsSep "" values
       else
-        item
-    ) null attrs;
+        builtins.elemAt values ((builtins.length values) - 1)
+    ) attrs;
   importAttrs =
     let
       maybeImport = target: if isString target || isPath target then import target else target;
