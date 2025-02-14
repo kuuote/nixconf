@@ -103,7 +103,9 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
 ** test
 #+begin_src sh :tangle t/t :shebang "#!/bin/sh -eu"
   sudo true
-  t/b
+  if [[ ! -e result/bin/switch-to-configuration ]]; then
+      t/b
+  fi
   sudo result/bin/switch-to-configuration test
 #+end_src
 
