@@ -6,7 +6,6 @@
 }:
 let
   moldStdenv = pkgs.useMoldLinker pkgs.clangStdenv;
-  optional = cond: value: if cond then value else null;
   inherit (import ../../lib/merge-attrs.nix) mergeAttrs;
 in
 moldStdenv.mkDerivation (mergeAttrs [
@@ -19,11 +18,15 @@ moldStdenv.mkDerivation (mergeAttrs [
     enableParallelBuilding = true;
     configureFlags = [ "--enable-fail-if-missing" ];
   }
-  (optional luaSupport {
-    configureFlags = [
-      "--enable-luainterp"
-      "--with-lua-prefix=${pkgs.lua}"
-      "--enable-fail-if-missing"
-    ];
-  })
+  (
+    if luaSupport then
+      {
+        configureFlags = [
+          "--enable-luainterp"
+          "--with-lua-prefix=${pkgs.lua}"
+        ];
+      }
+    else
+      { }
+  )
 ])
