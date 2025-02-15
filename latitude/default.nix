@@ -71,7 +71,6 @@ in
     alacritty
     btrfs-progs
     chromium
-    deno
     deno2nix
     dunst
     fd

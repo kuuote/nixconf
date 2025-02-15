@@ -8,6 +8,7 @@
   home.stateVersion = "24.05";
   imports = [
     # keep-sorted start
+    ./deno.nix
     ./direnv.nix
     ./emacs
     ./fish

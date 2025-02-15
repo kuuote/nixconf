@@ -15,7 +15,6 @@ let
 in
 with pkgs;
 [
-  deno
   ffmpeg
   home-manager-pkg
   neovim
