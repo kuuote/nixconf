@@ -81,6 +81,7 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
       git add src/github.lock
       git commit --amend --no-edit
   fi
+  git tag $(date +%F)
 #+end_src
 * NixOS
 ** build
