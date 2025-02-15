@@ -29,8 +29,7 @@ for d in defs:
     url = f"{github}/archive/{rev}.tar.gz"
     print(url)
     proc = subprocess.Popen(
-        # ["nix-prefetch-url", "--unpack", "--name", name, url], stdout=subprocess.PIPE
-        ["nix-prefetch-url", "--unpack", url],
+        ["nix-prefetch-url", "--unpack", "--name", "source", url],
         stdout=subprocess.PIPE,
     )
     stdout, _ = proc.communicate()

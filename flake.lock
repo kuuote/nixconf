@@ -20,22 +20,6 @@
         "type": "github"
       }
     },
-    "neovim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1739558948,
-        "narHash": "sha256-GydLVTGa9Jwa8qNdZ6xwa356j1UFBA5dzQtYmxeH5KE=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "f20335a54ce7f240902d4ee14d726620a38f95bc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "neovim",
-        "repo": "neovim",
-        "type": "github"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -90,12 +74,10 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "neovim-src": "neovim-src",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "org-babel": "org-babel",
-        "treefmt-nix": "treefmt-nix",
-        "vim-src": "vim-src"
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "treefmt-nix": {
@@ -115,22 +97,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "vim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1739552485,
-        "narHash": "sha256-gW6MUBPVa5g+tkWHZqv1KuNshRvJewElkr2XZGt+Dnw=",
-        "owner": "vim",
-        "repo": "vim",
-        "rev": "e67eff2e24f7289c5a40c90253b0b01910ab898d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vim",
-        "repo": "vim",
         "type": "github"
       }
     }

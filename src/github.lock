@@ -5,5 +5,19 @@
 		"owner": "kuuote",
 		"repo": "deno2nix",
 		"rev": "2076446997ee3551d49c1c7c6a08a7a2b9c8d65f"
+	},
+	"neovim": {
+		"hash": "sha256-Is4KSg1BgTU0lddDzSN0gbpjHDuRDfa0KU0/aRB1m0k=",
+		"name": "neovim",
+		"owner": "neovim",
+		"repo": "neovim",
+		"rev": "8e4b77134a1cbc08b7372b6834eafc7cecdbc33e"
+	},
+	"vim": {
+		"hash": "sha256-DWpDP0sDyYCeSjg4pNFNmLS1fgjLUo7SzPzwI3m3SnU=",
+		"name": "vim",
+		"owner": "vim",
+		"repo": "vim",
+		"rev": "3f60114236cff60caf117fd708476fd4ff72252b"
 	}
 }

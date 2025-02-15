@@ -1,1 +1,3 @@
 deno2nix.url = "https://github.com/kuuote/deno2nix"
+neovim.url = "https://github.com/neovim/neovim"
+vim.url = "https://github.com/vim/vim"

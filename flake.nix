@@ -5,16 +5,12 @@
     # keep-sorted start
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
-    neovim-src.flake = false;
-    neovim-src.url = "github:neovim/neovim";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     org-babel.url = "github:emacs-twist/org-babel";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    vim-src.flake = false;
-    vim-src.url = "github:vim/vim";
     # keep-sorted end
   };
 

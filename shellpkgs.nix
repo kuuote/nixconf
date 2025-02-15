@@ -4,11 +4,7 @@
   pkgs,
 }:
 let
-  inherit
-    (import ./pkgs/vim.nix {
-      inherit pkgs;
-      inherit (inputs) vim-src neovim-src;
-    })
+  inherit (import ./pkgs/vim.nix { inherit pkgs; })
     vim
     neovim
     ;
