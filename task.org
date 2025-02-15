@@ -84,6 +84,15 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
   git tag $(date +%F)
 #+end_src
 * NixOS
+** boot
+#+begin_src sh :tangle t/bo :shebang "#!/bin/sh -eu"
+  sudo true
+  if [[ ! -e result/bin/switch-to-configuration ]]; then
+      t/b
+  fi
+  sudo nix-env -p /nix/var/nix/profiles/system --set $(realpath result)
+  sudo result/bin/switch-to-configuration boot
+#+end_src
 ** build
 本来は ~nixos-rebuild build -v -L --flake .#latitude~
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
@@ -91,8 +100,10 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
   nom build -L -v $target#nixosConfigurations.latitude.config.system.build.toplevel
 #+end_src
 ** switch
-#+begin_src sh :tangle t/s :shebang "#!/bin/sh -u"
-  sudo nixos-rebuild switch -L --flake .#latitude
+#+begin_src sh :tangle t/s :shebang "#!/bin/sh -eu"
+  # sudo nixos-rebuild switch -L --flake .#latitude
+  t/t
+  t/bo
 #+end_src
 ** git
 *** build
