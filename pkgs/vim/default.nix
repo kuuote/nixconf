@@ -18,15 +18,10 @@ moldStdenv.mkDerivation (mergeAttrs [
     enableParallelBuilding = true;
     configureFlags = [ "--enable-fail-if-missing" ];
   }
-  (
-    if luaSupport then
-      {
-        configureFlags = [
-          "--enable-luainterp"
-          "--with-lua-prefix=${pkgs.lua}"
-        ];
-      }
-    else
-      { }
-  )
+  (lib.optionalAttrs luaSupport {
+    configureFlags = [
+      "--enable-luainterp"
+      "--with-lua-prefix=${pkgs.lua}"
+    ];
+  })
 ])
