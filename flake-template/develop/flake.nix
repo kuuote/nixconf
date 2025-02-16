@@ -8,30 +8,21 @@
     }:
     let
       inherit (nixpkgs) lib;
-      # flake-parts replica
-      perSystem =
-        fn:
-        let
-          eached = lib.genAttrs lib.systems.flakeExposed (system: fn nixpkgs.legacyPackages.${system});
-        in
-        lib.pipe eached [
-          (lib.mapAttrsToList (system: builtins.mapAttrs (name: value: { "${system}" = value; })))
-          (builtins.foldl' lib.recursiveUpdate { })
-        ];
+      eachSystem =
+        fn: lib.genAttrs lib.systems.flakeExposed (system: fn nixpkgs.legacyPackages.${system});
     in
-    perSystem (pkgs: {
-      devShells = rec {
-        default = shell;
-        shell = pkgs.mkShell {
-          packages = [
+    {
+      devShells = eachSystem (pkgs: {
+        default = pkgs.mkShell {
+          packages = with pkgs; [
             # put packages
           ];
         };
-      };
-      packages = {
+      });
+      packages = eachSystem (pkgs: {
         default = pkgs.writeShellScript "test" "echo 42";
-      };
-    });
+      });
+    };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
