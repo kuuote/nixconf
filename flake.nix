@@ -141,7 +141,6 @@
       # packages.${system}.default = pkgs.callPackage ./pkgs/mycmds { };
       packages.${system} = {
         default = pkgs.stdenvNoCC.mkDerivation {
-          allowSubstitutes = false;
           name = "test";
           srcs = import ./shellpkgs.nix {
             inherit
