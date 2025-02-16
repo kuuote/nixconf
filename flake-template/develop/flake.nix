@@ -23,8 +23,9 @@
       devShells = rec {
         default = shell;
         shell = pkgs.mkShell {
-          packages = [ pkgs.fish ];
-          shellHook = "exec fish";
+          packages = [
+            # put packages
+          ];
         };
       };
       packages = {
