@@ -52,6 +52,7 @@
               black.enable = true;
               keep-sorted.enable = true;
               nixfmt.enable = true;
+              rustfmt.enable = true;
               # keep-sorted end
             };
           };
