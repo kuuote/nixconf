@@ -13,6 +13,7 @@
     ./emacs
     ./fish
     ./git
+    ./nix.nix
     ./nvim-nix
     ./sway
     ./wezterm

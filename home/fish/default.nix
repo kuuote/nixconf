@@ -47,4 +47,7 @@ in
     "fish_add_path ~/cmd"
     "fish_add_path ~/.nix-profile/bin"
   ]);
+  programs.fish.interactiveShellInit = "echo in ${
+    if args ? "nixosConfig" then "NixOS" else "Standalone"
+  }";
 }
