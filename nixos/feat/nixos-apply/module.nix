@@ -3,13 +3,21 @@
   ...
 }:
 {
-  security.wrappers = {
-    nixos-apply = {
-      source = "${pkgs.callPackage ./. { }}/bin/nixos-apply";
-      owner = "root";
-      group = "root";
-      setuid = true;
-      permissions = "u+rx,g+x,o+x";
-    };
-  };
+  environment.systemPackages = [
+    (pkgs.callPackage ./. { })
+  ];
+  security.sudo.extraRules = [
+    {
+      groups = [ "wheel" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/nixos-apply";
+          options = [
+            "SETENV"
+            "NOPASSWD"
+          ];
+        }
+      ];
+    }
+  ];
 }
