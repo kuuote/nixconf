@@ -84,41 +84,27 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
   git tag $(date +%F)
 #+end_src
 * NixOS
+** apply
+#+begin_src sh :tangle t/na :shebang "#!/bin/sh -u"
+  sudo nixos-apply result "$1" && exit
+  t/b || exit "$?"
+  sudo nixos-apply result "$1"
+#+end_src
 ** boot
 #+begin_src sh :tangle t/bo :shebang "#!/bin/sh -eu"
-  sudo true
-  if [[ ! -e result/bin/switch-to-configuration ]]; then
-      t/b
-  fi
-  sudo nix-env -p /nix/var/nix/profiles/system --set $(realpath result)
-  sudo result/bin/switch-to-configuration boot
+  t/na boot
 #+end_src
 ** build
-本来は ~nixos-rebuild build -v -L --flake .#latitude~
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
-  target=${1:-.}
-  nom build -L -v $target#nixosConfigurations.latitude.config.system.build.toplevel
+  nixos-rebuild --log-format internal-json build --flake .#latitude |& nom --json
 #+end_src
 ** switch
 #+begin_src sh :tangle t/s :shebang "#!/bin/sh -eu"
-  # sudo nixos-rebuild switch -L --flake .#latitude
-  t/t
-  t/bo
-#+end_src
-** git
-*** build
-#+begin_src sh :tangle t/gb :shebang "#!/bin/sh -u"
-  rm -rf /tmp/nix
-  git clone . /tmp/nix
-  t/b /tmp/nix
+  t/na switch
 #+end_src
 ** test
-#+begin_src sh :tangle t/t :shebang "#!/bin/sh -eu"
-  sudo true
-  if [[ ! -e result/bin/switch-to-configuration ]]; then
-      t/b
-  fi
-  sudo result/bin/switch-to-configuration test
+#+begin_src sh :tangle t/t :shebang "#!/bin/sh -u"
+  t/na test
 #+end_src
 
 * /nixの容量チェック
