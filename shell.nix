@@ -1,8 +1,6 @@
 {
-  home-manager-pkg,
-  inputs,
-  pkgs,
+  pkgs ? import <nixpkgs> { },
 }:
 pkgs.mkShellNoCC {
-  packages = import ./shellpkgs.nix { inherit home-manager-pkg inputs pkgs; };
+  packages = import ./shellpkgs.nix { inherit pkgs; };
 }

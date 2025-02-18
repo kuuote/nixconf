@@ -1,6 +1,4 @@
 {
-  home-manager-pkg,
-  inputs,
   pkgs,
 }:
 let
@@ -12,7 +10,6 @@ in
 with pkgs;
 [
   ffmpeg
-  home-manager-pkg
   neovim
   nix-output-monitor
   nixfmt-rfc-style
