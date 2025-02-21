@@ -13,5 +13,5 @@ builtins.mapAttrs (
       }
     )
   else
-    (_: def: pkgs.fetchFromGitHub def)
+    (_: pkgs.fetchFromGitHub)
 ) (builtins.fromJSON (builtins.readFile ./github.lock))

@@ -2,7 +2,7 @@
   pkgs,
 }:
 let
-  src = import ../src { };
+  src = import ../src { inherit pkgs; };
   vim-src = src.vim;
   neovim-src = src.neovim;
 in
