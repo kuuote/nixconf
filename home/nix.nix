@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }@args:
 let
@@ -8,8 +9,7 @@ let
   isStandalone = !(args ? "nixosConfig");
   mkFlakeRef = name: path: {
     nixPath = [
-      "${name}=flake"
-      name
+      "${name}=flake:${name}"
     ];
     registry = {
       "${name}" = {
@@ -19,8 +19,7 @@ let
         };
         to = {
           type = "path";
-          # Pathを直接変換かけると謎のコピーが走ることがあるのでtoStringかます
-          path = if builtins.isPath path then builtins.toString path else "${path}";
+          inherit path;
         };
       };
     };
@@ -44,6 +43,6 @@ in
         keep-outputs = true;
       };
     }
-    (lib.optionalAttrs isStandalone (mkFlakeRef "nixpkgs" pkgs.path))
+    (lib.optionalAttrs isStandalone (mkFlakeRef "nixpkgs" inputs.nixpkgs.outPath))
   ];
 }
