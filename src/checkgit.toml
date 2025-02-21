@@ -1,3 +1,4 @@
+deno-pty-ffi.url = "https://github.com/sigmaSd/deno-pty-ffi"
 deno2nix.url = "https://github.com/kuuote/deno2nix"
 neovim.url = "https://github.com/neovim/neovim"
 vim.url = "https://github.com/vim/vim"

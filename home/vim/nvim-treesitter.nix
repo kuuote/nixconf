@@ -11,10 +11,6 @@ let
 in
 {
   xdg.configFile = {
-    nvim-nix.source = pkgs.linkFarm "nvim-nix" {
-      inherit
-        nvim-treesitter
-        ;
-    };
+    "nvim-nix/nvim-treesitter".source = nvim-treesitter;
   };
 }

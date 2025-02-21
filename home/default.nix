@@ -16,7 +16,7 @@
       ./fish
       ./git
       ./nix.nix
-      ./nvim-nix
+      ./vim
       # keep-sorted end
     ]
     ++ lib.optionals (args ? "nixosConfig") [
