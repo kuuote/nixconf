@@ -9,6 +9,7 @@
       ...
     }@inputs:
     let
+      lib = nixpkgs.lib;
       packages = pkgs: {
         home-manager =
           let
@@ -56,23 +57,27 @@
                     ] ++ extraModules;
                   };
                 };
-              merge = (import ./lib/merge-attrs.nix).mergeAttrs;
             in
-            merge [
-              (config {
-                host = "192";
-                user = "alice";
-              })
-              (config {
-                host = "42";
-                user = "arch";
-                extraModules = [
-                  {
-                    home.packages = import ./shellpkgs.nix { inherit pkgs; };
-                  }
-                ];
-              })
-            ];
+            lib.pipe
+              [
+                {
+                  host = "192";
+                  user = "alice";
+                }
+                {
+                  host = "42";
+                  user = "arch";
+                  extraModules = [
+                    {
+                      home.packages = import ./shellpkgs.nix { inherit pkgs; };
+                    }
+                  ];
+                }
+              ]
+              [
+                (map config)
+                lib.mergeAttrsList
+              ];
           nixosConfigurations = {
             iso = nixpkgs.lib.nixosSystem {
               inherit system;
