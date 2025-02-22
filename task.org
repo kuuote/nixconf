@@ -34,7 +34,7 @@
 #+end_src
 ** switch
 home-manager switchは使わずに自前でビルドして中身を直接叩く
-#+begin_src sh :tangle t/hs :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/hs :shebang "#!/usr/bin/env -S bash -eu"
   t/hb
   export HOME_MANAGER_BACKUP_EXT=".nixspill"
   result-hm/activate
