@@ -1,25 +1,65 @@
 #+STARTUP: fold
+* package for customize
+nix: epkgs.hydra
+nix: epkgs.leaf
+nix: epkgs.reformatter
+* macro for customize
+** reformatter
+#+begin_src emacs-lisp :tangle yes
+  (defmacro reformatter-hook (hook name &rest reformatter-args)
+    `(add-hook
+      ',hook
+      (lambda ()
+        (reformatter-define
+          ,name
+          ,@reformatter-args))))
+#+end_src
 * basic
 #+begin_src emacs-lisp :tangle yes
 #+end_src
 leaf.elで設定したい
 nix: epkgs.leaf
-** サクッと実験するために/tmp/init.elがあれば読み込むようにする
-#+begin_src emacs-lisp :tangle yes
-  (when (file-readable-p "/tmp/init.el")
-    (load-file "/tmp/init.el"))
-#+end_src
 ** indent/tab
 #+begin_src emacs-lisp :tangle yes
   (setq-default indent-tabs-mode nil)
+#+end_src
+** org-mode
+#+begin_src emacs-lisp :tangle yes
+  (defun my/org-mode-hook ()
+    (defhydra
+      hydra-org-shortcuts (org-mode-map "C-;")
+      ("h" org-metaleft)
+      ("j" org-metadown)
+      ("k" org-metaup)
+      ("l" org-metaright)
+      ("r" (lambda ()
+             (interactive)
+             (save-excursion
+               (org-mode-restart))
+             (org-fold-reveal)))
+      ("s" org-sort)
+      ("SPC" (lambda ()
+               (interactive)
+               (move-end-of-line nil)
+               (org-meta-return)))))
+  (leaf org-mode
+    :hook
+    (org-mode-hook . my/org-mode-hook))
 #+end_src
 ** repeat-mode
 #+begin_src emacs-lisp :tangle yes
   (repeat-mode)
 #+end_src
-** theme - modus-vivendi
+** theme
 #+begin_src emacs-lisp :tangle yes
-  (load-theme 'modus-vivendi t)
+  (if (or (daemonp) (display-graphic-p))
+      (load-theme 'modus-vivendi t)
+    (load-theme 'wombat t))
+#+end_src
+** サクッと実験するために/tmp/init.elがあれば読み込むようにする
+#+begin_src emacs-lisp :tangle yes
+  (when (file-readable-p "/tmp/init.el")
+    (load-file "/tmp/init.el"))
 #+end_src
 ** バックアップ系の無効化
 #+begin_src emacs-lisp :tangle yes
@@ -78,18 +118,6 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
   (defun my/kill-all-buffers ()
     (interactive)
     (mapcar #'kill-buffer (buffer-list)))
-#+end_src
-* macro packages
-** reformatter
-nix: epkgs.reformatter
-#+begin_src emacs-lisp :tangle yes
-  (defmacro reformatter-hook (hook name &rest reformatter-args)
-    `(add-hook
-      ',hook
-      (lambda ()
-        (reformatter-define
-         ,name
-         ,@reformatter-args))))
 #+end_src
 * packages
 ** consult
@@ -238,7 +266,7 @@ nix: epkgs.nyan-mode
 ** orderless
 nix: epkgs.orderless
 #+begin_src emacs-lisp :tangle yes
-  (setq completion-styles '(orderless))
+  (setq-default completion-styles '(orderless))
 #+end_src
 ** vertico
 nix: epkgs.vertico
