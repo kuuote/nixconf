@@ -85,7 +85,7 @@
                 modules = [
                   home-manager.nixosModules.home-manager
                   { home-manager.extraSpecialArgs = specialArgs; }
-                  ./home/nixos.nix
+                  ./nixos/home-manager.nix
                   inputs.nix-index-database.nixosModules.nix-index
                   ./latitude
                   {
