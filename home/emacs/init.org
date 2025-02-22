@@ -29,6 +29,10 @@ nix: epkgs.leaf
            (auto-save-list-file-prefix . nil)
            (create-lockfiles . nil)))
 #+end_src
+** 括弧の補完
+#+begin_src emacs-lisp :tangle yes
+  (electric-pair-mode)
+#+end_src
 ** 日本語でやっていく
 https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 #+begin_src emacs-lisp :tangle yes
@@ -47,10 +51,6 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 ** 起動画面の無効化
 #+begin_src emacs-lisp :tangle yes
   (setq inhibit-startup-screen t)
-#+end_src
-** 括弧の補完
-#+begin_src emacs-lisp :tangle yes
-  (electric-pair-mode)
 #+end_src
 * daemon only
 ** 色々と遅いのでpreloadしておく
