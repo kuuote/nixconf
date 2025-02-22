@@ -3,10 +3,8 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
-  inputs,
-  lib,
   pkgs,
+  host,
   user,
   ...
 }:
@@ -35,7 +33,7 @@ in
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "192"; # Define your hostname.
+  networking.hostName = host; # Define your hostname.
 
   time.timeZone = "Asia/Tokyo";
 

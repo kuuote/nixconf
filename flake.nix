@@ -81,32 +81,24 @@
                 ./nixos/iso
               ];
             };
-            latitude =
-              let
-                specialArgs = specialArgsBase // {
-                  user = "alice";
-                };
-              in
-              nixpkgs.lib.nixosSystem {
-                inherit specialArgs system;
-                modules = [
-                  home-manager.nixosModules.home-manager
-                  {
-                    home-manager.extraSpecialArgs = specialArgs // {
-                      isNixOSHost = true;
-                    };
-                  }
-                  ./nixos/home-manager.nix
-                  inputs.nix-index-database.nixosModules.nix-index
-                  ./latitude
-                  {
-                    # 何かあった時のために現在のビルドソースへのリンクを作っておく
-                    environment.etc.c.source = ./.;
-                    # inputsへのrefもあると便利そう
-                    environment.etc.inputs.source = (packages pkgs).inputs;
-                  }
-                ];
+            latitude = nixpkgs.lib.nixosSystem {
+              inherit system;
+              modules = [
+                ./nixos/home-manager.nix
+                inputs.nix-index-database.nixosModules.nix-index
+                ./latitude
+                {
+                  # 何かあった時のために現在のビルドソースへのリンクを作っておく
+                  environment.etc.c.source = ./.;
+                  # inputsへのrefもあると便利そう
+                  environment.etc.inputs.source = (packages pkgs).inputs;
+                }
+              ];
+              specialArgs = specialArgsBase // {
+                host = "192";
+                user = "alice";
               };
+            };
           };
           templates = rec {
             default = develop;
