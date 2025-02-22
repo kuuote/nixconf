@@ -14,16 +14,23 @@
   exit 0
 #+end_src
 
+* 1. setup
+#+begin_src sh :tangle t/lib
+  nix_setup=$BASH_SOURCE
+  source ../nix.env
+  pwd=$(pwd)
+  if ! command -v nom > /dev/null; then
+      nom () {
+          nix run --inputs-from . nixpkgs#nix-output-monitor -- "$@"
+      }
+  fi
+#+end_src
 * home-manager
 ** build
 #+begin_src sh :tangle t/hb :shebang "#!/bin/sh -u"
-  pwd=$(pwd)
+  source t/lib
   cd ${1:-.}
-  if command -v nom > /dev/null; then
-      nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
-  else
-      nix build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_USER:-$(id -nu)}\".activationPackage"
-  fi
+  nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"$(cat /etc/hostname)@${HM_USER:-$(id -nu)}\".activationPackage"
 #+end_src
 ** switch
 home-manager switchは使わずに自前でビルドして中身を直接叩く
@@ -96,7 +103,8 @@ nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作�
 #+end_src
 ** build
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
-  nixos-rebuild --log-format internal-json build --flake .#latitude |& nom --json
+  source t/lib
+  nixos-rebuild --log-format internal-json build --flake ".#${NIXOS_NAME}" |& nom --json
 #+end_src
 ** switch
 #+begin_src sh :tangle t/s :shebang "#!/bin/sh -eu"

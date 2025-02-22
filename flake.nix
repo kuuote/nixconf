@@ -39,33 +39,40 @@
               config =
                 {
                   extraModules ? [ ],
+                  host,
                   user,
                 }:
-                home-manager.lib.homeManagerConfiguration {
-                  inherit pkgs;
-                  extraSpecialArgs = specialArgsBase // {
-                    inherit user;
+                {
+                  "${host}@${user}" = home-manager.lib.homeManagerConfiguration {
+                    inherit pkgs;
+                    extraSpecialArgs = specialArgsBase // {
+                      inherit host user;
+                      isNixOSHost = builtins.elem host [
+                        "192"
+                      ];
+                    };
+                    modules = [
+                      ./home
+                    ] ++ extraModules;
                   };
-                  modules = [
-                    ./home
-                  ] ++ extraModules;
                 };
+              merge = (import ./lib/merge-attrs.nix).mergeAttrs;
             in
-            {
-              alice = config { user = "alice"; };
-              arch = config {
+            merge [
+              (config {
+                host = "192";
+                user = "alice";
+              })
+              (config {
+                host = "42";
+                user = "arch";
                 extraModules = [
                   {
-                    home.packages = import ./shellpkgs.nix {
-                      inherit
-                        pkgs
-                        ;
-                    };
+                    home.packages = import ./shellpkgs.nix { inherit pkgs; };
                   }
                 ];
-                user = "arch";
-              };
-            };
+              })
+            ];
           nixosConfigurations = {
             iso = nixpkgs.lib.nixosSystem {
               inherit system;
@@ -84,7 +91,11 @@
                 inherit specialArgs system;
                 modules = [
                   home-manager.nixosModules.home-manager
-                  { home-manager.extraSpecialArgs = specialArgs; }
+                  {
+                    home-manager.extraSpecialArgs = specialArgs // {
+                      isNixOSHost = true;
+                    };
+                  }
                   ./nixos/home-manager.nix
                   inputs.nix-index-database.nixosModules.nix-index
                   ./latitude

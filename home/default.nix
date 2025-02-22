@@ -1,6 +1,7 @@
 {
   lib,
   user,
+  isNixOSHost,
   ...
 }@args:
 {
@@ -19,7 +20,7 @@
       ./vim
       # keep-sorted end
     ]
-    ++ lib.optionals (args ? "nixosConfig") [
+    ++ lib.optionals isNixOSHost [
       ./sway
       ./wezterm
     ];
