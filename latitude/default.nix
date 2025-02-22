@@ -24,7 +24,6 @@ in
     (import ../nixos/services/openssh { usePassword = true; })
     ../nixos/feat/acpilight.nix
     ../nixos/feat/nixos-apply/module.nix
-    ../nixos/feat/vim.nix
     ../nixos/feat/vm.nix
     ../nixos/nix.nix
     ../nixos/sway.nix
