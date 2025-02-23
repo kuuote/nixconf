@@ -23,6 +23,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # keep-sorted start
+        ./flake/template
         ./flake/treefmt.nix
         # keep-sorted end
       ];
@@ -103,13 +104,6 @@
                 host = "192";
                 user = "alice";
               };
-            };
-          };
-          templates = rec {
-            default = develop;
-            develop = {
-              description = "devShellテンプレ";
-              path = ./flake-template/develop;
             };
           };
         };
