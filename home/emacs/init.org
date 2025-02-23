@@ -218,7 +218,14 @@ nix: epkgs.ddskk-posframe
 nix: epkgs.embark
 nix: epkgs.embark-consult
 #+begin_src emacs-lisp :tangle yes
-  (keymap-global-set "C-." #'embark-act)
+  (leaf embark
+    :bind
+    ("C-." . embark-act)
+    :defer-config
+    ;; describe-functionの選択中にembarkでfind-functionできるようにする
+    (setq embark-symbol-help-map (make-sparse-keymap))
+    (keymap-set embark-symbol-help-map "f" 'find-function)
+    (add-to-list 'embark-keymap-alist '(symbol-help embark-symbol-help-map)))
 #+end_src
 ** magit
 nix: epkgs.magit
