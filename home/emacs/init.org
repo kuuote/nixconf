@@ -46,10 +46,6 @@ nix: epkgs.leaf
     :hook
     (org-mode-hook . my/org-mode-hook))
 #+end_src
-** repeat-mode
-#+begin_src emacs-lisp :tangle yes
-  (repeat-mode)
-#+end_src
 ** theme
 #+begin_src emacs-lisp :tangle yes
   (if (or (daemonp) (display-graphic-p))
