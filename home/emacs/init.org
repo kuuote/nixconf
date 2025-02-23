@@ -58,7 +58,7 @@ nix: epkgs.leaf
 #+end_src
 ** サクッと実験するために/tmp/init.elがあれば読み込むようにする
 #+begin_src emacs-lisp :tangle yes
-  (when (file-readable-p "/tmp/init.el")
+  (when (and (not (daemonp)) (file-readable-p "/tmp/init.el"))
     (load-file "/tmp/init.el"))
 #+end_src
 ** バックアップ系の無効化
