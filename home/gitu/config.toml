@@ -1,0 +1,3 @@
+[general]
+# 今の所symlink辿っちゃうので切っておく
+refresh_on_file_change.enabled = false
