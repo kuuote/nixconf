@@ -25,26 +25,36 @@ nix: epkgs.leaf
 #+end_src
 ** org-mode
 #+begin_src emacs-lisp :tangle yes
-  (defun my/org-mode-hook ()
+  (defun my/org-mode-restart ()
+    (interactive)
+    (save-excursion
+      (org-mode-restart))
+    (org-fold-reveal))
+
+  (leaf org
+    :defer-config
+    (defhydra
+      hydra-org-view ()
+      ("TAB" org-cycle)
+      ("f" consult-org-heading)
+      ("n" outline-next-visible-heading)
+      ("p" outline-previous-visible-heading)
+      ("j" next-line)
+      ("k" previous-line)
+      ("r" my/org-mode-restart))
     (defhydra
       hydra-org-shortcuts (org-mode-map "C-;")
       ("h" org-metaleft)
       ("j" org-metadown)
       ("k" org-metaup)
       ("l" org-metaright)
-      ("r" (lambda ()
-             (interactive)
-             (save-excursion
-               (org-mode-restart))
-             (org-fold-reveal)))
+      ("v" hydra-org-view/body :exit t)
       ("s" org-sort)
       ("SPC" (lambda ()
                (interactive)
                (move-end-of-line nil)
-               (org-meta-return)))))
-  (leaf org-mode
-    :hook
-    (org-mode-hook . my/org-mode-hook))
+               (org-meta-return))))
+    )
 #+end_src
 ** theme
 #+begin_src emacs-lisp :tangle yes
