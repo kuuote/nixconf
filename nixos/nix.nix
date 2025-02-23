@@ -1,12 +1,5 @@
 {
-  nix.settings = {
-    # flakeが無いと始まらない感ある
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    # GC時にビルドデータを消さない
-    keep-outputs = true;
+  nix.settings = (import ../common/nixconf.nix) // {
     trusted-users = [
       "alice"
     ];

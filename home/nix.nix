@@ -34,14 +34,7 @@ in
       package = pkgs.nix;
     })
     {
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        keep-derivations = true;
-        keep-outputs = true;
-      };
+      settings = import ../common/nixconf.nix;
     }
     (lib.optionalAttrs isStandalone (mkFlakeRef "nixpkgs" inputs.nixpkgs.outPath))
   ];
