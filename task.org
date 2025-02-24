@@ -64,40 +64,26 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
   result-git-hm/activate
 #+end_src
 * nix flake update
-** コミットだけ積むやつ
-#+begin_src sh :tangle t/uc :shebang "#!/bin/sh -u"
-  if git log --oneline | head -n1 | grep -q 'あぷでたん'; then
-      git restore flake.lock
-      git reset HEAD^
-  fi
-  git add flake.lock
-  git add src/github.lock
-  git commit -m あぷでたん
-#+end_src
-** with git commit
-先端に「あぷでたん」というコミットが積まれてたら消した上でflake.lockを復元する
+** コミット積むやつ
 #+begin_src sh :tangle t/u :shebang "#!/bin/sh -u"
-  if git log --oneline | head -n1 | grep -q 'あぷでたん'; then
-      git reset HEAD^
-  fi
-  git restore flake.lock
-#+end_src
-nixpkgsに変更があれば ~nix flake update~ の機能でコミットを作ってそうじゃないなら再び「あぷでたん」を積む
-#+begin_src sh :tangle t/u
-  src/update
   remote_head=$(git ls-remote --heads https://github.com/NixOS/nixpkgs nixos-unstable | awk '{print $1}')
   local_head=$(jq -r '.nodes.nixpkgs.locked.rev' flake.lock)
   echo $remote_head
   echo $local_head
+  # nixpkgsに更新が無い場合は最後にコミットを戻す
   if [[ "$remote_head" = "$local_head" ]]; then
-      nix flake update
-      t/uc
-  else
-      nix flake update --commit-lock-file
-      git add src/github.lock
-      git commit --amend --no-edit
+      head=$(git rev-parse @)
+      trap "git reset -q $head" EXIT
   fi
+  nix flake update --commit-lock-file
+  src/update
+  git add src/github.lock
+  git commit --amend --no-edit
   git tag $(date +%F)
+#+end_src
+** コミット確認するやつ
+#+begin_src sh :tangle t/gl :shebang "#!/usr/bin/env -S bash -u"
+  git log $(date +%F)
 #+end_src
 * NixOS
 ** apply
