@@ -1,8 +1,11 @@
-#!/bin/sh -eu
+#!/usr/bin/env bash
 # -*- mode: org -*-
 #+STARTUP: fold
 
 #+begin_src sh
+  set -eu
+  unset EMACSLOADPATH
+  unset EMACSNATIVEPATH
   pwd=$(pwd)
   rm -rf /tmp/task
   mkdir -p /tmp/task/t
@@ -13,6 +16,8 @@
   rsync -rlpcP --delete-before /tmp/task/t/ t/
   exit 0
 #+end_src
+
+EMACSLOADPATHとかunsetしておかないとeshellとかでネストした時に死ぬ
 
 * 1. setup
 flakes
