@@ -1,5 +1,5 @@
 let
-  locked = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
+  locked = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.nixpkgs.locked;
 in
 builtins.fetchTarball {
   name = "source";
