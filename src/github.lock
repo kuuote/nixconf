@@ -7,24 +7,24 @@
 		"rev": "b56a5c0ced36e1f87b710eb60a2d2f88c8e3ab33"
 	},
 	"deno2nix": {
-		"hash": "sha256-rAu0suikyHVHbuJfkaZDjQueJV0wQJaQ5Jo5UbpVd0w=",
+		"hash": "sha256-MXylEp9xczBaKKtp7KAYvmvGq9tH5hQkhc6I05E1RCI=",
 		"name": "deno2nix",
 		"owner": "kuuote",
 		"repo": "deno2nix",
-		"rev": "2076446997ee3551d49c1c7c6a08a7a2b9c8d65f"
+		"rev": "644e3e8fdfd62a0f8b0a267a297202043dd972ec"
 	},
 	"neovim": {
-		"hash": "sha256-wxMPPA/FBXfGhsSEKLFSRofodwCRE5IUJAAgxsGgTNQ=",
+		"hash": "sha256-W01q9gpDfY9m4YY3HY9cPnq2OVadRjbJhaxYl3YRChg=",
 		"name": "neovim",
 		"owner": "neovim",
 		"repo": "neovim",
-		"rev": "07c5f41da3ad5a609e74da47685f430fcc4896fe"
+		"rev": "095c0876c2010d6160df37cf057f2d0ad2c4501f"
 	},
 	"vim": {
-		"hash": "sha256-zhojQO29miaamvzf5vhCDakV5DKa/eM+PJnaer+49oM=",
+		"hash": "sha256-F3rdlejgA8avaslC/yQ3Y4vgs5ST4wQEqGp/C1O9N8A=",
 		"name": "vim",
 		"owner": "vim",
 		"repo": "vim",
-		"rev": "e0029daa3599529d9d438cc51c7ada8580297a39"
+		"rev": "12b1eb58abca1eabc4833ad855c8a31d8b40981e"
 	}
 }
