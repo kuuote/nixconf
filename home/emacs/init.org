@@ -28,24 +28,43 @@ nix: epkgs.leaf
   (setq-default indent-tabs-mode nil)
 #+end_src
 ** org-mode
+*** hydra-org-view
 #+begin_src emacs-lisp :tangle yes
-  (defun my/org-mode-restart ()
-    (interactive)
-    (save-excursion
-      (org-mode-restart))
-    (org-fold-reveal))
-
   (leaf org
     :defer-config
+    (defun my/org-restart ()
+      (interactive)
+      (save-excursion
+        (org-mode-restart))
+      (org-reveal))
+    ;; vim-fernみたいに上の階層の見出しを閉じる
+    (defun my/org-fold-hide-parent ()
+      (interactive)
+      (let ((current (point)))
+        (ignore-errors (outline-up-heading 0))
+        (when (eql current (point))
+          (ignore-errors (outline-up-heading 1))))
+      (org-fold-hide-subtree))
     (defhydra
       hydra-org-view ()
       ("TAB" org-cycle)
       ("f" consult-org-heading)
-      ("n" outline-next-visible-heading)
-      ("p" outline-previous-visible-heading)
-      ("j" next-line)
-      ("k" previous-line)
-      ("r" my/org-mode-restart))
+      ("h" my/org-fold-hide-parent)
+      ("j" outline-next-visible-heading)
+      ("k" outline-previous-visible-heading)
+      ("l" (lambda ()
+             (interactive)
+             (org-cycle)
+             (forward-line)))
+      ("n" next-line)
+      ("p" previous-line)
+      ("r" my/org-restart)
+      ("s" org-sort)))
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+  (leaf org
+    :defer-config
     (defhydra
       hydra-org-shortcuts (org-mode-map "C-;")
       ("h" org-metaleft)
@@ -53,12 +72,10 @@ nix: epkgs.leaf
       ("k" org-metaup)
       ("l" org-metaright)
       ("v" hydra-org-view/body :exit t)
-      ("s" org-sort)
       ("SPC" (lambda ()
                (interactive)
                (move-end-of-line nil)
-               (org-meta-return))))
-    )
+               (org-meta-return)))))
 #+end_src
 ** theme
 #+begin_src emacs-lisp :tangle yes
