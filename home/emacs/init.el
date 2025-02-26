@@ -1,6 +1,8 @@
 (cond
  ((null (getenv "babel"))
-  (load "~/.emacs.d/init_built.el"))
+  (add-to-list 'load-path "@site_lisp@")
+  (add-to-list 'native-comp-eln-load-path "@native_lisp@")
+  (require 'init))
  (t
   (find-file-read-only (file-truename "~/.emacs.d/init.org"))
   (require 'dash)

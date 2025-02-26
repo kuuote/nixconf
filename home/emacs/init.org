@@ -1,4 +1,10 @@
 #+STARTUP: fold
+
+* header
+#+begin_src emacs-lisp :tangle yes
+  ;;; init.el --- My Castle -*- lexical-binding: t -*-
+#+end_src
+歴史軽
 * package for customize
 nix: epkgs.hydra
 nix: epkgs.leaf
@@ -15,8 +21,6 @@ nix: epkgs.reformatter
           ,@reformatter-args))))
 #+end_src
 * basic
-#+begin_src emacs-lisp :tangle yes
-#+end_src
 leaf.elで設定したい
 nix: epkgs.leaf
 ** indent/tab
@@ -155,7 +159,10 @@ https://github.com/yonta/dotfiles/blob/7c53daf87f78f721919bb3c3cc3a6fcd0a2b2b2d/
      . (lambda () (setq-local completion-styles '(hotfuzz))))
     :config
     (global-corfu-mode))
-  (require 'corfu)
+  (add-hook
+   'emacs-startup-hook
+   (lambda ()
+     (require 'corfu)))
 #+end_src
 ** ddskk
 nix: epkgs.ddskk
