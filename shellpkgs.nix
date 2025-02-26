@@ -9,11 +9,14 @@ let
 in
 with pkgs;
 [
+  # keep-sorted start
   ffmpeg
   neovim
   nix-output-monitor
+  nix-serve-ng
   nixfmt-rfc-style
   nvfetcher
   vim
   vimPlugins.vim-themis
+  # keep-sorted end
 ]
