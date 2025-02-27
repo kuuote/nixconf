@@ -13,14 +13,10 @@
     in
     {
       devShells = eachSystem (pkgs: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            # place packages
-          ];
-        };
+        default = import ./shell.nix { inherit pkgs; };
       });
       packages = eachSystem (pkgs: {
-        default = pkgs.writeShellScript "test" "echo 42";
+        default = import ./default.nix { inherit pkgs; };
       });
     };
 
