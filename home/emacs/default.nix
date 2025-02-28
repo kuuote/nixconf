@@ -8,17 +8,14 @@ let
   init = builtins.readFile ./init.org;
   # init.orgから行頭に書かれた `nix: epkgs.ddskk` のような定義を抽出する
   decls =
-    init
-    |> (lib.split "\nnix: ([a-zA-z.\-]+)")
-    |> (lib.filter lib.isList)
-    |> (map (lib.flip lib.elemAt 0));
+    init |> lib.split "\nnix: ([a-zA-z.\-]+)" |> lib.filter lib.isList |> map (lib.flip lib.elemAt 0);
   # AttrSetと `epkgs.ddskk` のような式を渡すと再帰的に参照する
   ref =
     set: decls:
     decls
-    |> (builtins.split "\\.")
-    |> (builtins.filter builtins.isString)
-    |> (builtins.foldl' (set: attr: set."${attr}") set);
+    |> builtins.split "\\."
+    |> builtins.filter builtins.isString
+    |> builtins.foldl' (set: attr: set."${attr}") set;
   # declsをrefしてパッケージを集める
   packageRequires =
     let
@@ -54,7 +51,7 @@ in
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs.pkgs.withPackages (packageRequires);
+    package = pkgs.emacs.pkgs.withPackages packageRequires;
   };
   home = {
     file = {
