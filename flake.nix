@@ -17,7 +17,6 @@
             pkg = "${path}/home-manager";
           in
           pkgs.callPackage pkg { inherit path; };
-        inputs = pkgs.linkFarm "inputs" (builtins.mapAttrs (name: builtins.toString) inputs);
       };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -83,7 +82,7 @@
             iso = nixpkgs.lib.nixosSystem {
               inherit system;
               modules = [
-                "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+                "${inputs.nixpkgs.outPath}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
                 ./nixos/iso
               ];
             };
@@ -96,8 +95,6 @@
                 {
                   # 何かあった時のために現在のビルドソースへのリンクを作っておく
                   environment.etc.c.source = ./.;
-                  # inputsへのrefもあると便利そう
-                  environment.etc.inputs.source = (packages pkgs).inputs;
                 }
               ];
               specialArgs = specialArgsBase // {
@@ -119,7 +116,6 @@
           };
           packages = rec {
             links = pkgs.linkFarm "links" {
-              inputs = (packages pkgs).inputs;
               shellpkgs = pkgs.linkFarmFromDrvs "shellpkgs" (import ./shellpkgs.nix { inherit pkgs; });
             };
             default = pkgs.runCommandCC "hoge" { } ''

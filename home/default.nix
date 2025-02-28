@@ -17,6 +17,7 @@
       ./fish
       ./git
       ./gitu
+      ./inputs.nix
       ./nix.nix
       ./vim
       # keep-sorted end
