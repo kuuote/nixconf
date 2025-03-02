@@ -22,6 +22,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # keep-sorted start
+        ./flake/pkgs
         ./flake/template
         ./flake/treefmt.nix
         # keep-sorted end
