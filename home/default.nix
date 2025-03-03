@@ -11,6 +11,7 @@
   imports =
     [
       # keep-sorted start
+      ./cmd
       ./deno.nix
       ./direnv.nix
       ./emacs
