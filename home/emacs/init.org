@@ -10,15 +10,20 @@ nix: epkgs.hydra
 nix: epkgs.leaf
 nix: epkgs.reformatter
 * macro for customize
+#+begin_src emacs-lisp :tangle yes
+  (defmacro add-hook-lambda (hook &rest body)
+    (declare (indent defun))
+    `(add-hook ',hook (lambda () ,@body)))
+#+end_src
 ** reformatter
 #+begin_src emacs-lisp :tangle yes
   (defmacro reformatter-hook (hook name &rest reformatter-args)
-    `(add-hook
-      ',hook
-      (lambda ()
-        (reformatter-define
-          ,name
-          ,@reformatter-args))))
+    (declare (indent defun))
+    `(add-hook-lambda ,hook
+       (require 'reformatter) ;; require load reformatter when executed byte compiled function
+       (reformatter-define
+         ,name
+         ,@reformatter-args)))
 #+end_src
 * basic
 leaf.elで設定したい
@@ -293,11 +298,14 @@ Most Recently Writtenっぽいの
 ** nix-mode
 nix: epkgs.nix-mode
 #+begin_src emacs-lisp :tangle yes
-  (autoload 'nix-mode "nix-mode")
-  (add-to-list 'auto-mode-alist '("\\.nix$" . nix-mode))
-  (reformatter-hook
-   nix-mode-hook nix-format
-   :program "nixfmt")
+  (reformatter-hook nix-mode-hook nix-format
+    :program "nixfmt")
+  (leaf nix-mode
+    :mode
+    ("\\.nix$" . nix-mode)
+    :bind
+    ((nix-mode-map
+      ("C-c f" . nix-format-buffer))))
 #+end_src
 ** nyan-mode
 nix: epkgs.nyan-mode
