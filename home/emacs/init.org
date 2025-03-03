@@ -284,10 +284,12 @@ nix: epkgs.magit
   (defun my/magit-refresh ()
     (interactive)
     (setq magit-section-visibility-cache nil)
-    (magit-refresh))
-  (add-hook 'magit-status-mode-hook
-            (lambda ()
-              (define-key magit-status-mode-map (kbd "g") #'my/magit-refresh)))
+    (magit-refresh)
+    (goto-char 0)
+    (search-forward "\n\n") ;; 最初の段落に移動
+    )
+  (add-hook-lambda magit-status-mode-hook
+    (define-key magit-status-mode-map (kbd "g") #'my/magit-refresh))
 #+end_src
 ** mr
 nix: orepkgs.mr
