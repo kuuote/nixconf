@@ -11,7 +11,7 @@
    (mapcan 'cdr it) ;; per files => per blocks
    (seq-filter (lambda (a) (string= (car a) "emacs-lisp")) it)
    (mapcar (-cut elt <> 6) it)
-   (apply 'concat `("(progn" ,@it ")"))
+   (string-join `("(progn" ,@it ")") "\n")
    (car (read-from-string it))
    (progn
      (kill-buffer)
