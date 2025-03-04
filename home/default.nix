@@ -20,6 +20,7 @@
       ./gitu
       ./inputs.nix
       ./nix.nix
+      ./pkgs.nix
       ./vim
       # keep-sorted end
     ]
