@@ -10,6 +10,8 @@ nix: epkgs.hydra
 nix: epkgs.leaf
 nix: epkgs.reformatter
 * macro for customize
+** add-hook-lambda
+add-hookの度に一々クォートとラムダ書くのがだるい
 #+begin_src emacs-lisp :tangle yes
   (defmacro add-hook-lambda (hook &rest body)
     (declare (indent defun))
@@ -24,6 +26,11 @@ nix: epkgs.reformatter
        (reformatter-define
          ,name
          ,@reformatter-args)))
+#+end_src
+** transient
+requireしておかないとバイトコンパイルした時に死ぬ
+#+begin_src emacs-lisp :tangle yes
+  (require 'transient)
 #+end_src
 * basic
 leaf.elで設定したい
@@ -169,7 +176,6 @@ nix: epkgs.consult
 #+begin_src emacs-lisp :tangle yes
   (defun my/consult-menu ()
     (interactive)
-    (require 'transient)
     (transient-define-prefix my/consult-menu ()
       [("w" "Most Recently Written" consult-mrw)
        ("rw" "Project MRW by ripgrep" consult-project-mrw)])
