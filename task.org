@@ -111,6 +111,11 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
   source t/lib
   nixos-rebuild --log-format internal-json build --flake ".#${NIXOS_NAME}" |& nom --json
 #+end_src
+** diff-closure
+#+begin_src sh :tangle t/dc :shebang "#!/usr/bin/env bash"
+  set -u
+  nix store diff-closures $(realpath /run/booted-system) $(realpath result)
+#+end_src
 ** switch
 #+begin_src sh :tangle t/s :shebang "#!/bin/sh -eu"
   t/na switch
