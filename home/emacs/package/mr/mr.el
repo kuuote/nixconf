@@ -15,15 +15,12 @@
    mr-mrw-list
    (with-temp-buffer
      (insert-file-contents mr-mrw-filename)
-     (split-string
-      (buffer-substring-no-properties (point-min) (point-max))
-      "\n" t)))
+     ;; 何も設定してないのでno-propertiesじゃなくていい
+     (split-string (buffer-string) "\n" t)))
   (setq recentf-list mr-mrw-list))
 
 (defun mr-mrw-savefile ()
-  (with-temp-buffer
-    (insert (string-join mr-mrw-list "\n"))
-    (write-region nil nil mr-mrw-filename nil 'nomsg)))
+  (write-region (string-join mr-mrw-list "\n") nil mr-mrw-filename nil 'nomsg))
 
 (defun mr-mrw-record ()
   (interactive)
