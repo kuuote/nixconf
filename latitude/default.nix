@@ -84,6 +84,7 @@ in
     tmux
     trash-cli
     vifm
+    nsxiv
     wezterm
     wineWow64Packages.full
     # keep-sorted end
