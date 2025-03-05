@@ -139,6 +139,13 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
       ))
 #+end_src
 * commands
+** command-output
+#+begin_src emacs-lisp :tangle yes
+  (defun my/command-output (cmd &rest args)
+    (with-temp-buffer
+      (apply 'call-process `(,cmd nil t nil ,@args))
+      (split-string (buffer-string) "\n" t)))
+#+end_src
 ** indent-buffer
 #+begin_src emacs-lisp :tangle yes
   (defun my/indent-buffer ()
@@ -160,9 +167,38 @@ https://hylom.net/2020/11/23/emacs-settings-to-use-japanese-font/ より
 ** consult
 nix: epkgs.consult
 #+begin_src emacs-lisp :tangle yes
-  (keymap-global-set "C-c r" #'consult-mrw)
+  (defun my/consult-menu ()
+    (interactive)
+    (require 'transient)
+    (transient-define-prefix my/consult-menu ()
+      [("w" "Most Recently Written" consult-mrw)
+       ("rw" "Project MRW by ripgrep" consult-project-mrw)])
+    (my/consult-menu))
+  (keymap-global-set "M-c" #'my/consult-menu) ;; orig: capitalize-word
   ;; isearch中にC-c押したら開始するようにしてみる
   (keymap-set isearch-mode-map "C-c" #'consult-line)
+#+end_src
+*** file-external
+コマンド列を投げ込んでmy/command-outputに通して結果をファイルリストとしてconsultに投げる
+cwdはwith-temp-bufferとか使って外でいじってくれ方針
+#+begin_src emacs-lisp :tangle yes
+  (defun consult--file-external (&rest cmdargs)
+    (require 'consult)
+    (consult--read
+     (apply #'my/command-output cmdargs)
+     :category 'file
+     :require-match t
+     :state (consult--file-preview)
+     :sort nil))
+#+end_src
+*** project-mrw
+#+begin_src emacs-lisp :tangle yes
+  (defun consult-project-mrw ()
+    (interactive)
+    (find-file
+     (with-temp-buffer
+       (setq-local default-directory (project-root (project-current t)))
+       (file-truename (consult--file-external "rg" "--files" "--sortr=modified")))))
 #+end_src
 ** corfu
 nix: epkgs.corfu
