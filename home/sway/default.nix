@@ -54,6 +54,7 @@
         (builtins.readFile ./extra_config/border.conf)
         (builtins.readFile ./extra_config/notify.conf)
         (import ./extra_config/floaterm)
+        "exec xbacklight 10"
       ];
     };
 }
