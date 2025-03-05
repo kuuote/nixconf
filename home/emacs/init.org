@@ -218,6 +218,8 @@ https://github.com/yonta/dotfiles/blob/7c53daf87f78f721919bb3c3cc3a6fcd0a2b2b2d/
     (corfu-auto-delay . 0.1)
     (corfu-auto-prefix . 1)
     (corfu-preselect . 'prompt)
+    ;; Emacs 30で死ぬようになったので切る
+    (text-mode-ispell-word-completion . nil)
     :hook
     (corfu-mode-hook
      . (lambda () (setq-local completion-styles '(hotfuzz))))
