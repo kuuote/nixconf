@@ -311,6 +311,8 @@ nix: epkgs.embark-consult
     (keymap-set embark-symbol-help-map "f" 'find-function)
     (add-to-list 'embark-keymap-alist '(symbol-help embark-symbol-help-map)))
 #+end_src
+** expand-region
+nix: epkgs.expand-region
 ** magit
 nix: epkgs.magit
 *** 全画面でmagitするやつ
