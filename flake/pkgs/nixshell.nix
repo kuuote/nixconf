@@ -1,8 +1,4 @@
 {
-  inputs,
-  ...
-}:
-{
   perSystem = (
     {
       pkgs,
@@ -24,7 +20,7 @@
               done
             }
           '';
-          option = "-L --inputs-from path:${inputs.self.outPath} --option flake-registry ''";
+          option = "-L --inputs-from self --option flake-registry ''";
         in
         pkgs.linkFarm "nixshell" {
           "bin/ni" = pkgs.writeShellScript "ni" ''

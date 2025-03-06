@@ -37,5 +37,6 @@ in
       settings = import ../common/nixconf.nix;
     }
     (lib.optionalAttrs isStandalone (mkFlakeRef "nixpkgs" inputs.nixpkgs.outPath))
+    (mkFlakeRef "self" inputs.self.outPath)
   ];
 }
