@@ -17,6 +17,29 @@ add-hookの度に一々クォートとラムダ書くのがだるい
     (declare (indent defun))
     `(add-hook ',hook (lambda () ,@body)))
 #+end_src
+** eval-when-compile枠
+バイトコンパイルの時だけ欲しいやつ
+*** 1. header
+#+begin_src emacs-lisp :tangle yes
+  (eval-when-compile
+#+end_src
+*** 2. body
+**** transient
+transient-define-prefixの呼び出し時にrequireするコードを吐いておく
+#+begin_src emacs-lisp :tangle yes
+  (require 'transient)
+  (advice-add
+   #'transient-define-prefix
+   :filter-return
+   #'(lambda (expr)
+       `(progn
+          (require 'transient)
+          ,expr)))
+#+end_src
+*** 3. footer
+#+begin_src emacs-lisp :tangle yes
+  )
+#+end_src
 ** reformatter
 #+begin_src emacs-lisp :tangle yes
   (defmacro reformatter-hook (hook name &rest reformatter-args)
@@ -26,11 +49,6 @@ add-hookの度に一々クォートとラムダ書くのがだるい
        (reformatter-define
          ,name
          ,@reformatter-args)))
-#+end_src
-** transient
-requireしておかないとバイトコンパイルした時に死ぬ
-#+begin_src emacs-lisp :tangle yes
-  (require 'transient)
 #+end_src
 * basic
 leaf.elで設定したい
