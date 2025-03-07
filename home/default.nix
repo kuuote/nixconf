@@ -12,6 +12,7 @@
     [
       # keep-sorted start
       ./cmd
+      ./vars.nix
       ./deno.nix
       ./direnv.nix
       ./emacs
