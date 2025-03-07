@@ -17,6 +17,22 @@ add-hookの度に一々クォートとラムダ書くのがだるい
     (declare (indent defun))
     `(add-hook ',hook (lambda () ,@body)))
 #+end_src
+** evil-mode
+define-evil。悪魔のマクロではない
+#+begin_src emacs-lisp :tangle yes
+  (defmacro devil (keymap &rest per-modes)
+    (declare (indent defun))
+    `(with-eval-after-load 'evil
+       ,@(mapcan
+          (pcase-lambda (`(,evil-modes . ,keymaps))
+            (setq evil-modes (if (listp evil-modes) evil-modes (list evil-modes)))
+            (setq evil-modes (mapcar (lambda (m) `',m) evil-modes))
+            (mapcar
+             (pcase-lambda (`(,key ,def . ,bindings))
+               `(evil-define-key ,@evil-modes ',keymap ,(kbd key) #',def . ,bindings)
+               ) keymaps)
+            ) per-modes)))
+#+end_src
 ** eval-when-compile枠
 バイトコンパイルの時だけ欲しいやつ
 *** 1. header
@@ -263,12 +279,18 @@ nix: epkgs.evil
     :require evil
     :global-minor-mode evil-mode
     :defer-config
-    (evil-define-key 'normal 'global-map (kbd "SPC s")
-      (lambda ()
-        (interactive)
-        ;; 今使える保存コマンドを引っ張り出す
-        ;; 例えばorgのedit-specialがあるのでこうじゃないとだめ
-        (call-interactively (key-binding (kbd "C-x C-s"))))))
+    ;; 今使える保存コマンドを引っ張り出して叩く
+    ;; 例えばorgのedit-specialがあるのでこうじゃないとだめ
+    (defun my/evil-execute-save-key ()
+      (interactive)
+      (call-interactively (key-binding (kbd "C-x C-s"))))
+    (devil global-map
+      (normal
+       ("SPC s" my/evil-execute-save-key)
+       ("to" tab-bar-close-other-tabs)
+       ("tq" tab-bar-close-tab)
+       ("tt" tab-bar-new-tab)
+       )))
 #+end_src
 ** ddskk
 nix: epkgs.ddskk
