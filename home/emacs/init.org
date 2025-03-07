@@ -113,10 +113,9 @@ nix: epkgs.leaf
                (org-meta-return)))))
 #+end_src
 ** theme
+nix: epkgs.catppuccin-theme
 #+begin_src emacs-lisp :tangle yes
-  (if (or (daemonp) (display-graphic-p))
-      (load-theme 'modus-vivendi t)
-    (load-theme 'wombat t))
+  (load-theme 'catppuccin t)
 #+end_src
 ** サクッと実験するために/tmp/init.elがあれば読み込むようにする
 壊れてるケースがあるので最後に読むことにする
