@@ -203,6 +203,7 @@ cwdはwith-temp-bufferとか使って外でいじってくれ方針
     (interactive)
     (find-file
      (with-temp-buffer
+       (require 'project)
        (setq-local default-directory (project-root (project-current t)))
        (file-truename (consult--file-external "rg" "--files" "--sortr=modified")))))
 #+end_src
