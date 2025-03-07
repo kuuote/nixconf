@@ -132,6 +132,12 @@ nix: epkgs.leaf
                (move-end-of-line nil)
                (org-meta-return)))))
 #+end_src
+*** evil
+#+begin_src emacs-lisp :tangle yes
+  (devil org-mode-map
+    (normal
+     ("TAB" org-cycle)))
+#+end_src
 ** theme
 nix: epkgs.catppuccin-theme
 #+begin_src emacs-lisp :tangle yes
@@ -264,7 +270,13 @@ https://github.com/yonta/dotfiles/blob/7c53daf87f78f721919bb3c3cc3a6fcd0a2b2b2d/
     (corfu-mode-hook
      . (lambda () (setq-local completion-styles '(hotfuzz))))
     :config
-    (global-corfu-mode))
+    (global-corfu-mode)
+    :defer-config
+    (devil corfu-map
+      (insert
+       ("C-n" corfu-next)
+       ("C-p" corfu-previous)))
+    )
   (add-hook
    'emacs-startup-hook
    (lambda ()
@@ -379,10 +391,22 @@ nix: epkgs.embark-consult
     (keymap-set embark-symbol-help-map "f" 'find-function)
     (add-to-list 'embark-keymap-alist '(symbol-help embark-symbol-help-map)))
 #+end_src
+*** evil
+#+begin_src emacs-lisp :tangle yes
+  (devil global-map
+    (normal
+     ("C-." embark-act)))
+#+end_src
 ** expand-region
 nix: epkgs.expand-region
 ** magit
 nix: epkgs.magit
+*** evil
+#+begin_src emacs-lisp :tangle yes
+  (devil global-map
+    (normal
+     ("gs" my/magit-full)))
+#+end_src
 *** 全画面でmagitするやつ(magit-full)
 [[http://k2nr.me/blog/2014/12/22/emacs-magit.html]]より
 #+begin_src emacs-lisp :tangle yes
