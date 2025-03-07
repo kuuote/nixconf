@@ -24,6 +24,11 @@ add-hookの度に一々クォートとラムダ書くのがだるい
   (eval-when-compile
 #+end_src
 *** 2. body
+**** evil-mode
+evil-define-keyがマクロらしい
+#+begin_src emacs-lisp :tangle yes
+  (require 'evil-core)
+#+end_src
 **** transient
 transient-define-prefixの呼び出し時にrequireするコードを吐いておく
 #+begin_src emacs-lisp :tangle yes
@@ -248,6 +253,21 @@ https://github.com/yonta/dotfiles/blob/7c53daf87f78f721919bb3c3cc3a6fcd0a2b2b2d/
    'emacs-startup-hook
    (lambda ()
      (require 'corfu)))
+#+end_src
+** evil-mode
+nix: epkgs.evil
+#+begin_src emacs-lisp :tangle yes
+  (leaf evil
+    :custom
+    (evil-move-beyond-eol . t) ;; virtualedit=onemore相当
+    :global-minor-mode evil-mode
+    :defer-config
+    (evil-define-key 'normal 'global-map (kbd "SPC s")
+      (lambda ()
+        (interactive)
+        ;; 今使える保存コマンドを引っ張り出す
+        ;; 例えばorgのedit-specialがあるのでこうじゃないとだめ
+        (call-interactively (key-binding (kbd "C-x C-s"))))))
 #+end_src
 ** ddskk
 nix: epkgs.ddskk
