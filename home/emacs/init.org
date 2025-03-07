@@ -63,7 +63,7 @@ nix: epkgs.leaf
   (setq-default indent-tabs-mode nil)
 #+end_src
 ** org-mode
-*** hydra-org-view
+*** org-heading-menu
 #+begin_src emacs-lisp :tangle yes
   (leaf org
     :defer-config
@@ -101,7 +101,7 @@ nix: epkgs.leaf
       ("C-;" . my/org-heading-menu))))
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (leaf org
     :defer-config
     (defhydra
