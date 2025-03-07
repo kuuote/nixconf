@@ -341,6 +341,12 @@ nix: epkgs.ddskk-posframe
   (autoload 'ddskk-posframe-mode "ddskk-posframe")
   (add-hook 'skk-mode-hook #'ddskk-posframe-mode)
 #+end_src
+*** evil
+#+begin_src emacs-lisp :tangle yes
+  (add-hook-lambda evil-insert-state-exit-hook
+    (skk-mode -1))
+#+end_src
+挿入モードでEscした時にddskkを使ってたら切る
 ** embark
 nix: epkgs.embark
 nix: epkgs.embark-consult
