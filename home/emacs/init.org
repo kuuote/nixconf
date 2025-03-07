@@ -73,31 +73,35 @@ nix: epkgs.leaf
         (org-mode-restart))
       (org-reveal))
     ;; vim-fernみたいに上の階層の見出しを閉じる
-    (defun my/org-fold-hide-parent ()
+    (defun my/org-fern-hide ()
       (interactive)
       (let ((current (point)))
         (ignore-errors (outline-up-heading 0))
         (when (eql current (point))
           (ignore-errors (outline-up-heading 1))))
       (org-fold-hide-subtree))
-    (defhydra
-      hydra-org-view ()
-      ("TAB" org-cycle)
-      ("f" consult-org-heading)
-      ("h" my/org-fold-hide-parent)
-      ("j" outline-next-visible-heading)
-      ("k" outline-previous-visible-heading)
-      ("l" (lambda ()
-             (interactive)
-             (org-cycle)
-             (forward-line)))
-      ("n" next-line)
-      ("p" previous-line)
-      ("r" my/org-restart)
-      ("s" org-sort)))
+    (defun my/org-fern-collapse ()
+      (interactive)
+      (org-cycle)
+      (forward-line))
+    (transient-define-prefix my/org-heading-menu ()
+      :transient-suffix 'transient--do-stay
+      :transient-non-suffix 'transient--do-quit
+      [("TAB" "cycle" org-cycle)
+       ("c" "cd" cd)
+       ("f" "find by consult" consult-org-heading)
+       ("h" "fern like hide" my/org-fern-hide)
+       ("j" "next" outline-next-visible-heading)
+       ("k" "previous" outline-previous-visible-heading)
+       ("l" "fern like collapse" my/org-fern-collapse)
+       ("s" "sort" org-sort)
+       ("r" "restart" org-mode-restart)])
+    :bind
+    ((org-mode-map
+      ("C-;" . my/org-heading-menu))))
 #+end_src
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
   (leaf org
     :defer-config
     (defhydra
