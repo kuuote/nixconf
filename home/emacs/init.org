@@ -475,3 +475,9 @@ nix: epkgs.vertico
 #+begin_src emacs-lisp :tangle yes
   (vertico-mode)
 #+end_src
+* custom
+#+begin_src emacs-lisp :tangle yes
+  (setq custom-file "~/.emacs.d/custom.el")
+  (when (file-readable-p custom-file)
+    (load custom-file))
+#+end_src
