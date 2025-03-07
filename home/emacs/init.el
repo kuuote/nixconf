@@ -8,14 +8,24 @@
   (add-to-list 'native-comp-eln-load-path "@native_lisp@")
   (require 'init))
  (t
-  (find-file-read-only (file-truename "~/.emacs.d/init.org"))
-  (pipe it
-    (org-babel-tangle-collect-blocks)
-    (mapcan 'cdr it) ;; per files => per blocks
-    (seq-filter (lambda (a) (string= (car a) "emacs-lisp")) it)
-    (mapcar (lambda (a) (elt a 6)) it)
-    (string-join `("(progn" ,@it ")") "\n")
-    (car (read-from-string it))
-    (progn
-      (kill-buffer)
-      (eval it)))))
+  (let* ((my/tanglefile (file-truename "~/.emacs.d/init.org"))
+         (curhash (with-temp-buffer
+                    (insert-file-contents my/tanglefile)
+                    (secure-hash 'sha256 (buffer-string))))
+         (oldhash (condition-case nil
+                      (with-temp-buffer
+                        (insert-file-contents "/tmp/init.el.sum")
+                        (buffer-string))
+                    (error ""))))
+    (unless (string= curhash oldhash)
+      (find-file-read-only my/tanglefile)
+      (pipe it
+        (org-babel-tangle-collect-blocks)
+        (mapcan 'cdr it) ;; per files => per blocks
+        (seq-filter (lambda (a) (string= (car a) "emacs-lisp")) it)
+        (mapcar (lambda (a) (elt a 6)) it)
+        (string-join it "\n")
+        (write-region it nil "/tmp/init.el")
+        (kill-buffer))
+      (write-region curhash nil "/tmp/init.el.sum")))
+  (load "/tmp/init.el")))

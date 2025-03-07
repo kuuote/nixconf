@@ -121,15 +121,12 @@ nix: epkgs.catppuccin-theme
 #+begin_src emacs-lisp :tangle yes
   (load-theme 'catppuccin t)
 #+end_src
-** サクッと実験するために/tmp/init.elがあれば読み込むようにする
+** サクッと実験するために/tmp/init_extra.elがあれば読み込むようにする
 壊れてるケースがあるので最後に読むことにする
 #+begin_src emacs-lisp :tangle yes
-  (leaf init
-    :hook
-    (emacs-startup-hook
-     . (lambda ()
-         (when (and (not (daemonp)) (file-readable-p "/tmp/init.el"))
-           (load-file "/tmp/init.el")))))
+  (add-hook-lambda emacs-startup-hook
+    (when (and (not (daemonp)) (file-readable-p "/tmp/init_extra.el"))
+      (load-file "/tmp/init_extra.el")))
 #+end_src
 ** バックアップ系の無効化
 #+begin_src emacs-lisp :tangle yes
