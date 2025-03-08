@@ -12,7 +12,6 @@
     [
       # keep-sorted start
       ./cmd
-      ./vars.nix
       ./deno.nix
       ./direnv.nix
       ./emacs
@@ -22,6 +21,7 @@
       ./inputs.nix
       ./nix.nix
       ./pkgs.nix
+      ./vars.nix
       ./vim
       # keep-sorted end
     ]

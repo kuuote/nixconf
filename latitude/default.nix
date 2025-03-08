@@ -78,13 +78,13 @@ in
     jq
     nix-output-monitor
     nixfmt-rfc-style
+    nsxiv
     python3
     ripgrep
     stylua
     tmux
     trash-cli
     vifm
-    nsxiv
     wezterm
     wineWow64Packages.full
     # keep-sorted end
