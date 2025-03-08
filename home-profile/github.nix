@@ -4,7 +4,9 @@
     ../home/base.nix
     ../home/linux.nix
     # keep-sorted start
+    ../home/fish
     ../home/git
+    ../home/inputs.nix
     ../home/nix.nix
     ../home/vars.nix
     ../home/vim
