@@ -1,5 +1,6 @@
 [
   # keep-sorted start
+  "github"
   "latitude"
   "sakura"
   # keep-sorted end
