@@ -1,6 +1,8 @@
 {
   user = "runner";
   modules = [
+    ../home/base.nix
+    ../home/linux.nix
     # keep-sorted start
     ../home/git
     ../home/nix.nix
