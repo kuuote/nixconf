@@ -13,7 +13,7 @@
       { pkgs, ... }:
       {
         home.packages = [ pkgs.nix-output-monitor ];
-        home.sessionVariables.LANG = "en-US.UTF-8";
+        home.sessionVariables.LANG = "en_US.UTF-8";
       }
     )
   ];
