@@ -37,48 +37,17 @@
         in
         {
           homeConfigurations =
-            let
-              config =
-                {
-                  extraModules ? [ ],
-                  host,
-                  user,
-                }:
-                {
-                  "${host}@${user}" = home-manager.lib.homeManagerConfiguration {
-                    inherit pkgs;
-                    extraSpecialArgs = specialArgsBase // {
-                      inherit host user;
-                      isNixOSHost = builtins.elem host [
-                        "192"
-                      ];
-                    };
-                    modules = [
-                      ./home
-                    ] ++ extraModules;
-                  };
+            import ./home-profile
+            |> builtins.mapAttrs (
+              _:
+              { user, modules }:
+              home-manager.lib.homeManagerConfiguration {
+                inherit pkgs modules;
+                extraSpecialArgs = specialArgsBase // {
+                  inherit user;
                 };
-            in
-            lib.pipe
-              [
-                {
-                  host = "192";
-                  user = "alice";
-                }
-                {
-                  host = "42";
-                  user = "arch";
-                  extraModules = [
-                    {
-                      home.packages = import ./shellpkgs.nix { inherit pkgs; };
-                    }
-                  ];
-                }
-              ]
-              [
-                (map config)
-                lib.mergeAttrsList
-              ];
+              }
+            );
           nixosConfigurations = {
             iso = nixpkgs.lib.nixosSystem {
               inherit system;
@@ -101,6 +70,7 @@
               specialArgs = specialArgsBase // {
                 host = "192";
                 user = "alice";
+                homeManagerModules = (import ./home-profile/latitude.nix).modules;
               };
             };
           };

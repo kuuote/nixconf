@@ -1,0 +1,4 @@
+[
+  ../home/sway
+  ../home/wezterm
+]

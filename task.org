@@ -36,14 +36,16 @@ pipe-operators
 #+end_src
 * home-manager
 ** build
-#+begin_src sh :tangle t/hb :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/hb :shebang "#!/usr/bin/env bash"
+  set -u
   source t/lib
   cd ${1:-.}
-  nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"$(cat /etc/hostname)@${HM_USER:-$(id -nu)}\".activationPackage"
+  nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_PROFILE}\".activationPackage"
 #+end_src
 ** switch
 home-manager switchは使わずに自前でビルドして中身を直接叩く
-#+begin_src sh :tangle t/hs :shebang "#!/usr/bin/env -S bash -eu"
+#+begin_src sh :tangle t/hs :shebang "#!/usr/bin/env bash"
+  set -eu
   t/hb
   export HOME_MANAGER_BACKUP_EXT=".nixspill"
   result-hm/activate
