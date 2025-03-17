@@ -24,6 +24,7 @@ flakes
 nix-command
 pipe-operators
 #+begin_src sh :tangle t/lib
+  set -u
   export NIX_CONFIG='experimental-features = flakes nix-command pipe-operators'
   nix_setup=$BASH_SOURCE
   source ../nix.env
@@ -37,7 +38,6 @@ pipe-operators
 * home-manager
 ** build
 #+begin_src sh :tangle t/hb :shebang "#!/usr/bin/env bash"
-  set -u
   source t/lib
   cd ${1:-.}
   nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_PROFILE}\".activationPackage"
