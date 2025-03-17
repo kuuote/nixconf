@@ -11,7 +11,7 @@
   mkdir -p /tmp/task/t
   cp task.org /tmp/task/task.org
   cd /tmp/task
-  nix run --extra-experimental-features 'flakes nix-commands pipe-operators' --inputs-from $pwd nixpkgs#emacs-nox -- --batch task.org -f org-babel-tangle
+  nix run --extra-experimental-features 'flakes nix-command pipe-operators' --inputs-from $pwd nixpkgs#emacs -- --batch task.org -f org-babel-tangle
   cd -
   rsync -rlpcP --delete-before /tmp/task/t/ t/
   exit 0
