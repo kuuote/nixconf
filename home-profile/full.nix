@@ -1,7 +1,7 @@
 [
   # keep-sorted start
   ../home/deno.nix
-  ../home/direnv.nix
+  ../home/direnv
   ../home/emacs
   ../home/fish
   ../home/git
