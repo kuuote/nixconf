@@ -38,11 +38,6 @@ in
       # keep-sorted end
     ] args;
     shellInit = builtins.concatStringsSep "\n" ([
-      # 強制的にsessionVariablesをリロードする
-      ''
-        set -gu __HM_SESS_VARS_SOURCED
-        source (grep -o '/nix/store/.*hm-session-vars.fish$' (status current-filename))
-      ''
       (import ./init/mru.nix { inherit pkgs; })
       (import ./init/external-chdir.nix)
       "fish_add_path ~/cmd"
