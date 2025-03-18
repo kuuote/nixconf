@@ -15,6 +15,9 @@ in
         lockFile = "${src}/Cargo.lock";
       };
       doCheck = false;
+      postInstall = ''
+        ln -s libpty.so $out/lib/libpty_x86_64.so
+      '';
     };
   };
 }
