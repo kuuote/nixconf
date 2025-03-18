@@ -49,9 +49,18 @@ let
   };
 in
 {
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs.pkgs.withPackages packageRequires;
+  programs = {
+    emacs = {
+      enable = true;
+      package = pkgs.emacs.pkgs.withPackages packageRequires;
+    };
+    git = {
+      # .dir-locals.elをコミットできるよう分かれてるらしいので
+      # .dir-locals-2.elは常に除外しといていいらしい
+      ignores = [
+        ".dir-locals-2.el"
+      ];
+    };
   };
   home = {
     file = {
