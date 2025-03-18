@@ -3,7 +3,7 @@
 
 declare -A direnv_layout_dirs
 direnv_layout_dir() {
-  echo /tmp/direnv/$(nix-hash .)
+  echo /tmp/direnv/$(pwd | base64)
 }
 
 use_nom() {
