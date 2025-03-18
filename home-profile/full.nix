@@ -1,5 +1,6 @@
 [
   # keep-sorted start
+  ../home/cmd
   ../home/deno.nix
   ../home/direnv
   ../home/emacs
