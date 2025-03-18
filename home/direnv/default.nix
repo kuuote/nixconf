@@ -16,5 +16,6 @@
   };
   xdg.configFile = {
     "direnv/direnvrc".source = ./direnvrc;
+    "direnv/rc".source = ./rc;
   };
 }

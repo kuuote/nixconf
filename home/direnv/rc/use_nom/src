@@ -1,0 +1,7 @@
+#!/bin/bash
+# to source
+
+if command -v nom > /dev/null; then
+  export USE_NOM_NIX=$(command -v nix)
+  PATH=$(dirname ${BASH_SOURCE}):$PATH
+fi

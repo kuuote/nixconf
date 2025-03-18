@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -u
+
+if echo "$@" | grep -v -q print-dev-env; then
+  $USE_NOM_NIX "$@"
+  exit $?
+fi
+$USE_NOM_NIX "$@" --log-format internal-json 2> >(nom --json > /dev/tty)

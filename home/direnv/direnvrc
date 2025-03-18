@@ -1,0 +1,11 @@
+#!/bin/bash
+# to source
+
+declare -A direnv_layout_dirs
+direnv_layout_dir() {
+  echo /tmp/direnv/$(nix-hash .)
+}
+
+use_nom() {
+  source ~/.config/direnv/rc/use_nom/src
+}
