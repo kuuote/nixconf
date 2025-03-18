@@ -29,9 +29,14 @@ pipe-operators
   nix_setup=$BASH_SOURCE
   source ../nix.env
   pwd=$(pwd)
-  if ! command -v nom > /dev/null; then
-      nom () {
-          nix run --inputs-from . nixpkgs#nix-output-monitor -- "$@"
+  mkdir -p /tmp/nix-profile
+  PATH=$PATH:/tmp/nix-profile/profile/bin
+  if [[ "${USE_NOM:-t}" != "nil" ]]; then
+      if ! command -v nom > /dev/null; then
+          nix profile install --profile /tmp/nix-profile/profile --inputs-from . nixpkgs#nix-output-monitor || exit 1
+      fi
+      nix () {
+          command nix -vvvvv --log-format internal-json "$@" |& tee /tmp/nix.log | nom --json
       }
   fi
 #+end_src
@@ -40,7 +45,7 @@ pipe-operators
 #+begin_src sh :tangle t/hb :shebang "#!/usr/bin/env bash"
   source t/lib
   cd ${1:-.}
-  nom build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_PROFILE}\".activationPackage"
+  nix build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_PROFILE}\".activationPackage"
 #+end_src
 ** switch
 home-manager switchは使わずに自前でビルドして中身を直接叩く
@@ -111,7 +116,7 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
 ** build
 #+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
   source t/lib
-  nixos-rebuild --log-format internal-json build --flake ".#${NIXOS_NAME}" |& nom --json
+  nixos-rebuild -vvvvv --log-format internal-json build --flake ".#${NIXOS_NAME}" |& tee /tmp/nixos-rebuild.log | nom --json
 #+end_src
 ** diff-closure
 #+begin_src sh :tangle t/dc :shebang "#!/usr/bin/env bash"
