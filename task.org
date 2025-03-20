@@ -57,13 +57,13 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
 #+end_src
 ** git op
 *** build
-#+begin_src sh :tangle t/ghb :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/ghb :shebang "#!/usr/bin/env bash"
   rm -rf /tmp/nix
   git clone . /tmp/nix
   t/hb /tmp/nix git-
 #+end_src
 *** switch
-#+begin_src sh :tangle t/ghs :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/ghs :shebang "#!/usr/bin/env bash"
   if [[ ! -x result-git-hm/activate ]]; then
       t/ghb
   fi
@@ -99,22 +99,23 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
   git commit --amend --no-edit
 #+end_src
 ** コミット確認するやつ
-#+begin_src sh :tangle t/gl :shebang "#!/usr/bin/env -S bash -u"
+#+begin_src sh :tangle t/gl :shebang "#!/usr/bin/env bash"
   git log $(date +%F)
 #+end_src
 * NixOS
 ** apply
-#+begin_src sh :tangle t/na :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/na :shebang "#!/usr/bin/env bash"
+  set -u
   sudo nixos-apply result "$1" && exit
   t/b || exit "$?"
   sudo nixos-apply result "$1"
 #+end_src
 ** boot
-#+begin_src sh :tangle t/bo :shebang "#!/bin/sh -eu"
+#+begin_src sh :tangle t/bo :shebang "#!/usr/bin/env bash"
   t/na boot
 #+end_src
 ** build
-#+begin_src sh :tangle t/b :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/b :shebang "#!/usr/bin/env bash"
   source t/lib
   nixos-rebuild -vvvvv --log-format internal-json build --flake ".#${NIXOS_NAME}" |& tee /tmp/nixos-rebuild.log | nom --json
 #+end_src
@@ -124,16 +125,16 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
   nix store diff-closures $(realpath /run/booted-system) $(realpath result)
 #+end_src
 ** switch
-#+begin_src sh :tangle t/s :shebang "#!/bin/sh -eu"
+#+begin_src sh :tangle t/s :shebang "#!/usr/bin/env bash"
   t/na switch
 #+end_src
 ** test
-#+begin_src sh :tangle t/t :shebang "#!/bin/sh -u"
+#+begin_src sh :tangle t/t :shebang "#!/usr/bin/env bash"
   t/na test
 #+end_src
 
 * /nixの容量チェック
-#+begin_src sh :tangle t/c :shebang "#/bin/sh -u"
+#+begin_src sh :tangle t/c :shebang "#!/usr/bin/env bash"
   df --output=ipcent,pcent /nix
 #+end_src
 * コミットしないやつ置き場
