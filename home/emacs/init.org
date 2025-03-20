@@ -293,6 +293,7 @@ nix: epkgs.evil
   (leaf evil
     :custom
     (evil-move-beyond-eol . t) ;; virtualedit=onemore相当
+    (evil-shift-width . 2)
     :require evil
     :global-minor-mode evil-mode
     :defer-config
