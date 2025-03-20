@@ -440,7 +440,8 @@ nix: epkgs.magit
     :bind
     ("C-c g" . my/magit-full)
     (magit-status-mode-map
-     ("g" . my/magit-refresh)))
+     ("g" . my/magit-refresh)
+     ("<right>" . magit-section-toggle)))
 #+end_src
 ** mr
 nix: orepkgs.mr
