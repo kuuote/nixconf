@@ -101,8 +101,8 @@ nix: epkgs.leaf
       (org-cycle)
       (forward-line))
     (transient-define-prefix my/org-heading-menu ()
-      :transient-suffix 'transient--do-stay
-      :transient-non-suffix 'transient--do-quit
+      :transient-suffix #'transient--do-stay
+      :transient-non-suffix #'transient--do-quit-one
       [("TAB" "cycle" org-cycle)
        ("c" "cd" cd)
        ("f" "find by consult" consult-org-heading)
