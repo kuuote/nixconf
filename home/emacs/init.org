@@ -231,6 +231,9 @@ nix: epkgs.consult
        ("rw" "Project MRW by ripgrep" consult-project-mrw)])
     (my/consult-menu))
   (keymap-global-set "M-c" #'my/consult-menu) ;; orig: capitalize-word
+  (devil global-map
+    (normal
+     (";" my/consult-menu)))
   ;; isearch中にC-c押したら開始するようにしてみる
   (keymap-set isearch-mode-map "C-c" #'consult-line)
 #+end_src
