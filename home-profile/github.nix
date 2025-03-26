@@ -5,6 +5,7 @@
     ../home/linux.nix
     # keep-sorted start
     ../home/cmd
+    ../home/deno.nix
     ../home/emacs-min
     ../home/fish
     ../home/git
