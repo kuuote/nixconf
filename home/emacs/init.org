@@ -290,29 +290,6 @@ https://github.com/yonta/dotfiles/blob/7c53daf87f78f721919bb3c3cc3a6fcd0a2b2b2d/
    (lambda ()
      (require 'corfu)))
 #+end_src
-** evil-mode
-nix: epkgs.evil
-#+begin_src emacs-lisp :tangle yes
-  (leaf evil
-    :custom
-    (evil-move-beyond-eol . t) ;; virtualedit=onemore相当
-    (evil-shift-width . 2)
-    :require evil
-    :global-minor-mode evil-mode
-    :defer-config
-    ;; 今使える保存コマンドを引っ張り出して叩く
-    ;; 例えばorgのedit-specialがあるのでこうじゃないとだめ
-    (defun my/evil-execute-save-key ()
-      (interactive)
-      (call-interactively (key-binding (kbd "C-x C-s"))))
-    (devil global-map
-      (normal
-       ("SPC s" my/evil-execute-save-key)
-       ("to" tab-bar-close-other-tabs)
-       ("tq" tab-bar-close-tab)
-       ("tt" tab-bar-new-tab)
-       )))
-#+end_src
 ** ddskk
 nix: epkgs.ddskk
 辞書の設定は.skk.elに記述している
@@ -406,6 +383,29 @@ nix: epkgs.embark-consult
     (normal
      ("C-." embark-act)))
 #+end_src
+** evil-mode
+nix: epkgs.evil
+#+begin_src emacs-lisp :tangle yes
+  (leaf evil
+    :custom
+    (evil-move-beyond-eol . t) ;; virtualedit=onemore相当
+    (evil-shift-width . 2)
+    :require evil
+    :global-minor-mode evil-mode
+    :defer-config
+    ;; 今使える保存コマンドを引っ張り出して叩く
+    ;; 例えばorgのedit-specialがあるのでこうじゃないとだめ
+    (defun my/evil-execute-save-key ()
+      (interactive)
+      (call-interactively (key-binding (kbd "C-x C-s"))))
+    (devil global-map
+      (normal
+       ("SPC s" my/evil-execute-save-key)
+       ("to" tab-bar-close-other-tabs)
+       ("tq" tab-bar-close-tab)
+       ("tt" tab-bar-new-tab)
+       )))
+#+end_src
 ** expand-region
 nix: epkgs.expand-region
 ** magit
@@ -474,6 +474,13 @@ nix: epkgs.nyan-mode
 nix: epkgs.orderless
 #+begin_src emacs-lisp :tangle yes
   (setq-default completion-styles '(orderless))
+#+end_src
+** rainbow-delimiters
+nix: epkgs.rainbow-delimiters
+#+begin_src emacs-lisp :tangle yes
+  (leaf rainbow-delimiters
+    :hook
+    (prog-mode-hook . rainbow-delimiters-mode))
 #+end_src
 ** vertico
 nix: epkgs.vertico
