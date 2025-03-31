@@ -88,6 +88,7 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
       trap "git tag -f $(date +%F)" EXIT
   fi
   nix flake update --commit-lock-file
+  git reset > /dev/null
   cp flake.lock flake/template/develop/
   cd flake/template/develop
   nix flake lock
