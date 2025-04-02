@@ -84,6 +84,13 @@
         {
           devShells = {
             default = import ./shell.nix { inherit pkgs; };
+            nix-path = pkgs.mkShell {
+              env.NIX_PATH =
+                inputs
+                |> builtins.mapAttrs (name: value: "${name}=${value.outPath}")
+                |> builtins.attrValues
+                |> builtins.concatStringsSep ":";
+            };
           };
           packages = rec {
             links = pkgs.linkFarm "links" {
