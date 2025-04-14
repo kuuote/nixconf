@@ -57,16 +57,17 @@ local font = wezterm.font("Noto Sans Mono CJK JP")
 local settings = {
 	color_scheme = "OneHalfDark",
 	color_schemes = color_schemes,
+	disable_default_mouse_bindings = true, -- URLクリックとか別にいらん
 	enable_csi_u_key_encoding = true,
 	font = font,
 	font_size = 14,
-  front_end = "WebGpu",
+	front_end = "WebGpu",
 	hide_tab_bar_if_only_one_tab = true,
 	keys = {
 		{ key = "B", mods = "ALT", action = wezterm.action({ EmitEvent = "toggle-bg-opacity" }) },
 		{ key = "J", mods = "ALT", action = wezterm.action({ EmitEvent = "toggle-jiskan" }) },
 		-- simulate modifyOtherKeys
-    -- keycodes can get by `$ showkey -a` if `enable_csi_u_encoding = true`
+		-- keycodes can get by `$ showkey -a` if `enable_csi_u_encoding = true`
 		-- {key="Enter", mods="CTRL", action=wezterm.action.SendString('\x1b[13;5u')},
 		-- {key="Enter", mods="SHIFT", action=wezterm.action.SendString('\x1b[13;2u')},
 		-- {key=".", mods="CTRL", action=wezterm.action.SendString('\x1b[46;5u')},
