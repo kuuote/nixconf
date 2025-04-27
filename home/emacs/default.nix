@@ -64,8 +64,7 @@ in
   };
   home = {
     file = {
-      ".emacs.d/init.el".source = pkgs.substituteAll {
-        src = ./init.el;
+      ".emacs.d/init.el".source = pkgs.replaceVars ./init.el {
         site_lisp = "${init_pkg}/share/emacs/site-lisp/elpa/init-0";
         native_lisp = "${init_pkg}/share/emacs/native-lisp";
       };
