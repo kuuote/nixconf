@@ -79,6 +79,12 @@ nix: epkgs.leaf
   (setq-default indent-tabs-mode nil)
 #+end_src
 ** org-mode
+*** evil
+#+begin_src emacs-lisp :tangle yes
+  (devil org-mode-map
+    (normal
+     ("TAB" org-cycle)))
+#+end_src
 *** org-heading-menu
 #+begin_src emacs-lisp :tangle yes
   (leaf org
@@ -132,11 +138,9 @@ nix: epkgs.leaf
                (move-end-of-line nil)
                (org-meta-return)))))
 #+end_src
-*** evil
+*** 折り返したい
 #+begin_src emacs-lisp :tangle yes
-  (devil org-mode-map
-    (normal
-     ("TAB" org-cycle)))
+  (setopt org-startup-truncated nil)
 #+end_src
 ** theme
 nix: epkgs.catppuccin-theme
