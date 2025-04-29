@@ -1,10 +1,10 @@
 {
 	"deno-pty-ffi": {
-		"hash": "sha256-o4edJmyeqePwiBLZ1YhSPCMqYwG4OPyj07H3FRbRrXo=",
+		"hash": "sha256-HPBMgQMTypkDxheeIjXu0Mv3C7GxE1QP30sxujhwnj0=",
 		"name": "deno-pty-ffi",
 		"owner": "sigmaSd",
 		"repo": "deno-pty-ffi",
-		"rev": "a65a2bad1dc447b89a8cccda0226a3354e53357f"
+		"rev": "9a571455b8486a3cb3cbbe02971595f0e4b5777b"
 	},
 	"deno2nix": {
 		"hash": "sha256-MXylEp9xczBaKKtp7KAYvmvGq9tH5hQkhc6I05E1RCI=",
@@ -14,17 +14,17 @@
 		"rev": "644e3e8fdfd62a0f8b0a267a297202043dd972ec"
 	},
 	"neovim": {
-		"hash": "sha256-nerUXvPe4htdVhBeYrQ9yfF9DuYev9NfqTtFuF934vk=",
+		"hash": "sha256-ZFtLKXOydkcJwbx4lSzcD6/V5hXITzJGStIHPHTiK4k=",
 		"name": "neovim",
 		"owner": "neovim",
 		"repo": "neovim",
-		"rev": "dd18ab169128a5bb620c04089eff78ee83ed14a5"
+		"rev": "08c484f2ca4b58e9eda07e194e9d096565db7144"
 	},
 	"vim": {
-		"hash": "sha256-oeV9jKDQaWAaOa8zPwVQYfVoOO64in+yYruj8TR7VmQ=",
+		"hash": "sha256-Wsmpa7MoE5eaOGUGae95YLnTX/iDRnKDmF5WPXfu9RI=",
 		"name": "vim",
 		"owner": "vim",
 		"repo": "vim",
-		"rev": "c29b533cf1a1c31a14b5c7b2b3daa806c2d90ec0"
+		"rev": "c3e71d4da6633f2804ef3212dcd6ac615580417c"
 	}
 }
