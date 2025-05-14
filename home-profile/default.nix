@@ -2,6 +2,7 @@
   # keep-sorted start
   "github"
   "latitude"
+  "minimal"
   "sakura"
   # keep-sorted end
 ]
