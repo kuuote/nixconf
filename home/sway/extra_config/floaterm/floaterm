@@ -1,6 +1,6 @@
 #!/usr/bin/env -S bash -u
-# 36 210
+# 47 191
 exec wezterm \
-  --config initial_rows=32 \
-  --config initial_cols=189 \
+  --config initial_rows=42 \
+  --config initial_cols=171 \
   start --class Floaterm "$@"

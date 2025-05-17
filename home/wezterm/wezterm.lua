@@ -49,8 +49,8 @@ local one = wezterm.get_builtin_color_schemes()["OneHalfDark"]
 one.background = "black"
 local color_schemes = { OneHalfDark = one }
 
--- local font = wezterm.font('PlemolJP Console'),
-local font = wezterm.font("Noto Sans Mono CJK JP")
+local font = wezterm.font('PlemolJP Console')
+-- local font = wezterm.font("Noto Sans Mono CJK JP")
 -- local font = nil
 
 -- :'<,'>call vimrc#blocksort('^  \w+ =', '.*')
