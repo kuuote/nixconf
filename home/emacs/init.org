@@ -1,4 +1,4 @@
-#+STARTUP: fold
+#+STARTUP: content
 
 * header
 #+begin_src emacs-lisp :tangle yes
