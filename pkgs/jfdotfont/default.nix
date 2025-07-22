@@ -5,7 +5,6 @@
 }:
 
 stdenvNoCC.mkDerivation rec {
-  allowSubstitutes = false;
   pname = "jfdotfont";
   version = "20150527";
 
