@@ -14,7 +14,6 @@ in
     enable = true;
     functions = mergeAttrs [
       (import ./functions/chdir.nix)
-      # (import ./functions/mru.nix { inherit pkgs; })
       {
         # nix shell使うとネストするのでネスト数を出す
         fish_right_prompt = ''
