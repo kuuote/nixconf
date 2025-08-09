@@ -74,6 +74,7 @@ in
     fzf
     git
     jq
+    keepassxc
     nix-output-monitor
     nixfmt-rfc-style
     nsxiv
