@@ -19,7 +19,7 @@
 
 EMACSLOADPATHとかunsetしておかないとeshellとかでネストした時に死ぬ
 
-* 1. setup
+* 1. 共通ライブラリみたいなやつ
 flakes
 nix-command
 pipe-operators
@@ -133,7 +133,10 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
 #+begin_src sh :tangle t/t :shebang "#!/usr/bin/env bash"
   t/na test
 #+end_src
-
+** 古いprofile片付けるやつ
+#+begin_src sh :tangle t/pgc :shebang "#!/usr/bin/env bash"
+  sudo nix profile wipe-history -v --profile /nix/var/nix/profiles/system --older-than 7d
+#+end_src
 * /nixの容量チェック
 #+begin_src sh :tangle t/c :shebang "#!/usr/bin/env bash"
   df --output=ipcent,pcent /nix
