@@ -29,7 +29,7 @@ define-evil。悪魔のマクロではない
             (setq evil-modes (mapcar (lambda (m) `',m) evil-modes))
             (mapcar
              (pcase-lambda (`(,key ,def . ,bindings))
-               `(evil-define-key ,@evil-modes ',keymap ,(kbd key) #',def . ,bindings)
+               `(evil-define-key ,@evil-modes ,keymap ,(kbd key) #',def . ,bindings)
                ) keymaps)
             ) per-modes)))
 #+end_src
