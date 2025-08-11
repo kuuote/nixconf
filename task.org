@@ -47,14 +47,6 @@ pipe-operators
   cd ${1:-.}
   nix build -L -v -o $pwd/result-${2:-}hm ".#homeConfigurations.\"${HM_PROFILE}\".activationPackage"
 #+end_src
-** switch
-home-manager switchは使わずに自前でビルドして中身を直接叩く
-#+begin_src sh :tangle t/hs :shebang "#!/usr/bin/env bash"
-  set -eu
-  t/hb
-  export HOME_MANAGER_BACKUP_EXT=".nixspill"
-  result-hm/activate
-#+end_src
 ** git op
 *** build
 #+begin_src sh :tangle t/ghb :shebang "#!/usr/bin/env bash"
@@ -69,6 +61,24 @@ home-manager switchは使わずに自前でビルドして中身を直接叩く
   fi
   export HOME_MANAGER_BACKUP_EXT=".nixspill"
   result-git-hm/activate
+#+end_src
+** minimal
+Nix無い状況からアプデ等の処理をするための最小環境
+#+begin_src sh :tangle t/hm :shebang "#!/usr/bin/env bash"
+  rm -rf /tmp/nix
+  cp -a . /tmp/nix
+  cd /tmp/nix
+  sed -i -e "s/@user@/$USER/" home-profile/minimal.nix
+  nix run --extra-experimental-features pipe-operators --inputs-from . nixpkgs#home-manager -- -L -b nixspill --extra-experimental-features pipe-operators --flake .#minimal switch
+#+end_src
+
+** switch
+home-manager switchは使わずに自前でビルドして中身を直接叩く
+#+begin_src sh :tangle t/hs :shebang "#!/usr/bin/env bash"
+  set -eu
+  t/hb
+  export HOME_MANAGER_BACKUP_EXT=".nixspill"
+  result-hm/activate
 #+end_src
 * nix flake update
 ** コミット積むやつ

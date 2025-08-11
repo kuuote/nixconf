@@ -1,6 +1,7 @@
-# minimal and impure configuration
+# minimal configuration
+# 置換して運用する前提でユーザーはプレースホルダにしてる
 {
-  user = builtins.getEnv "USER";
+  user = "@user@";
   modules = [
     ../home/base.nix
     ../home/linux.nix
