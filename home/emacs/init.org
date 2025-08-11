@@ -74,6 +74,14 @@ transient-define-prefixの呼び出し時にrequireするコードを吐いて�
 * basic
 leaf.elで設定したい
 nix: epkgs.leaf
+** evil
+evilは外部パッケージだけど操作体系の根幹なのでこっちに入れておく
+#+begin_src emacs-lisp :tangle yes
+  (devil global-map
+    (normal
+     ("H" tab-bar-switch-to-prev-tab)
+     ("L" evil-tab-next)))
+#+end_src
 ** indent/tab
 #+begin_src emacs-lisp :tangle yes
   (setq-default indent-tabs-mode nil)
