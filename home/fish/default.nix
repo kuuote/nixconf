@@ -13,7 +13,7 @@ in
   programs.fish = {
     enable = true;
     functions = mergeAttrs [
-      (import ./functions/chdir.nix)
+      (import ./functions/chdir.nix args)
       {
         # nix shell使うとネストするのでネスト数を出す
         fish_right_prompt = ''
