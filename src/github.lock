@@ -14,17 +14,17 @@
 		"rev": "644e3e8fdfd62a0f8b0a267a297202043dd972ec"
 	},
 	"neovim": {
-		"hash": "sha256-wAltPeKp8xeOGP2jlVTZPViihUKXcVO0+hB7jWKaRoc=",
+		"hash": "sha256-GL1OTAxh1NwT92561FSRrH3u+yFBBFYYizN7VeTUk68=",
 		"name": "neovim",
 		"owner": "neovim",
 		"repo": "neovim",
-		"rev": "848c7a7894709a5bf73cd09d5612c35426994c0e"
+		"rev": "6a409e05071735c4b1c0272d51d8871b58384eee"
 	},
 	"vim": {
-		"hash": "sha256-pjPysYtqehFRjXSS9gV/HFfpvI9X8iCRpswJpSnH3bA=",
+		"hash": "sha256-jS4AZ6cxdvT7A2nFn04wg0A4VAoQOzpm0/v7SrhkKrE=",
 		"name": "vim",
 		"owner": "vim",
 		"repo": "vim",
-		"rev": "3e44fbf316f4feb9592050e9774711d2dc01245b"
+		"rev": "0a9ad34cad8e104dd8eaf4c45af007bf049104e0"
 	}
 }
