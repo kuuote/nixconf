@@ -9,7 +9,7 @@
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
       packages = pkgs: {
         home-manager =
           let
