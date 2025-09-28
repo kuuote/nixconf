@@ -22,6 +22,7 @@ in
     ../nixos/feat/acpilight.nix
     ../nixos/feat/nixos-apply/module.nix
     ../nixos/feat/vm.nix
+    ../nixos/nix-ld.nix
     ../nixos/nix.nix
     ../nixos/sway.nix
     ../nixos/systemd-boot.nix
