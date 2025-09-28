@@ -3,8 +3,8 @@
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
   networking.wireless.secretsFile = "/data/nix-secrets/wireless.conf";
   networking.wireless.networks = {
-    "Buffalo-G-230E" = {
-      pskRaw = "ext:psk_buffalo";
+    "NSD1K-7EC0-g" = {
+      pskRaw = "ext:psk_nsd1k";
     };
   };
   networking.wireless.userControlled.enable = true;
