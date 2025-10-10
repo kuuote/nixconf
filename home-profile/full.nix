@@ -1,6 +1,5 @@
 [
   # keep-sorted start
-  ../home/cmd
   ../home/codex.nix
   ../home/deno.nix
   ../home/direnv
