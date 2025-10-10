@@ -1,11 +1,16 @@
 #!/usr/bin/env -S bash -u
 
 if ! mountpoint -q /mnt; then
-  mount -m -t tmpfs none /mnt
+  # mode 指定しないと / の mode が 1777 になるので nix build がこける
+  mount -m -t tmpfs -o mode=755 none /mnt
 fi
 if ! mountpoint -q /mnt/nix; then
   # mount -m --bind /n /mnt/nix
   mount -m /dev/disk/by-partlabel/nixos /mnt/nix
+fi
+if ! mountpoint -q /mnt/nix/var/nix/builds; then
+  # ditto (mode)
+  mount -m -t tmpfs -o mode=755 none /mnt/nix/var/nix/builds
 fi
 if ! mountpoint -q /mnt/nix/var/nix/gcroots; then
   mount -m -t tmpfs none /mnt/nix/var/nix/gcroots
