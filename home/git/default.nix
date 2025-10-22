@@ -1,10 +1,10 @@
 {
   programs.git = {
     enable = true;
-    aliases = {
-      save = "!git add -A ; git commit -m save ; git tag -f save";
-    };
-    extraConfig = {
+    settings = {
+      alias = {
+        save = "!git add -A ; git commit -m save ; git tag -f save";
+      };
       commit.verbose = true;
       core = {
         editor = "vim";
