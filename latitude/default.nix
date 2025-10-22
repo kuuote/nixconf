@@ -45,6 +45,7 @@ in
   };
 
   programs.fish.enable = true;
+  users.users.root.hashedPassword = "$y$j9T$r2hDb1.weG.kmkAkWL0nc/$e7p1/YFoLVfjhE7XJJCUS5Yt4hcpoHKr1HdyHQnA0z7";
   users.users.${user} = {
     isNormalUser = true;
     extraGroups = [
@@ -97,11 +98,14 @@ in
 
   fonts = {
     packages = with pkgs; [
+      # keep-sorted start
+      ibm-plex
       jfdotfont
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji
       plemoljp
+      # keep-sorted end
     ];
     fontDir.enable = true;
     fontconfig = {
@@ -126,4 +130,5 @@ in
   system.rebuild.enableNg = true;
   system.stateVersion = "25.05"; # Did you read the comment?
   zramSwap.enable = true;
+  programs.gnupg.agent.enable = true;
 }
