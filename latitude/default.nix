@@ -20,6 +20,7 @@ in
     (import ../nixos/feat/systemd-timeout.nix 10)
     (import ../nixos/services/openssh { usePassword = true; })
     ../nixos/feat/acpilight.nix
+    ../nixos/feat/bluetooth.nix
     ../nixos/feat/nixos-apply/module.nix
     ../nixos/feat/vm.nix
     ../nixos/nix-ld.nix
