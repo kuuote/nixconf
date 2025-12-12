@@ -1,7 +1,7 @@
 {
   pkgs ? import <nixpkgs> { },
 }:
-pkgs.emacsPackages.melpaBuild {
+pkgs.emacs.pkgs.melpaBuild {
   pname = "mr";
   version = "0";
   src = ./.;

@@ -20,7 +20,7 @@ let
   packageRequires =
     let
       set = {
-        epkgs = pkgs.emacsPackages;
+        epkgs = pkgs.emacs.pkgs;
         orepkgs = import ./package { inherit pkgs; };
       };
     in
@@ -41,7 +41,7 @@ let
         echo "(provide 'init)" >> init.el
         install -D init.el $out/init.el
       '';
-  init_pkg = pkgs.emacsPackages.melpaBuild {
+  init_pkg = pkgs.emacs.pkgs.melpaBuild {
     pname = "init";
     version = "0";
     src = init_src;
