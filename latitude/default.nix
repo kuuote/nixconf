@@ -23,11 +23,11 @@ in
     ../nixos/feat/bluetooth.nix
     ../nixos/feat/nixos-apply/module.nix
     ../nixos/feat/vm.nix
+    ../nixos/keyd.nix
     ../nixos/nix-ld.nix
     ../nixos/nix.nix
     ../nixos/sway.nix
     ../nixos/systemd-boot.nix
-    ../nixos/user/xremap.nix
     ./networking.nix
     # keep-sorted end
     # Include the results of the hardware scan.
@@ -128,7 +128,6 @@ in
     };
   };
 
-  system.rebuild.enableNg = true;
   system.stateVersion = "25.05"; # Did you read the comment?
   zramSwap.enable = true;
   programs.gnupg.agent.enable = true;
