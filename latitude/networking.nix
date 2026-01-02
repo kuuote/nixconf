@@ -7,6 +7,6 @@
       pskRaw = "ext:psk_nsd1k";
     };
   };
-  networking.wireless.userControlled.enable = true;
+  networking.wireless.userControlled = true;
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 }
