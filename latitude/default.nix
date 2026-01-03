@@ -29,6 +29,7 @@ in
     ../nixos/sway.nix
     ../nixos/systemd-boot.nix
     ./networking.nix
+    ./test.nix
     # keep-sorted end
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
