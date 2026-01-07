@@ -14,11 +14,11 @@
 		"rev": "644e3e8fdfd62a0f8b0a267a297202043dd972ec"
 	},
 	"neovim": {
-		"hash": "sha256-C2Q1EsR4X9FlsFp+uNwESSwqonM32fYXeApzijtg38s=",
+		"hash": "sha256-2bBIByf/LvSPZhhtWhMFKrr16Bzd0Nv/RK3FbJdpA8M=",
 		"name": "neovim",
 		"owner": "neovim",
 		"repo": "neovim",
-		"rev": "661455cc4757f3de524f7f47bccf0c46fe0bc586"
+		"rev": "7500f76e613154e72e9238d174c8ee4cfccdc305"
 	},
 	"vim": {
 		"hash": "sha256-LPcT12+/T+yzmOZrrJv8XTPlgQvzW02JlWeB0ASdTu8=",
