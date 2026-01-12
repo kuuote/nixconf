@@ -80,7 +80,7 @@ in
     jq
     keepassxc
     nix-output-monitor
-    nixfmt-rfc-style
+    nixfmt
     nsxiv
     python3
     ripgrep

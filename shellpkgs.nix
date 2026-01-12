@@ -14,7 +14,7 @@ with pkgs;
   neovim
   nix-output-monitor
   nix-serve-ng
-  nixfmt-rfc-style
+  nixfmt
   nvfetcher
   vim
   vimPlugins.vim-themis
