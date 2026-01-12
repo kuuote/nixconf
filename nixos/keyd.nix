@@ -1,4 +1,6 @@
+{ pkgs, ... }:
 {
+  environment.systemPackages = [ pkgs.keyd ];
   services.keyd = {
     enable = true;
     keyboards = {
