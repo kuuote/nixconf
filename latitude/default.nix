@@ -79,6 +79,7 @@ in
     git
     jq
     keepassxc
+    meld
     nix-output-monitor
     nixfmt
     nsxiv
@@ -87,9 +88,11 @@ in
     stylua
     tmux
     trash-cli
+    unar
     vifm
     wezterm
     wineWow64Packages.full
+    zellij
     # keep-sorted end
     # sway
     grim
